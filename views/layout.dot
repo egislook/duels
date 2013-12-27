@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/css/default.css">
+		<script src="//raw.github.com/olado/doT/master/doT.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+		<script src="/js/default.js"></script>
+	</head>
+	<body>
+		<!--<div id="toolbar">
+			<table>
+				<tr>
+					<td>
+						<a href="/">home</a>
+					</td>
+					<td>
+						<a href="/user">user</a>
+					</td>
+				</tr>
+			</table>
+		</div>-->
+		
+		
+		{{=it.body}}
+		
+	</body>
+</html>
+
+
+{{##def.test:
+<div id='test'>
+	test
+</div>
+#}}

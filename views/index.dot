@@ -1,0 +1,13 @@
+
+ <div>
+  <h1> welcome user : {{=it.steamid}} </h1>
+  <ul>
+  	<li>
+  		<a href="{{=it.steamid}}">bla bla</a>
+  	</li>
+  </ul>
+ </div>
+  
+  {{#def.test}}
+  
+ 

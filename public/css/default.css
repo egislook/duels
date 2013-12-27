@@ -1,0 +1,90 @@
+body{background-color:#FFFFFF; padding:50px;}
+*{padding:0; margin:0; font-size:12px;}
+
+.buy div{
+	padding:13px;
+	background:#47A347;
+	color:#FFFFFF;
+}
+
+#market img{
+	height:63px;
+}
+
+.active{
+	background-color:#000000;
+	margin:3px;
+	font-size:15px;
+	padding:10px;
+}
+
+a{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+#pages{
+	float:clear;
+	padding-bottom:10px;
+}
+#market{
+	float:clear;
+}
+
+
+.page{
+	margin:3px;
+	font-size:15px;
+	padding:10px;
+	background-color:#FF7519;
+}
+
+.price{
+	color: #525252;
+	text-align:right;
+	padding-right:2px;
+	font-size:30px;
+}
+
+.name{
+	padding-right:2px;
+	text-align:right;
+	font-size:9px;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+#toolbar{font-size:14px;}
+.left{float:left;}
+
+.friend:hover{background-color:yellow; cursor:pointer;}
+
+#inventory{max-width:750px;}
+
+.item-class{font-size:8px;}
+
+.item-rarity{
+	max-width:5px; 
+	height:10px; 
+	background-color:#EEEEEE; 
+	position:absolute; 
+	margin-top:-15px; 
+	margin-left: 60px; 
+	padding:3px; 
+	overflow:hidden;
+	text-transform:uppercase;
+}
+.item-cont{float:left; padding:3px; border: solid 1px #DDDDDD;}
+.item-cont:hover{background-color:#EEEEEE; cursor:pointer;}
+.item-count{font-size:9px; position:absolute; margin-top:-15px; padding:3px; background-color:#FFFFFF; color:#000000;}
+.item-name{font-size:10px; position:absolute; max-width:66px; padding:2px; background-color:#000000; color:#FFFFFF; display:none;}
+.item-name:hover{z-index:9999;}
+.item{position:relative;}
+
+.common{background-color:#B0C3D9}
+.uncommon{background-color:#5E98D9}
+.rare{background-color:#4B69FF}
+.mythical{background-color:#8847FF}
+.legendary{background-color:#D32CE6}
+.ancient{background-color:#EB4B4B}
+.immortal{background-color:#E4AE33}
+.arcana{background-color:#ADE55C}

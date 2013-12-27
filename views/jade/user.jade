@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+    table
+        tr
+            td
+                img(src='#{user.avatarfull}')
+                p SVEIKUTIS #{user.personaname}
+                p
+                    a(href='#{user.profileurl}') steam url
+                        ul
+                            each friend, i in friends
+                                li
+                                    span #{i+1} | 
+                                    a(href='http://dota2lounge.com/profile?id=#{friend.steamid}') #{friend.steamid}
+        
+            td
+                table
+                    each slot, i in inventory
+                        if i%8 === 0
+                            tr
+                            
+                        each item in items
+                            if slot.defindex == item.defindex
+                                td 
+                                    img(src='#{item.image_url}', width='70', alt='#{item.name}')

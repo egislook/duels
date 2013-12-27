@@ -1,0 +1,57 @@
+
+
+<div id="market">
+	<table>
+	<tr>
+		<td>
+			<div id="pages">
+
+				{{~ (function(){ return [0,1,2,3,4,5,6,7]})() :k}}
+					<a href="./{{=k}}">
+						{{? k==it.page}}
+							<span class="active">
+						{{??}}
+							<span class="page">
+						{{?}}
+							{{=k+1}}
+						</span>
+					</a>
+				{{~}}
+				
+			</div>
+		</td>
+	</tr>
+	{{~it.items :item:i}}
+	{{?i<=it.limit}}
+		<tr>
+			<td>
+				<div class="price">
+					€{{=item.price}}
+				</div>
+				<div class="name">
+					{{=item.name}}
+				</div>
+			</td>
+			<td>
+				<img src="{{=item.img}}">
+			</td>
+			<td class="buy">
+				<a href="{{=item.href}}" onclick="window.open(this.href, 'mywindow' ,'left=250,top=50,width=800,height=700,toolbar=0,resizable=0'); return false;"> 
+					<div>
+						buy
+					</div>
+				</a>	
+			</td>
+			<td class="name">
+				
+			</td>
+			<td>
+				<!--{{=item.count}}	-->
+			</td>
+			
+			
+		</tr>
+		</a>
+	{{?}}
+	{{~}}
+	</table>

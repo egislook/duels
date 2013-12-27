@@ -1,0 +1,13 @@
+extends layout
+
+
+block content
+  h1 welcome user : #{steamid}
+  p
+    a(href="/user") user
+  p
+    a(href="http://dota-trade.com/users/#{steamid}") dota-trade
+  p
+    a(href="http://dota2lounge.com/profile?id=#{steamid}") lounge
+  p
+    a(href="/logout") logout

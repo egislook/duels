@@ -1,0 +1,45 @@
+
+<div class='left'>
+	<table>
+	<tr>
+	 	<td>
+	 		<img src="{{=it.user.avatarfull}}" width="50px">
+	 		
+	 	</td>
+	 	<td>
+	 		<p>{{=it.user.personaname}}</p>
+	 		<p>
+	 			<a href="{{=it.user.profileurl}}/inventory/#570">steam acc</a>
+	 		</p>
+	 	</td>
+	 </tr>
+	 <tr>
+	 	<td colspan="2">
+	 		<ul>
+	 			{{~it.friends :friend:i}}
+	 				<a href="/user/{{=friend.steamid}}">
+						<li class='friend'>{{=friend.personaname}}</li>
+					</a>
+				{{~}}
+	 		</ul>
+	 	</td>
+	 </tr>
+	</table>
+</div>
+<div class="left" id="inventory">
+	<div id="info">all:{{=it.count['all']}}</div>
+	{{~it.inventory :item:i}}
+		<div class="item-cont" title="{{=item.name}}">
+			<div class="item-class">{{=item.prefab}}</div>
+			<img src="{{=item.image_url}}" width="70" height="50" />
+			<div class="{{=item.item_rarity}}">{{=item.item_rarity}}</div>
+		</div>
+	{{~}}
+</div>
+<div>
+	{{~it.temp :item:i}}
+		<div>
+			{{= JSON.stringify(item)}}
+		</div>
+	{{~}}
+</div>

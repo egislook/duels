@@ -1,0 +1,17 @@
+extends layout
+
+-var size=8
+
+block content
+	div#inventory
+		div#info all: #{count['all']} 
+		each item, i in data
+			div.item-cont
+				div.item-class #{item.prefab!=undefined ? item.prefab : "none"}
+					a(href='http://www.dota2.com/store/itemdetails/#{item.defindex}') #{item.defindex}
+				img(src='#{item.image_url}', class='item', width='70', height='50', alt='#{item.name}')
+				if(count[item.defindex]>1)
+					div.item-count= count[item.defindex]
+				div(class='item-rarity #{item.item_rarity!=undefined ? item.item_rarity : ""}') #{item.item_rarity!=undefined ? item.item_rarity : "N"}
+				div.item-name= item.name
+		a #{console.log(data[20])} suka
