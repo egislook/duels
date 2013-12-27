@@ -13,7 +13,7 @@ app.enable('strict routing');
 
 
 
-app.set('port', 3000);
+app.set('port',  process.env.PORT || 3000);
 app.set('view engine', 'dot');
 app.engine('dot', require('express-dot').__express);
 //app.use(express.methodOverride());
@@ -50,31 +50,31 @@ app.get('/scan/?(:page)?', function(req, res){
 	
 	if(req.session.steamid == '76561198046566579' || req.session.steamid == '76561198065626987'){
 	
-	steam.getFromSteam('trash', 'market', function(market){
-		
-		var $ = cheerio.load(market);
-		var items = [];
-		var temp = {};
-		var price = '';
-		
-		$("a").each(function(i, elem) {
-			temp['href'] = $(this).attr('href').split('?')[0];
-  			temp['img'] = $(this).find('img').attr("src");
-  			temp['name'] = $(this).find('span.market_listing_item_name').text();
-  			//temp['count'] = $(this).find('span.market_listing_num_listings_qty').text();
-  			var price = ($(this).find('div.market_listing_num_listings').text()).split('$')[1].replace(/(\r\n\t|\n|\r|\t)/gm,"");
-  			temp['price'] = Math.floor((price * curency['$']) * 100) / 100;
-  			items.push(temp);
-  			temp={};
-		});
-		
-		var newItems = items.sort(function(a, b){
-			return a.price-b.price;
-		});
-		
-		res.render('scan', { items : newItems, page : req.params.page, limit : '10'});
-		//res.send(market);
-	}, req.params.page);
+		steam.getFromSteam('trash', 'market', function(market){
+			
+			var $ = cheerio.load(market);
+			var items = [];
+			var temp = {};
+			var price = '';
+			
+			$("a").each(function(i, elem) {
+				temp['href'] = $(this).attr('href').split('?')[0];
+	  			temp['img'] = $(this).find('img').attr("src");
+	  			temp['name'] = $(this).find('span.market_listing_item_name').text();
+	  			//temp['count'] = $(this).find('span.market_listing_num_listings_qty').text();
+	  			var price = ($(this).find('div.market_listing_num_listings').text()).split('$')[1].replace(/(\r\n\t|\n|\r|\t)/gm,"");
+	  			temp['price'] = Math.floor((price * curency['$']) * 100) / 100;
+	  			items.push(temp);
+	  			temp={};
+			});
+			
+			var newItems = items.sort(function(a, b){
+				return a.price-b.price;
+			});
+			
+			res.render('scan', { items : newItems, page : req.params.page, limit : '10'});
+			//res.send(market);
+		}, req.params.page);
 	}
 	else
 		res.redirect('/login');
