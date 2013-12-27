@@ -25,7 +25,7 @@ app.use('/js' , express.static(path.join(process.cwd(), '/public/js')));
 app.use('/css' , express.static(path.join(process.cwd(), '/public/css')));
 app.use(app.router);
 
-
+app.cache.requests=0;
 
 
 //routs
@@ -73,6 +73,8 @@ app.get('/scan/?(:page)?', function(req, res){
 			});
 			res.render('scan', { items : newItems, page : req.params.page, limit : '10'});
 			//res.send(market);
+			app.cache.requests++;
+			console.log('requests count => ' + app.cache.requests);
 		}, req.params.page);
 	}
 	else
