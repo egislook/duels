@@ -71,9 +71,8 @@ app.get('/scan/?(:page)?', function(req, res){
 			var newItems = items.sort(function(a, b){
 				return a.price-b.price;
 			});
-			
-			//res.render('scan', { items : newItems, page : req.params.page, limit : '10'});
-			res.send(market);
+			res.render('scan', { items : newItems, page : req.params.page, limit : '10'});
+			//res.send(market);
 		}, req.params.page);
 	}
 	else
@@ -85,7 +84,7 @@ app.get('/login', function(req, res){
     if(req.session.steamid)
         res.redirect('/');
     else
-        auth.redirect(res);
+        auth.redirect(req, res);
 });
 
 app.get('/data', function(req, res) {
