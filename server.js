@@ -67,7 +67,6 @@ app.get('/scan/?(:page)?', function(req, res){
 	  			items.push(temp);
 	  			temp={};
 			});
-			console.log(items)
 			
 			var newItems = items.sort(function(a, b){
 				return a.price-b.price;
