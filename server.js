@@ -62,8 +62,8 @@ app.get('/scan/?(:page)?', function(req, res){
 	  			temp['img'] = $(this).find('img').attr("src");
 	  			temp['name'] = $(this).find('span.market_listing_item_name').text();
 	  			//temp['count'] = $(this).find('span.market_listing_num_listings_qty').text();
-	  			temp['price'] = ($(this).find('div.market_listing_num_listings').text()).split('$')[1].replace(/(\r\n\t|\n|\r|\t|USD)/gm,"");
-	  			//temp['price'] = Math.floor((price * curency['$']) * 100) / 100;
+	  			var price = ($(this).find('div.market_listing_num_listings').text()).split('$')[1].replace(/(\r\n\t|\n|\r|\t|USD)/gm,"");
+	  			temp['price'] = Math.floor((price * curency['$']) * 100) / 100;
 	  			items.push(temp);
 	  			temp={};
 			});
