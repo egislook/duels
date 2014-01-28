@@ -36,7 +36,7 @@
                         </td>
                         <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                             <img src="img/type-icon.png"/>
-                            <div class="note dark">Game type</div>
+                            <div class="note dark" style="margin-left:24px;margin-top:-19px;">Game type (players quantity <b>vs</b> players quantity)</div>
                         </td>
                     </tr>
                     <tr>
@@ -54,7 +54,7 @@
                         </td>
                         <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                             <img src="img/buyin-icon.png"/>
-                          <div class="note">Buy-in price</div>
+                          	<div class="note dark" style="margin-left:24px;margin-top:-19px;">Buy-in price (items <b>quantity</b> and <b>rarity</b> for tournament registration)</div>
                         </td>
                     </tr>
                     <tr>
@@ -67,7 +67,7 @@
                         </td>
                         <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                             <img src="img/amount-icon.png"/>
-                          <div class="note">Players</div>
+                          	<div class="note dark" style="margin-left:24px;margin-top:-19px;">Players (players confirmed <b>and</b> max players quantity)</div>
                         </td>
                     </tr>
                     <tr>
@@ -76,7 +76,7 @@
                         </td>
                         <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                             <img src="img/mode-icon.png"/>
-                          <div class="note">Game mode</div>
+                            <div class="note dark" style="margin-left:24px;margin-top:-19px;">Game mode</div>
                         </td>
                     </tr>
                     <tr>
@@ -89,7 +89,7 @@
                         </td>
                         <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                             <img src="img/prize-icon.png"/>
-                          <div class="note">Prize</div>
+                            <div class="note dark" style="margin-left:24px;margin-top:-19px;">Prize</div>
                         </td>
                     </tr>
                     <tr>

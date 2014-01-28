@@ -77,7 +77,7 @@ table td > div{padding:2px 5px 2px 5px;}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:var(colorDark);color:var(colorLight);}
-.note{display:none;position:absolute;border-radius:2px;padding:3px;font-size:11px;max-width:200px;}
+.note{display:none;position:absolute;border-radius:2px;padding:3px;font-size:11px;max-width:145px;}
 
 .players{padding:0px; padding-right:2px}
 .players img{width:35px; border:solid 2px var(colorDark);padding:0px;margin:0px;}
