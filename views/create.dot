@@ -1,0 +1,122 @@
+<div class="page">
+    <div class="spaced">
+    <form action="./submit" method="post">
+        <table cellspacing="0" cellpadding="0" class="textLight spaced">
+            <tr>
+                <td height="20px"></td>
+                <td class="b-l"></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">date</div>
+                </td>
+                <td class="b-l">
+                    <input class="inputs" size="8" type="text" value="2014-01-15" name="date"/>
+                    <script>
+                        var date = new Date();
+                       document.getElementsByName('date')[0].value = date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate();
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">name</div>
+                </td>
+                <td class="b-l">
+                    <input class="inputs textBig" size="25" type="text" value="daily" name="name"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">type</div>
+                </td>
+                <td class="b-l">
+                    <select class="inputs" name="type">
+                      <option value="1x1">1x1</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">game</div>
+                </td>
+                <td class="b-l">
+                    <select class="inputs" name="game">
+                      <option value="dota">dota2</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">buyin</div>
+                </td>
+                <td class="b-l">
+                    <input class="inputs textBig" type="text" size="1" value="1" name="buyin_count"/>
+                    <select class="inputs" name="buyin_type">
+                        <option value="com" class="com">common</option>
+                        <option value="unc" class="unc">uncommon</option>
+                        <option value="rare" class="rare" selected>rare</option>
+                        <option value="key" class="key">key</option>
+                        <option value="free">free</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">players</div>
+                </td>
+                <td class="b-l">
+                    <select class="inputs" name="maxplayers">
+                      <option value="2">2</option>
+                      <option value="4">4</option>
+                      <option value="8" selected>8</option>
+                      <option value="16">16</option>
+                      <option value="32">32</option>
+                      <option value="64">64</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">mode</div>
+                </td>
+                <td class="b-l">
+                    <select class="inputs" name="mode">
+                      <option value="sh">SH</option>
+                      <option value="ar">AR</option>
+                      <option value="ap">AP</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">prize</div>
+                </td>
+                <td class="b-l">
+                    <input class="inputs textBig" type="text" size="1" value="1" name="prize_count"/>
+                    <select class="inputs" name="prize_type">
+                        <option value="com" class="com">common</option>
+                        <option value="unc" class="unc">uncommon</option>
+                        <option value="rare" class="rare" selected>rare</option>
+                        <option value="key" class="key">key</option>
+                        <option value="specific">specific</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td height="20px"></td>
+                <td class="b-l"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="accept click left b-t dest textLight" value="create tournament"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+  
+  {{#def.test}}
+  
+ 

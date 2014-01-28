@@ -1,0 +1,15 @@
+<div class="page">
+    <h1>Please enable "Share Match History"</h1>
+    <div>In order to enable the "Share Match History" setting, please take the following steps:</div>
+    <ol>
+        <li>Open the Dota 2 game client</li>
+        <li>Click the Settings icon</li>
+        <li>Navigate to "Game", then to "General"</li>
+        <li>Set the "Share Match History" setting to "On"</li>
+    </ol>
+    <img src="http://dotabuff.com/assets/pages/enabling-statistics/share-match-history-497c3ea65b6cbb2ecc03b1df3c7b24b6.png"/>
+</div>
+  
+  {{#def.test}}
+  
+ 

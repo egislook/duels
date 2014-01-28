@@ -1,33 +1,85 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="/css/default.css">
-		<script src="//raw.github.com/olado/doT/master/doT.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 		<script src="/js/default.js"></script>
+		<!--<script src="//raw.github.com/olado/doT/master/doT.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>-->
 	</head>
 	<body>
-		<!--<div id="toolbar">
-			<table>
-				<tr>
-					<td>
-						<a href="/">home</a>
-					</td>
-					<td>
-						<a href="/user">user</a>
-					</td>
-				</tr>
-			</table>
-		</div>-->
-		
-		
+	    <div class="dark textLight textSmall" id="clock">
+	    
+	        {{ var date = Date();}}
+	        {{= date}}
+	        <div class="accept tip textLight" style="padding:1px;">wdpwp alpha</div>
+	    </div>
+	    
 		{{=it.body}}
-		
+		<div id="toolbar">
+		    <a href="/">
+		        <div class="left list">
+                  <img src="http://s26.postimg.org/73aobj1id/home_icon.png">
+                  <p>Home</p>
+		        </div> 
+		    </a>
+          {{? true}}
+		    <a href="/d/t">
+		        <div class="left list">
+		            <img src="http://s26.postimg.org/w7wmrtun9/laurel_icon.png">
+                  	<p>Tourneys</p>
+		        </div> 
+		    </a>
+          {{?}}
+		    <a href="/d/l">
+		        <div class="left list">
+		            log
+		        </div> 
+		    </a>
+	        {{~it.tournaments :t:i}}
+	            {{? t.state =='started'}}
+	            <a href="/tournament/{{=i}}">
+    		        <div class="left list">
+    		            {{=t.name}}
+    		        </div> 
+    		    </a>
+    		    {{?}}
+	        {{~}}
+		    {{? !it.user.loged }}
+		    <a href="/login">
+		        <div class="right list">
+                  <img src="http://s26.postimg.org/dr2810ep1/login_icon.png">
+                  <p>Login</p>
+		        </div> 
+		    </a>
+		    {{?? true}}
+		    <a href="/logout">
+		        <div class="right list">
+		            <img src="http://s26.postimg.org/q88vo69ut/logout.png">
+                  	<p>Logout</p>
+		        </div> 
+		    </a>
+		    <a href="/p">
+		        <div class="right list">
+                  	<img src="http://s26.postimg.org/yo3i2sj1h/profile_icon.png">
+                  	<p>{{=it.user.name}}</p>
+		        </div>
+		        
+		    </a>
+    		    {{? it.user.status==='good'}}
+    		        <a href="/create">
+        		        <div class="right list">
+                          	<img src="http://s26.postimg.org/7rjiuh085/create_icon.png">
+                          	<p>Create</p>
+        		        </div> 
+        		    </a>
+    		    {{?}}
+		    {{?}}
+		    
+		</div>
 	</body>
 </html>
 
 
 {{##def.test:
 <div id='test'>
-	test
 </div>
 #}}

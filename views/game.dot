@@ -1,0 +1,525 @@
+<div class="page">
+    {{? (it.g.t1[0].imgs || it.g.t2[0].imgs) && (it.user.steamid == it.g.t1[0].id || it.user.steamid == it.g.t2[0].id) || it.user.status ==='good'}}
+        {{? it.g.t1[0].imgs}}
+            <div style="position:absolute;left:0px;top:50px;">
+                {{~ it.g.t1[0].imgs :img:i}}
+                    <div style="padding-bottom:10px">
+                        <img class="b-a nb-l" width="200px" src="{{=img}}">
+                    </div>
+                {{~}}
+            </div>
+        {{?}}
+        {{? it.g.t2[0].imgs}}
+            <div style="position:absolute;right:0px;top:50px">
+                {{~ it.g.t2[0].imgs :img:i}}
+                    <div style="padding-bottom:10px">
+                        <img class="b-a nb-r" width="200px" src="{{=img}}">
+                    </div>
+                {{~}}
+            </div>
+        {{?}}
+    {{?}}
+    <table cellspacing="0" cellpadding="0" class="spaced textLight">
+        <tr>
+            <td class="b-r" height="20px"></td>
+        </tr>
+        <tr>
+            <td class="b-r">
+                <div class="dark right textSmall">{{= it.g.info.date}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="b-r" height="3px"></td>
+        </tr>
+        <tr>
+            <td class="b-r">
+                <div class="dark right textSmall up_case">{{= it.g.info.mode}}</div>
+            </td>
+        </tr>
+        {{? it.user.loged && (it.g.t1[0].id == it.user.steamid || it.g.t2[0].id == it.user.steamid || it.user.status ==='good')}}
+        <tr>
+            <td class="b-r" height="5px"></td>
+        </tr>
+        {{? (it.g.t1[0].id == it.user.steamid && (!it.g.t1[0].imgs || it.g.t1[0].imgs.length<=2)) || (it.g.t2[0].id == it.user.steamid && (!it.g.t2[0].imgs || it.g.t2[0].imgs.length<=2)) || it.user.status ==='goodd'}}
+        <tr>
+            <form action="/upload/{{= it.gameid}}" enctype="multipart/form-data" method="post">
+            <td class="b-r">
+                    <button type="submit" class="right edit click b-t b-b textLight" style="display:inline-block;">
+                        <p class="tip left">upload result image of the game (max 2 images per game .png or .jpg max size 2mb each)</p>
+                        <div class="left dest">upload</div>
+                    </button>
+                </div>
+            </td>
+            <td>
+                <div class="left">
+                    <input class="inputs" style="width:105px; margin-left:-10px" name="datafile" type="file">
+                </div>
+            </td>
+            </form>
+        </tr>
+        {{?}}
+        {{?}}
+        <tr>
+            <td class="b-r" height="10px"></td>
+        </tr>
+        <tr>
+            <td class="b-r-r">
+                <div class="dark">
+                    <img class="b-a avatar" src="{{=it.u[it.g.t1[0].id].avatar}}"/>
+                    <div class="dark b-a" style="display:inline-block">{{=it.u[it.g.t1[0].id].name}}</div>
+                    {{? it.g.info.mode == 'sh' || it.g.info.mode == 'ar'}}
+                    <img class="right hero" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g.t1[0].hero.url}}_sb.png"/>
+                    {{?}}
+                </div>
+            </td>
+            <td>
+                <div class="dark">
+                    {{? it.g.info.mode == 'sh' || it.g.info.mode == 'ar'}}
+                    <img class="hero" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g.t2[0].hero.url}}_sb.png"/>
+                    {{?}}
+                     <div class="dark b-a" style="display:inline-block">{{=it.u[it.g.t2[0].id].name}}</div>
+                    <img class="b-a right avatar" src="{{=it.u[it.g.t2[0].id].avatar}}"/>
+                </div>
+            </td>
+        </tr>
+        {{? it.user.loged && it.user.status === 'good'}}
+        <form action="../decide" method="post">
+            <tr>
+                <input name="id" type="hidden" value="{{=it.gameid}}">
+                <input name="tournamentid" type="hidden" value="{{=it.g.info.tournamentid}}">
+                <td class="b-r" height="10px"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <select class="inputs b-a" name="win">
+                        {{? it.g.info.win=='t1'}}
+                            <option value="t1" selected> <<<<<< radiant </option>
+                        {{??}}
+                            <option value="t1"> <<<<<< radiant </option>
+                        {{?}}
+                        {{? it.g.info.win=='t2'}}
+                            <option value="t2" selected> dire >>>>>> </option>
+                        {{??}}
+                            <option value="t2"> dire >>>>>> </option>
+                        {{?}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="b-r" height="10px"></td>
+            </tr>
+            <tr>
+                <td class="b-r-r">
+                  {{? it.g.t1[0].items && it.g.t1[0].items.length>0}}
+                        {{var i=0; for(i in it.g.t1[0].items){ }}
+                            <div class="item b-a nb-r left" onclick="showitems(this)">
+                                <img height="30" src="http://media.steampowered.com/apps/dota2/images/items/{{=it.g.t1[0].items[i]}}_lg.png">
+                                <input name="t1items[]" type="hidden" value="{{=it.g.t1[0].items[i]}}">
+                            </div>
+                        {{ } }}
+                        {{for(i; i<5; i++){ }}
+                          <div class="item b-a nb-r left" onclick="showitems(this)">
+                          	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                          	<input name="t1items[]" type="hidden" value="">
+                          </div>
+                        {{ } }}
+                    {{??}}
+                      {{ for(var i=0; i<6; i++){ }}
+                      <div class="item b-a nb-r left" onclick="showitems(this)">
+                      	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                      	<input name="t1items[]" type="hidden" value="">
+                      </div>
+                      {{ } }}
+                    {{?}}
+                  <div class="note items" style="width:386px;margin-top:35px;">
+                    {{ for(var key in it.i) { if(key == 'halloween_candy_corn'){break;}; }}
+                        <div class="left b-a" onclick="itemselect(this)"><img alt="{{=key}}" height="20px" src="http://media.steampowered.com/apps/dota2/images/items/{{=key}}_lg.png"></div>
+                    {{  } }}
+                    </div>
+                </td>
+                <td>
+                    {{? it.g.t2[0].items && it.g.t2[0].items.length>0}}
+                        {{var i=0; for(i in it.g.t2[0].items){ }}
+                            <div class="item b-a nb-r left" onclick="showitems(this)">
+                                <img height="30" src="http://media.steampowered.com/apps/dota2/images/items/{{=it.g.t2[0].items[i]}}_lg.png">
+                                <input name="t2items[]" type="hidden" value="{{=it.g.t2[0].items[i]}}">
+                            </div>
+                        {{ } }}
+                        {{for(i; i<5; i++){ }}
+                          <div class="item b-a nb-r left" onclick="showitems(this)">
+                          	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                          	<input name="t2items[]" type="hidden" value="">
+                          </div>
+                        {{ } }}
+                    {{??}}
+                      {{ for(var i=0; i<6; i++){ }}
+                      <div class="item b-a nb-r left" onclick="showitems(this)">
+                      	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                      	<input name="t2items[]" type="hidden" value="">
+                      </div>
+                      {{ } }}
+                    {{?}}
+                </td>
+            </tr>
+            <tr>
+                <td class="b-r" height="10px"></td>
+            </tr>
+                <tr>
+                    <td class="b-r">
+                        <div class="dark right textSmall">duration</div>
+                    </td>
+                    <td>
+                        {{ if(it.g.info.duration){var val=it.g.info.duration;}else{var val='0';}}}
+                        <input name="duration" class="inputs left" size="3" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="10px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">level</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].lvl){var val=it.g.t1[0].lvl;}else{var val='1';}}}
+                        <input name="lvl[]" class="inputs b-a nb-r right" size="1" value="{{=val}}">
+                        
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].lvl){val=it.g.t2[0].lvl;}else{val='1';}}}
+                        <input name="lvl[]" class="inputs left" size="1" value="{{=val}}">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="accept textSmall" style="display:inline-block">kills</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].k){val=it.g.t1[0].k;}else{val='0';}}}
+                        <input name="k[]" class="inputs b-a nb-r right" size="1" value="{{=val}}">
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].k){val=it.g.t2[0].k;}else{val='0';}}}
+                        <input name="k[]" class="inputs left" size="1" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="delete textSmall" style="display:inline-block">deaths</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].d){val=it.g.t1[0].d;}else{val='0';}}}
+                        <input name="d[]" class="inputs b-a nb-r right" size="1" value="{{=val}}">
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].d){val=it.g.t2[0].d;}else{val='0';}}}
+                        <input name="d[]" class="inputs left" size="1" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="8px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">last hits</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].last){val=it.g.t1[0].last;}else{val='0';}}}
+                        <input name="last[]" class="inputs b-a nb-r right" size="1" value="{{=val}}">
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].last){val=it.g.t2[0].last;}else{val='0';}}}
+                        <input name="last[]" class="inputs left" size="1" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">denies</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].denie){val=it.g.t1[0].denie;}else{val='0';}}}
+                        <input name="denie[]" class="inputs b-a nb-r right" size="1" value="{{=val}}">
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].denie){val=it.g.t2[0].denie;}else{val='0';}}}
+                        <input name="denie[]" class="inputs left" size="1" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="8px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="edit textSmall" style="display:inline-block">gold/min</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].gold){val=it.g.t1[0].gold;}else{val='0';}}}
+                        <input name="gold[]" class="inputs b-a nb-r right" size="2" value="{{=val}}">
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].gold){val=it.g.t2[0].gold;}else{val='0';}}}
+                        <input name="gold[]" class="inputs left" size="2" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">exp/min</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.t1[0].exp){val=it.g.t1[0].exp;}else{val='0';}}}
+                        <input name="exp[]" class="inputs b-a nb-r right" size="2" value="{{=val}}">
+                    </td>
+                    <td>
+                        {{ if(it.g.t2[0].exp){val=it.g.t2[0].exp;}else{val='0';}}}
+                        <input name="exp[]" class="inputs left" size="2" value="{{=val}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="10px"></td>
+                </tr>
+                <tr>
+                    <td class="b-r"></td>
+                    <td>
+                        <input type="submit" class="edit click left b-t dest textLight" value="save stats"/>
+                    </td>
+                </tr>
+            </form>
+        {{??}}
+      		<tr>
+                <input name="id" type="hidden" value="{{=it.g.info.gameid}}">
+                <td class="b-r" height="10px"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    {{? it.g.info.win}}
+                        {{? it.g.info.win == 't1'}}
+                            <div class="b-a neutral">Radiant victory ({{=it.u[it.g.t1[0].id].name}})</div>
+                        {{??}}
+                            <div class="b-a neutral">Dire Victory ({{=it.u[it.g.t2[0].id].name}})</div>
+                        {{?}}
+                    {{??}}
+                    <div class="b-a neutral">game in progress</div>
+                    {{?}}
+                </td>
+            </tr>
+            <tr>
+                <td class="b-r" height="10px"></td>
+            </tr>
+            <td class="b-r-r">
+                {{? it.g.t1[0].items && it.g.t1[0].items.length>0}}
+                    {{var i=0; for(i in it.g.t1[0].items){ }}
+                        <div class="item b-a nb-r right">
+                            <img height="30" src="http://media.steampowered.com/apps/dota2/images/items/{{=it.g.t1[0].items[i]}}_lg.png">
+                        </div>
+                    {{ } }}
+                    {{for(i; i<5; i++){ }}
+                      <div class="item b-a nb-r right">
+                      	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                      </div>
+                    {{ } }}
+                {{??}}
+                  {{ for(var i=0; i<6; i++){ }}
+                  <div class="item b-a nb-r right">
+                  	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                  </div>
+                  {{ } }}
+                {{?}}
+                </td>
+                <td>
+                    {{? it.g.t2[0].items && it.g.t2[0].items.length>0}}
+                        {{var i=0; for(i in it.g.t2[0].items){ }}
+                            <div class="item b-a nb-r left">
+                                <img height="30" src="http://media.steampowered.com/apps/dota2/images/items/{{=it.g.t2[0].items[i]}}_lg.png">
+                            </div>
+                        {{ } }}
+                        {{for(i; i<5; i++){ }}
+                          <div class="item b-a nb-r left">
+                          	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                          </div>
+                        {{ } }}
+                    {{??}}
+                      {{ for(var i=0; i<6; i++){ }}
+                      <div class="item b-a nb-r left">
+                      	<img height="30" src="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/6/6b/Unknown_icon.png/128px-Unknown_icon.png">
+                      </div>
+                      {{ } }}
+                    {{?}}
+                </td>
+                <tr>
+                <tr>
+                    <td class="b-r" height="10px"></td>
+                </tr>
+                    <td class="b-r">
+                        <div class="dark right textSmall">duration</div>
+                    </td>
+                    <td>
+                        {{ if(it.g.info.duration){var val=it.g.info.duration;}else{var val='0';}}}
+                        <div class="b-a nb-l neutral left">{{=val}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="10px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">level</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.info.duration){val=it.g.t1[0].lvl;}else{val='1';}}}
+                        <div class="b-a nb-r right neutral">{{=val}}</div>
+                    </td>
+                    <td>
+                        {{ if(it.g.info.duration){val=it.g.t2[0].lvl;}else{val='1';}}}
+                        <div class="b-a nb-l neutral left">{{=val}}</div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="accept textSmall" style="display:inline-block">kills</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.info.duration){val=it.g.t1[0].k;}else{val='0';}}}
+                        <div class="b-a nb-r right neutral">{{=val}}</div>
+                    </td>
+                    <td>
+                        {{ if(it.g.info.duration){val=it.g.t2[0].k;}else{val='0';}}}
+                        <div class="b-a nb-l neutral left">{{=val}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="delete textSmall" style="display:inline-block">deaths</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        {{ if(it.g.info.duration){val=it.g.t1[0].d;}else{val='0';}}}
+                        <div class="b-a nb-r right neutral">{{=val}}</div>
+                    </td>
+                    <td>
+                        {{ if(it.g.info.duration){val=it.g.t2[0].d;}else{val='0';}}}
+                        <div class="b-a nb-l neutral left">{{=val}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="8px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">last hits</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        <div class="b-a nb-r right neutral">12</div>
+                    </td>
+                    <td>
+                        <div class="b-a nb-l neutral left">13</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">denies</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        <div class="b-a nb-r right neutral">?</div>
+                    </td>
+                    <td>
+                        <div class="b-a nb-l neutral left">?</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="8px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="edit textSmall" style="display:inline-block">gold/min</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        <div class="b-a nb-r right neutral">120</div>
+                    </td>
+                    <td>
+                        <div class="b-a nb-l neutral left">?</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="2px"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <div class="dark textSmall" style="display:inline-block">exp/min</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r">
+                        <div class="b-a nb-r right neutral">?</div>
+                    </td>
+                    <td>
+                        <div class="b-a nb-l neutral left">?</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="b-r" height="10px"></td>
+                </tr>
+      	{{?}}
+        <tr>
+            <td class="b-r" height="20px"></td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/t/{{= it.g.info.tournamentid}}">
+                    <div class="accept click right b-t"><p class="tip left">to the tournament page</p><div class="left dest">back</div></div>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+  
+  {{#def.test}}
+  
+  

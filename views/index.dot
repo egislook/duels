@@ -1,12 +1,178 @@
-
- <div>
-  <h1> welcome user : {{=it.steamid}} </h1>
-  <ul>
-  	<li>
-  		<a href="{{=it.steamid}}">bla bla</a>
-  	</li>
-  </ul>
- </div>
+<div class="page">
+    {{? it.tournaments.length>0}}
+            
+            {{~it.tournaments :t:i}}
+                <a href="./t/{{= t.id}}">
+                <table cellspacing="0" class="tournament textLight">
+                    <tr>
+                        <td class="b-r">
+                            <a href="steam://friends/add/{{=t.owner[0].steamid}}">
+                                <div class="left b-b b-l b-r neutral tip click">{{=t.owner[0].name}}</div>
+                              <div class="left dark" style="width:50px;" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
+                                  <div class="note dark right textSmall" style="max-width:300px;margin-left:12px;margin-top:-20px;">Game created by this person. Click on it if you want add him to your steam friendlist for more information.</div>
+                  				</div>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            
+                            <div class="neutral b-t right textSmall">~2h</div>
+                            <div class="dark b-t right textSmall">{{=t.date}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            <div class="dark right textBig">{{=t.name}} tournament</div>
+                        </td>
+                        <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                            <img src="img/dota2-icon.png"/>
+                          <div class="note">Game</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            <div class="dark right">{{=t.type}}</div>
+                        </td>
+                        <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                            <img src="img/type-icon.png"/>
+                            <div class="note">Game type</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r" height="5px"></td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            {{? t.buyin_type == 'free'}}
+                                <div class="{{=t.buyin_type}} neutral b-a right nb-r">{{=t.buyin_type}}</div>
+                            {{??}}
+                            <div class="{{=t.buyin_type}} right">{{=t.buyin_type}}</div>
+                            <div class="dark right">{{=t.buyin_count}}</div>
+                            {{?}}
+                            
+                        </td>
+                        <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                            <img src="img/buyin-icon.png"/>
+                          <div class="note">Buy-in price</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            {{? t.players == t.maxplayers}}
+                            <div class="dark delete textBig right">{{=t.players}} / {{=t.maxplayers}}</div>
+                            {{??}}
+                            <div class="dark accept textBig right">{{=t.players}} / {{=t.maxplayers}}</div>
+                            {{?}}
+                        </td>
+                        <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                            <img src="img/amount-icon.png"/>
+                          <div class="note">Players</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            <div class="dark right">SH</div>
+                        </td>
+                        <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                            <img src="img/mode-icon.png"/>
+                          <div class="note">Game mode</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r" height="5px"></td>
+                    </tr>
+                    <tr>
+                        <td class="b-r">
+                            <div class="{{=t.prize_type}} right">{{=t.prize_type}}</div>
+                            <div class="dark right">{{=t.prize_count}}</div>
+                        </td>
+                        <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                            <img src="img/prize-icon.png"/>
+                          <div class="note">Prize</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="b-r" height="20px"></td>
+                    </tr>
+                    {{? it.user.loged}}
+                    {{? !t.users.joined[it.user.steamid] && !t.users.approved[it.user.steamid]}}
+                    <tr>
+                        <td colspan="2">
+                            <a href="./join/{{=t.id}}">
+                                <div class="accept click right b-t"><p class="tip left">must join our dota2 clan first</p><div class="left dest">join</div></div>
+                            </a>
+                        </td>
+                    </tr>
+                        {{?? !t.users.approved[it.user.steamid]}}
+                        <tr>
+                            <td colspan="2">
+                                <div class="neutral right b-a"><p class="tip left">code for participation</p><div class="left dest">{{= t.users.joined[it.user.steamid].key}}</div></div>
+                            </td>
+                        </tr>
+                        {{?? t.state == 'join'}}
+                        <tr>
+                            <td colspan="2">
+                                <div class="neutral right b-a"><p class="tip left">w8 till tournament will start</p><div class="left dest">participated</div></div>
+                            </td>
+                        </tr>
+                        {{?? t.state != 'join' && t.state != 'ended' && t.states[t.state]}}
+                        <tr>
+                            <td colspan="2">
+                                <div class="neutral right b-a">
+                                    <p class="tip left">tournament phase</p>
+                                    <div class="left dest dark textLight">{{=t.state}}</div>
+                                </div>
+                                {{? t.states[t.state].endedgames == t.states[t.state].games}}
+                                <div class="delete textBig right">{{=t.states[t.state].endedgames}} / {{=t.states[t.state].games}}</div>
+                                {{??}}
+                                <div class="accept textBig right">{{=t.states[t.state].endedgames}} / {{=t.states[t.state].games}}</div>
+                                {{?}}
+                                <div class="right dark textSmall">{{=t.states[t.state].time}}</div>
+                            </td>
+                        </tr>
+                        {{?? t.state != 'join' && t.state != 'ended'}}
+                        <tr>
+                            <td colspan="2">
+                                <div class="neutral right b-a"><p class="tip left">click to check games information</p><div class="left dest">in progress</div></div>
+                            </td>
+                        </tr>
+                        {{?}}
+                    {{?? t.state != 'ended'}}
+                    <tr>
+                        <td colspan="2">
+                            <a href="./login">
+                                <div class="delete click right b-t"><p class="tip left">If you want to paticipate in the tournament you have to login and u have to be on our dota2 clan</p><div class="left dest">login</div></div>
+                            </a>
+                        </td>
+                    </tr>
+                    {{?}}
+                    {{? it.user.status==='good'}}
+                    <tr>
+                        <td colspan="2">
+                            <a href="./remove/{{= t.id}}">
+                                <div class="delete click right"><div class="left dest">delete</div></div>
+                            </a>
+                        </td>
+                    </tr>
+                    {{?}}
+                    {{? t.state == 'ended'}}
+                    <tr>
+                        <td colspan="2">
+                            <div class="neutral right b-a"><p class="tip left">click to check the winner</p><div class="left dest delete textLight">finished</div></div>
+                            <div class="right dark textSmall">{{=t.time}}</div>
+                        </td>
+                    </tr>
+                    {{?}}
+                </table>
+                </a>
+            {{~}}
+    {{??}}
+        <div>
+            no tournaments
+        </div>
+    {{?}}
+</div>
   
   {{#def.test}}
   
