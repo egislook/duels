@@ -38,6 +38,8 @@ table td > div{padding:2px 5px 2px 5px;}
 .b-t{border-top:solid 2px #383838;}
 .b-b{border-bottom:solid 2px #383838;}
 .b-a{border:solid 2px #383838;}
+.b-w{border:solid 2px #E4AE33;outline:#E4AE33 solid 1px;}
+.b-w-r{border-right:solid 2px #E4AE33;}
 .nb-r{border-right:none;}
 .nb-l{border-left:none;}
 

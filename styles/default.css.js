@@ -62,6 +62,8 @@ table td > div{padding:2px 5px 2px 5px;}
 .b-t{border-top:solid 2px var(colorDark);}
 .b-b{border-bottom:solid 2px var(colorDark);}
 .b-a{border:solid 2px var(colorDark);}
+.b-w{border:solid 2px var(colorEdit);outline:var(colorEdit) solid 1px;}
+.b-w-r{border-right:solid 2px var(colorEdit);}
 .nb-r{border-right:none;}
 .nb-l{border-left:none;}
 

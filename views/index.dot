@@ -142,7 +142,12 @@
                     <tr>
                         <td colspan="2">
                             <a href="./login">
-                                <div class="delete click right b-t"><p class="tip left">If you want to paticipate in the tournament you have to login and u have to be on our dota2 clan</p><div class="left dest">login</div></div>
+                            	<div class="delete click right b-t">
+                                  <div class="left dark b-b" style="width:20px;margin-top:-1px;text-align:center;" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
+                                    <div class="note dark left" style="margin-top:10px;margin-left:-5px;">If you want to paticipate in the tournament you have to login and join our Dota2 clan</div>
+                                  </div>
+                                  <div class="left dest">login</div>
+                              	</div>
                             </a>
                         </td>
                     </tr>

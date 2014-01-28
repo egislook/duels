@@ -74,12 +74,12 @@
             <td class="b-r" height="5px"></td>
         </tr>
         <tr>
-            <td class="b-r">
-                <div class="right dark">{{=it.u[it.t.winner].name}}</div>
+            <td class="b-w-r">
+                <div class="right edit">{{=it.u[it.t.winner].name}}</div>
             </td>
           	<td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-              	<img class="b-a" src="{{=it.u[it.t.winner].avatar}}"/>
-                <div class="note dark" style="margin-left:24px;margin-top:-19px;">tournament winner</div>
+              <img class="b-w" src="{{=it.u[it.t.winner].avatar}}"/>
+                <div class="note dark" style="margin-left:24px;margin-top:-19px;">Tournament winner</div>
             </td>
         </tr>
         {{?}}
@@ -289,7 +289,12 @@
             <tr>
                 <td>
                     <a href="/login">
-                        <div class="delete click right b-t"><p class="tip left">If you want to participate tournament you have to join our Dota2 clan</p><div class="left dest">login</div></div>
+                      <div class="delete click right b-t">
+                        <div class="left dark b-b" style="width:20px;margin-top:-1px;text-align:center;" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
+                          <div class="note dark left" style="margin-top:10px;margin-left:-5px;">If you want to paticipate in the tournament you have to login and join our Dota2 clan</div>
+                        </div>
+                        <div class="left dest">login</div>
+                      </div>
                     </a>
                 </td>
             </tr>
