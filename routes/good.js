@@ -3,39 +3,11 @@ var tournaments_model = require('../models/tournaments_model.js');
 
 'use strict';
 module.exports = {
-    '/d/:data': function(req, res){
-        
-        var data = req.params.data;
-        if(data == 't' && req.app.cache.tournaments.length>0)
-            res.send(req.app.cache.tournaments);
-        else if(data == 'd' && req.app.cache.tournaments.length>0 && req.app.cache.tournaments[0].duels)
-            res.send(req.app.cache.tournaments[0].duels);
-        else if(data == 'g' && req.app.cache.games)
-            res.send(req.app.cache.games);
-        else if(data == 'l'){
-            req.session.user = {
-                'loged' : true,
-                'steamid' : '76561198065634959',
-                'status' : 'neutral'
-            };
-            res.redirect('/');
-        }
-        else if(data == 'u' && req.session.user){
-            user_model.user(req, res, function(user){
-               res.send(user);
-            });
-        }
-        else
-            res.send('there is no data to display');
-    },
     '/create': function(req, res){
-        req.session.user = {
+        /*req.session.user = {
             'loged' : true,
-            'steamid' : '76561198065626987',
-            'status' : 'good'
-        };
-        
-        console.log(Math.floor((Math.random()*2))+1);
+            'steamid' : '76561198065626987'
+        };*/
         
         user_model.user(req, res, function(user){
             if(user.status === 'good' && user.loged === true)

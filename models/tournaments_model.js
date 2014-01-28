@@ -47,7 +47,7 @@ exports.create = function create(req, tournament, user, callback){
     var approved = {};
     var max = tournament.maxplayers;
     
-    if(max == 2){
+    /*if(max == 2){
         approved = {
                 '76561198065626987':{
                     key:'123'
@@ -101,7 +101,7 @@ exports.create = function create(req, tournament, user, callback){
                 }
             
         }
-    }
+    }*/
     
     tournament.id = new Date().getTime();
     tournament.state = 'join';
