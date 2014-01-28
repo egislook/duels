@@ -22,7 +22,7 @@ app.use('/css' , express.static(path.join(process.cwd(), '/public/css')));
 app.use('/img' , express.static(path.join(process.cwd(), '/public/img')));
 app.use(app.router);
 
-app.cache.loaded = 3;
+app.cache.loaded = 4;
 
 steam.getLightFromSteam('heroes', function(data){
     app.cache.heroes = data;
@@ -46,58 +46,21 @@ db.con('league', function(dbs){
         app.cache.tournaments = tournaments;
         app.cache.loaded--;
         console.log("LOADED -> "+app.cache.loaded+" tournaments");
-        
     });
     
-    /*db.get(app, 'games', function(games){
-         app.cache.games = games;
-    });*/
+    db.get(app, 'users', function(users){
+        
+        var temp = {};
+        for(var i in users){
+            temp[users[i].steamid] = users[i];
+        }
+        
+        app.cache.users = temp;
+        app.cache.loaded--;
+        console.log("LOADED -> "+app.cache.loaded+" users");
+    });
     
 });
-app.cache.users = {
-    '76561198065626987':{
-        name:'Zarna',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/37/37afbaaaff032a36ad62bc64f28dd5a9ce2b9ab0_medium.jpg',
-        key:'123'
-    },
-    '76561198065634959':{
-        name:'Majasqzi',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/80/80dacf2223aed57b5f950416e78c5414c80bcb6e_medium.jpg',
-        key:'321'
-    },
-    '76561198059273715':{
-        name:'Aldona',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/d5/d5cec4b2cbf13fa4f67822c88e539b1f2eb79202_full.jpg',
-        key:'123'
-    },
-    '76561198107743493':{
-        name:'Etas',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/72/72bb6e5a558c137cff9db2b7953d4504b8f53b18_full.jpg',
-        key:'321'
-    },
-    '76561198074301154':{
-        name:'Deefects',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/57/57ba6cabb3b854e6afdf62827a5a37de6919c83e_full.jpg',
-        key:'123'
-    },
-    '76561198053424482':{
-        name:'Siltnamis',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/2d/2de0a1f4fa3be94f6529be6e9a0174324ba60459_full.jpg',
-        key:'321'
-    },
-    '76561198057469780':{
-        name:'Malunas',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/5d/5db573f28dffaac82bd983a76f01633972019ab0_full.jpg',
-        key:'123'
-    },
-    '76561198024922008':{
-        name:'пчела',
-        avatar:'http://media.steampowered.com/steamcommunity/public/images/avatars/c5/c5b4a69fbe470dbf286cf2e012cea7eacf9770b1_full.jpg',
-        key:'321'
-    }
-};
-
-
 
 app.cache.steamid = {
     'good' : ['76561198065626987', '76561198065634959'],

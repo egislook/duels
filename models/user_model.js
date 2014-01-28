@@ -1,4 +1,5 @@
 var steam = require('../lib/steam/steam.js');
+var db = require('../lib/db.js');
 
 exports.user = function user(req, res, callback){
     var loged = false;
@@ -18,7 +19,10 @@ exports.user = function user(req, res, callback){
             });
         } else {
             steam.getFromSteam(req.session.user.steamid, 'userData', function(data, count){
-                users[req.session.user.steamid] = {name : data[0].personaname, avatar : data[0].avatarmedium}; 
+                users[req.session.user.steamid] = {name : data[0].personaname, avatar : data[0].avatarmedium, steamid : req.session.user.steamid};
+                
+                db.add(req.app, 'users', users[req.session.user.steamid], function(data){});
+                
                 callback({
                    loged : loged,
                    status : status,

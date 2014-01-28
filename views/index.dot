@@ -16,9 +16,12 @@
                     </tr>
                     <tr>
                         <td class="b-r">
-                            
-                            <div class="neutral b-t right textSmall">~2h</div>
+                            {{? t.state == 'join'}}
+                            <div class="neutral b-t right textSmall">{{=t.time}}</div>
                             <div class="dark b-t right textSmall">{{=t.date}}</div>
+                            {{??}}
+                            <div class="dark b-t right textSmall">{{=t.date}}</div>
+                            {{?}}
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +75,7 @@
                     </tr>
                     <tr>
                         <td class="b-r">
-                            <div class="dark right">SH</div>
+                            <div class="dark right textSmall">Same Hero / Only Mid</div>
                         </td>
                         <td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                             <img src="img/mode-icon.png"/>
@@ -96,14 +99,16 @@
                         <td class="b-r" height="20px"></td>
                     </tr>
                     {{? it.user.loged}}
-                    {{? !t.users.joined[it.user.steamid] && !t.users.approved[it.user.steamid]}}
-                    <tr>
-                        <td colspan="2">
-                            <a href="./join/{{=t.id}}">
-                                <div class="accept click right b-t"><p class="tip left">must join our dota2 clan first</p><div class="left dest">join</div></div>
-                            </a>
-                        </td>
-                    </tr>
+                        {{? !t.users.joined[it.user.steamid] && !t.users.approved[it.user.steamid]}}
+                        {{? t.state != 'ended'}}
+                        <tr>
+                            <td colspan="2">
+                                <a href="./join/{{=t.id}}">
+                                    <div class="accept click right b-t"><p class="tip left">must join our dota2 clan first</p><div class="left dest">join</div></div>
+                                </a>
+                            </td>
+                        </tr>
+                        {{?}}
                         {{?? !t.users.approved[it.user.steamid]}}
                         <tr>
                             <td colspan="2">

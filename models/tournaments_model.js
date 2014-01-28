@@ -308,7 +308,6 @@ exports.start = function start(req, t, callback){
                 tournament.state = 'ended';
                 var date = new Date();
                 date = date.getHours()+':'+date.getMinutes();
-                tournament.states[state].time = date;
                 tournament.time = date;
                 
                 var where = {id : parseInt(tournament.id)};

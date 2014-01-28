@@ -1,13 +1,28 @@
 <div class="page">
     <table cellspacing="0" class="spaced textLight">
         <tr>
-            <td class="b-r" height="50px"></td>
-        </tr>
-        <!--<tr>
             <td class="b-r">
-                <div class="dark right textSmall">{{=it.t.date}}</div>
+                <a href="steam://friends/add/{{=it.t.owner[0].steamid}}">
+                    <div class="left b-b b-l b-r neutral tip click">{{=it.t.owner[0].name}}</div>
+                  <div class="left dark b-b" style="width:20px;margin-top:-1px;text-align:center;" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
+                      <div class="note dark right textSmall" style="max-width:150px;margin-left:21px;margin-top:-17px;">Game created by this person. Click on it if you want add him to your steam friendlist for more information.</div>
+      				</div>
+                </a>
             </td>
-        </tr>-->
+        </tr>
+        <tr>
+            <td class="b-r" height="30px"></td>
+        </tr>
+        <tr>
+            <td class="b-r">
+                {{? it.t.state == 'join'}}
+                <div class="neutral b-t right textSmall">{{=it.t.time}}</div>
+                <div class="dark b-t right textSmall">{{=it.t.date}}</div>
+                {{??}}
+                <div class="dark b-t right textSmall">{{=it.t.date}}</div>
+                {{?}}
+            </td>
+        </tr>
         <tr>
             <td class="b-r">
                 <div class="dark right textBig b-a">{{=it.t.name}} tournament</div>
@@ -30,8 +45,12 @@
         </tr>
         <tr>
             <td class="b-r">
+                {{? it.t.buyin_type == 'free'}}
+                    <div class="{{=it.t.buyin_type}} neutral b-a right nb-r">{{=it.t.buyin_type}}</div>
+                {{??}}
                 <div class="{{=it.t.buyin_type}} right">{{=it.t.buyin_type}}</div>
                 <div class="dark right">{{=it.t.buyin_count}}</div>
+                {{?}}
             </td>
           	<td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
               	<img src="../img/buyin-icon.png"/>
@@ -40,7 +59,11 @@
         </tr>
         <tr>
             <td class="b-r">
-                <div class="dark right"> {{=it.t.players}} / {{=it.t.maxplayers}}</div>
+                {{? it.t.players == it.t.maxplayers}}
+                <div class="dark delete textBig right">{{=it.t.players}} / {{=it.t.maxplayers}}</div>
+                {{??}}
+                <div class="dark accept textBig right">{{=it.t.players}} / {{=it.t.maxplayers}}</div>
+                {{?}}
             </td>
           	<td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
               	<img src="../img/amount-icon.png"/>
@@ -49,7 +72,7 @@
         </tr>
         <tr>
             <td class="b-r">
-                <div class="dark right up_case">{{=it.t.mode}}</div>
+                <div class="dark right textSmall">Same Hero / Only Mid</div>
             </td>
           	<td class="icon" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
               	<img src="../img/mode-icon.png"/>
@@ -128,10 +151,20 @@
                 <td>
                     <div class="neutral b-a left">in progress</div>
                   	<div class="left dark b-a" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
-                  		<div class="note dark right b-a textSmall" style="max-width:110px;margin-left:17px;margin-top:-76px;">Here you can see players (opponents on the opposite side) that are playing right now</div>
+                  		<div class="note dark right b-a textSmall" style="max-width:110px;margin-left:17px;margin-top:-105px;">Here you can see players (opponents on the opposite side) that are playing right now</div>
                   	</div>
                 </td>
             </tr>
+      		<tr>
+                <td class="b-r">
+                  <div class="right item"><img height="18" src="http://s26.postimg.org/pcpri3zvp/radiant.jpg"></div>
+                  <div class="accept right textSmall b-r">The Radiant</div>
+                </td>
+              	<td>
+                  <div class="left item b-r"><img height="18" src="http://s26.postimg.org/66ckexjdx/dire.jpg"></div>
+                  <div class="delete left textSmall">The Dire</div>
+                </td>
+      		</tr>
             <tr>
                 <td class="b-r" height="5px"></td>
             </tr>
@@ -174,6 +207,7 @@
                         {{??}}
                         <div class="dark right b-a">{{=state}}</div>
                         {{?}}
+                        <div class="neutral b-a right">{{=it.t.states[state].time}}</div>
                     </td>
                     <td>
                         <div class="neutral b-a left">{{=it.t.states[state].endedgames}} / {{=it.t.states[state].games}}</div>
@@ -246,8 +280,9 @@
                 <td>
                 <div class="b-t b-b right" style="overflow:hidden">
                 {{ for(var id in it.t.users.approved) { }}
-                    <div class="left players">
+                    <div class="left players" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                         <img src="{{=it.u[id].avatar}}"/>
+                  		<div class="note dark">{{=it.u[id].name}}</div>
                     </div>
                 {{ } }}
                 </div>
@@ -259,14 +294,21 @@
         </tr>
         {{? it.user.loged}}
             {{? !it.t.users.joined[it.user.steamid] && !it.t.users.approved[it.user.steamid]}}
+            {{? it.t.state != 'ended'}}
             <tr>
                 <td>
                     <a href="/join/{{=it.t.id}}">
-                        <div class="accept click right b-t"><p class="tip left">First you have to join our dota2 clan</p><div class="left dest">join</div></div>
+                      <div class="accept click right b-t">
+                        <div class="left dark b-b" style="width:20px;margin-top:-1px;text-align:center;" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
+                          <div class="note dark left" style="margin-top:10px;margin-left:-5px;">If you want to paticipate in the tournament you have to join our Dota2 clan</div>
+                        </div>
+                        <div class="left dest">join</div>
+                      </div>
                     </a>
                 </td>
             </tr>
-            {{?? !it.u[it.user.steamid]}}
+            {{?}}
+            {{?? !it.t.users.approved[it.user.steamid]}}
             <tr>
                 <td>
                     <div class="neutral right b-a"><p class="tip left">Code for participation</p><div class="left dest">{{= it.t.users.joined[it.user.steamid].key}}</div></div>

@@ -11,11 +11,9 @@
                     <div class="dark right">date</div>
                 </td>
                 <td class="b-l">
-                    <input class="inputs" size="8" type="text" value="2014-01-15" name="date"/>
-                    <script>
-                        var date = new Date();
-                       document.getElementsByName('date')[0].value = date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate();
-                    </script>
+                    {{var date = new Date(); var time = date.getHours()+':'+date.getMinutes(); date = date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate();}}
+                    <input class="inputs" size="8" type="text" value="{{=date}}" name="date"/>
+                    <input class="inputs b-l" size="5" type="text" value="{{=time}}" name="time"/>
                 </td>
             </tr>
             <tr>

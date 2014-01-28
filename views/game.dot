@@ -40,24 +40,24 @@
         <tr>
             <td class="b-r" height="5px"></td>
         </tr>
-        {{? (it.g.t1[0].id == it.user.steamid && (!it.g.t1[0].imgs || it.g.t1[0].imgs.length<=2)) || (it.g.t2[0].id == it.user.steamid && (!it.g.t2[0].imgs || it.g.t2[0].imgs.length<=2)) || it.user.status ==='goodd'}}
-        <tr>
-            <form action="/upload/{{= it.gameid}}" enctype="multipart/form-data" method="post">
-            <td class="b-r">
-                    <button type="submit" class="right edit click b-t b-b textLight" style="display:inline-block;">
-                        <p class="tip left">upload result image of the game (max 2 images per game .png or .jpg max size 2mb each)</p>
-                        <div class="left dest">upload</div>
-                    </button>
-                </div>
-            </td>
-            <td>
-                <div class="left">
-                    <input class="inputs" style="width:105px; margin-left:-10px" name="datafile" type="file">
-                </div>
-            </td>
-            </form>
-        </tr>
-        {{?}}
+            {{? (it.g.t1[0].id == it.user.steamid && (!it.g.t1[0].imgs || it.g.t1[0].imgs.length<=2)) || (it.g.t2[0].id == it.user.steamid && (!it.g.t2[0].imgs || it.g.t2[0].imgs.length<=2)) || it.user.status ==='goodd'}}
+            <tr>
+                <form action="/upload/{{= it.gameid}}" enctype="multipart/form-data" method="post">
+                <td class="b-r">
+                        <button type="submit" class="right edit click b-t b-b textLight" style="display:inline-block;">
+                            <p class="tip left">upload result image of the game (max 2 images per game .png or .jpg max size 2mb each)</p>
+                            <div class="left dest">upload</div>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="left">
+                        <input class="inputs" style="width:105px; margin-left:-10px" name="datafile" type="file">
+                    </div>
+                </td>
+                </form>
+            </tr>
+            {{?}}
         {{?}}
         <tr>
             <td class="b-r" height="10px"></td>
@@ -128,7 +128,7 @@
                       </div>
                       {{ } }}
                     {{?}}
-                  <div class="note items" style="width:386px;margin-top:35px;">
+                  <div class="note items" style="max-width:450px;margin-top:35px;">
                     {{ for(var key in it.i) { if(key == 'halloween_candy_corn'){break;}; }}
                         <div class="left b-a" onclick="itemselect(this)"><img alt="{{=key}}" height="20px" src="http://media.steampowered.com/apps/dota2/images/items/{{=key}}_lg.png"></div>
                     {{  } }}

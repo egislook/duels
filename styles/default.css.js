@@ -32,7 +32,7 @@ a{var(ruleColorTextLight);}
 .hero{width:48px;}
 .avatar{height:27px;}
 
-#toolbar{border-bottom:solid 5px var(colorDark);overflow:hidden;position:fixed;bottom:0px;width:100%;}
+#toolbar{border-bottom:solid 5px var(colorDark);position:fixed;bottom:0px;width:100%;z-index:0;}
 #toolbar img{height:30px;display:block;margin:auto;}
 #clock{position:absolute;right:0px;padding:10px;width:100px}
 p{font-size:14px;clear:both;padding-top:5px;}
@@ -49,8 +49,8 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .items div:hover{border:solid 2px var(colorDelete);}
 
 .icon img{height:21px;}
-.page{overflow:hidden;margin:auto;width:100%;text-align:center;border-top:solid 5px var(colorDark);}
-table{font-size:var(textNormal);}
+.page{overflow:hidden;margin:auto;width:100%;text-align:center;border-top:solid 5px var(colorDark);padding-bottom:20px;}
+table{font-size:var(textNormal);position:relative;z-index:3;}
 table td > div{padding:2px 5px 2px 5px;}
 .tournament{float:left;padding-left:30px;/*border:solid 1px var(colorGrey);*/}
 .spaced{min-width:200px;display:inline-block;}
@@ -84,12 +84,13 @@ table td > div{padding:2px 5px 2px 5px;}
 .players{padding:0px; padding-right:2px}
 .players img{width:35px; border:solid 2px var(colorDark);padding:0px;margin:0px;}
 
-.duel{padding:0px;padding-right:3px;}
+.duel{padding:0px;margin-right:3px;border-top:solid 4px transparent;border-bottom:solid 4px transparent;}
+.duel:hover{border-top:solid 4px var(colorAccept);}
 .img{border:solid 2px var(colorDark);width:35px;}
 .first{margin-right:2px;}
 .duel div{text-align:center;padding:2px}
-.win{width:40px;border:solid 2px var(colorDark);border-top:2px solid var(colorAccept);}
-.lose{width:25px;border:solid 2px var(colorDark);border-top:solid 2px var(colorDelete);}
+.win{width:40px;border:solid 2px var(colorDark);border-top:3px solid var(colorAccept);}
+.lose{width:25px;border:solid 2px var(colorDark);border-top:solid 3px var(colorDelete);}
 
 
 .accept{background:var(colorAccept);}
