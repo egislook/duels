@@ -23,6 +23,7 @@
     "colorArc" : "#ADE55C"
 }
 
+ol{list-style-type:circle;}
 *{padding:0;margin:0;border:none;text-decoration:none;box-sizing:border-box;}
 body{padding:1px;font-family:"Arial";font-size:var(textNormal);padding-bottom:80px;/*background:#ffcf01;*/}
 a{var(ruleColorTextLight);}

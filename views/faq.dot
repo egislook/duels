@@ -1,0 +1,176 @@
+{{
+    var tutorial = [
+        {
+            name : 'Duel Rules',
+            desc: '',
+            steps : [
+                {
+                    desc : 'first 2 kills wins'
+                },
+                {
+                    desc : 'first 2 towers wins'
+                },
+                {
+                    desc : 'If you lose you have to type in all chat "GG" and wait 10 seconds till game ends'
+                },
+                
+            ]
+        },
+        {
+            name : 'How to login?',
+            desc: 'In order to "Login", please take the following steps:',
+            steps : [
+                {
+                    desc : 'Press "Login" button.'
+                },
+                {
+                    desc : 'Make sure that this page fits both security requirements. "Sign in" with your steam account.',
+                    img : 'http://s26.postimg.org/3wt1hwzu1/login.jpg'
+                },
+                {
+                    desc : 'If you are signing in first time enter steam code from email and any name for your computer ex:"ILoveMyComputer"',
+                    img : 'http://s26.postimg.org/oi7t9thex/newpc.jpg'
+                },
+                {
+                    desc : 'Now you will be redirected back to the wdpwp.com main page'
+                }
+            ]
+        },
+        {
+            name : 'How to join tournament?',
+            desc: 'In order to "Join" tournament, please take the following steps:',
+            steps : [
+                {
+                    desc : 'You have to be loged in wdpwp.com .'
+                },
+                {
+                    desc : 'Press "Join" button.',
+                    img : 'http://s26.postimg.org/5eehth4kp/join.jpg'
+                },
+                {
+                    desc : 'Then you will get participation code. Press on the tournament owner nick e.g. "Majasqzi" (on the top of the tournament screen) and add to your friendlist',
+                    img : 'http://s26.postimg.org/engo3ldgp/code.jpg'
+                },
+                {
+                    desc : 'You will receive message from owner with your participation code. You need to confirm if it is correct code (you can see code on wdpwp.com tournament page)',
+                    img : 'http://s26.postimg.org/mu8nv63jd/confirm.jpg'
+                },
+                {
+                    desc : 'After confirmation you must turn on Dota2 and accept "WDPWP" guild invitation',
+                    img : 'http://s26.postimg.org/9eln5pv1l/guild.jpg'
+                },
+                {
+                    desc : 'When you become "WDPWP" guild member you will be confirmed tournament player. Then you need to wait till all tournament slots will be filled',
+                    img : 'http://s26.postimg.org/ks86gx5k9/participated.jpg'
+                }
+            ]
+        },
+        {
+            name : 'How to play in tournament?',
+            desc: 'In order to play with oponent, please take the following steps:',
+            steps : [
+                {
+                    desc : 'When tournament is started you can see your game on tournament page.',
+                    img : 'http://s26.postimg.org/o0cntyru1/duel.jpg'
+                },
+                {
+                    desc : 'The Radiant side have to create lobby in dota2 game'
+                },
+                {
+                    desc : 'The Dire side have to join lobby in dota2 game find a lobby on "Guild lobbies" section and join opponent lobby',
+                    img : 'http://s26.postimg.org/lkaug49rd/find_lobby.jpg'
+                },
+                {
+                    desc : 'After game ends you have to upload screenshot of your game stats'
+                },
+                {
+                    desc : 'Tournament owner will check your and your opponent screenshots and confirm game statistics'
+                },
+                {
+                    desc : 'After this you can see your game statistics and winners on the page'
+                }
+                
+            ]
+        },
+        {
+            name : 'How to create lobby game?',
+            desc: 'Only the Radiant side player will create the lobby:',
+            steps : [
+                {
+                    desc : 'Select on dota2 game "Play" section and press create lobby',
+                    img : 'http://s26.postimg.org/ayqz443ft/create_lobby.jpg'
+                },
+                {
+                    desc : 'Join The Radiant side and change lobby settings (press "Edit Settings" button)',
+                    img : 'http://s26.postimg.org/ewiu79fmx/lobby.jpg'
+                },
+                {
+                    desc : 'You must set game mode to "Mid Only" and tv delay to "10sec"',
+                    img : 'http://s26.postimg.org/kyqgxr42x/settings.jpg'
+                },
+                {
+                    desc : 'If you and oponent are ready you can start the game'
+                }
+                
+            ]
+        },
+        {
+            name : 'How to upload game result screenshot?',
+            desc: 'In order to upload correct screenshot, please take the following steps:',
+            steps : [
+                {
+                    desc : 'screenshot have to meet all requirements',
+                    img : 'http://s26.postimg.org/uylddnfc9/screenshot.jpg'
+                },
+                {
+                    desc : 'Select and upload screenshot of your game',
+                    img : 'http://s26.postimg.org/ht5v7jlgp/upload.jpg'
+                },
+                {
+                    desc : 'Now you can see screenshots you uploaded on the game page'
+                }
+                
+            ]
+        },
+        {
+            name : 'Please enable "Share Match History"',
+            desc: 'In order to enable the "Share Match History" setting, please take the following steps:',
+            steps : [
+                {
+                    desc : 'Open the Dota 2 game client'
+                },
+                {
+                    desc : 'Click the Settings icon'
+                },
+                {
+                    desc : 'Navigate to "Game", then to "General"'
+                },
+                {
+                    img : 'http://dotabuff.com/assets/pages/enabling-statistics/share-match-history-497c3ea65b6cbb2ecc03b1df3c7b24b6.png',
+                    desc : 'Set the "Share Match History" setting to "On"'
+                }
+            ]
+        }
+    ];
+}}
+
+<div class="page">
+
+    {{~tutorial :tut}}
+        <h1 style="padding-top:10px">{{=tut.name}}</h1>
+        <h4 style="padding-top:10px">{{=tut.desc}}</h2>
+        <ol>
+        {{~tut.steps :step}}
+            <li style="padding:5px;">{{=step.desc}}</li>
+            {{? step.img}}
+            <img style="max-width:400px" src="{{=step.img}}">
+            {{?}}
+        {{~}}
+        </ol>
+    {{~}}
+    
+</div>
+  
+  {{#def.test}}
+  
+ 

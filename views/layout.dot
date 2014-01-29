@@ -7,7 +7,6 @@
 	</head>
 	<body>
 	    <div class="dark textLight textSmall" id="clock">
-	    
 	        {{ var date = Date();}}
 	        {{= date}}
 	        <div class="accept tip textLight" style="padding:1px;">wdpwp alpha</div>
@@ -21,23 +20,14 @@
                   <p>Home</p>
 		        </div> 
 		    </a>
-          {{? false}}
-		    <a href="/d/t">
+          {{? true}}
+		    <a href="/faq">
 		        <div class="left list">
-		            <img src="http://s26.postimg.org/w7wmrtun9/laurel_icon.png">
-                  	<p>Tourneys</p>
+		            <img src="http://s26.postimg.org/lfbok6rtx/alien_icon.png">
+                  	<p>Faq</p>
 		        </div> 
 		    </a>
           {{?}}
-	        {{~it.tournaments :t:i}}
-	            {{? t.state =='started'}}
-	            <a href="/tournament/{{=i}}">
-    		        <div class="left list">
-    		            {{=t.name}}
-    		        </div> 
-    		    </a>
-    		{{?}}
-	        {{~}}
 		    {{? !it.user.loged }}
 		    <a href="/login">
 		        <div class="right list">

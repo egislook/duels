@@ -13,5 +13,10 @@ module.exports = {
     },
     '/error': function(req, res){
         res.send('please login to the system then try to join tournament <a href="../../login">login</a> or come back to main page <a href="../../">home</a>');        
-    }
+    },
+    '/faq': function(req, res){
+        user_model.user(req, res, function(user){
+            res.render('faq', {user : user});
+        });
+    }   
 };
