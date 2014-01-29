@@ -98,13 +98,23 @@
                     <tr>
                         <td class="b-r" height="20px"></td>
                     </tr>
+                    {{? t.state == 'join'}}
+                    <tr>
+                        <td class="b-r">
+                            <div class="right tip dark">joined</div>
+                        </td>
+                        <td>
+                            <div class="neutral left b-t b-r">{{=t.joined}}</div>
+                        </td>
+                    </tr>
+                    {{?}}
                     {{? it.user.loged}}
                         {{? !t.users.joined[it.user.steamid] && !t.users.approved[it.user.steamid]}}
-                        {{? t.state != 'ended'}}
+                        {{? t.state != 'ended' && t.state == 'join'}}
                         <tr>
                             <td colspan="2">
                                 <a href="./join/{{=t.id}}">
-                                    <div class="accept click right b-t"><p class="tip left">must join our dota2 clan first</p><div class="left dest">join</div></div>
+                                    <div class="accept click right b-t"><p class="tip left">after joining click on the tournament owner nick</p><div class="left dest">join</div></div>
                                 </a>
                             </td>
                         </tr>

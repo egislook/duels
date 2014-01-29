@@ -109,7 +109,7 @@
         <tr>
             <td class="b-r" height="20px"></td>
         </tr>
-        {{? it.t.joined>0 && it.user.status == 'good'}}
+        {{? it.t.joined>0 && it.t.state == 'join'}}
             <tr>
                 <td class="b-r">
                     <div class="dark right b-a">joined</div>
@@ -121,11 +121,17 @@
             <tr>
                 <td class="b-r" height="5px"></td>
             </tr>
-                {{ for(var id in it.t.users.joined) { }}
+                {{ var i=0; for(var id in it.t.users.joined) { i++;}}
                     <tr>
                         <td class="b-r">
-                            <div class="dark right b-a">{{=it.u[id].name}}</div><div class="right neutral b-a">{{=it.t.users.joined[id].key}}</div>
+                            <div class="dark right b-a">{{=it.u[id].name}}</div>
+                            {{? it.user.status == 'good'}}
+                            <div class="right neutral b-a">{{=it.t.users.joined[id].key}}</div>
+                            {{??}}
+                            <div class="right neutral b-a">{{=i}}</div>
+                            {{?}}
                         </td>
+                        {{? it.user.status == 'good'}}
                         <td>
                             <a href="/dismiss/{{=it.t.id}}/{{=id}}">
                                 <div class="delete click right dest">remove</div>
@@ -133,7 +139,11 @@
                             <a href="/approve/{{=it.t.id}}/{{=id}}">
                                 <div class="accept click right dest">aprove</div>
                             </a>
+                            <a href="steam://friends/add/{{=it.user.steamid}}">
+                                <div class="edit click right dest">add to steam</div>
+                            </a>
                         </td>
+                        {{?}}
                     </tr>
                     <tr>
                         <td class="b-r" height="2px"></td>
@@ -175,14 +185,22 @@
                         {{? it.t.mode == 'sh' || it.t.mode == 'ar'}}
                         <img class="right hero" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[duel.id].t1[0].hero.url}}_sb.png"/>
                         {{?}}
+                        {{? it.g[duel.id].t1[0].id == it.user.steamid}}
+                        <div class="accept right b-a">{{=it.u[it.g[duel.id].t1[0].id].name}}</div>
+                        {{??}}
                         <div class="dark right b-a">{{=it.u[it.g[duel.id].t1[0].id].name}}</div>
+                        {{?}}
                         <img class="right b-a avatar" src="{{=it.u[it.g[duel.id].t1[0].id].avatar}}"/>
                     </td>
                     <td>
                         {{? it.t.mode == 'sh' || it.t.mode == 'ar'}}
                         <img class="left hero" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[duel.id].t2[0].hero.url}}_sb.png"/>
                         {{?}}
+                        {{? it.g[duel.id].t2[0].id == it.user.steamid}}
+                        <div class="delete left b-a">{{=it.u[it.g[duel.id].t2[0].id].name}}</div>
+                        {{??}}
                         <div class="dark left b-a">{{=it.u[it.g[duel.id].t2[0].id].name}}</div>
+                        {{?}}
                         <img class="left b-a avatar" src="{{=it.u[it.g[duel.id].t2[0].id].avatar}}"/>
                         <a href="../g/{{=duel.id}}">
                             <div class="left click edit dest">stats</div>
@@ -233,7 +251,11 @@
                     <a href="../g/{{=duel.id}}">
                         <div class="left duel">
                             {{? it.t.mode == 'sh'}}
+                            {{? it.g[duel.id].t1[0].id == it.user.steamid || it.g[duel.id].t2[0].id == it.user.steamid}}
+                            <div class="edit textSmall" style="clear:both">{{=it.g[duel.id].t1[0].hero.name}}</div>
+                            {{??}}
                             <div class="dark textSmall" style="clear:both">{{=it.g[duel.id].t1[0].hero.name}}</div>
+                            {{?}}
                             {{??}}
                             <div class="dark textSmall" style="clear:both">{{=i}}</div>
                             {{?}}
@@ -262,7 +284,7 @@
         {{? it.t.players>0}}
             <tr>
                 <td class="b-r">
-                    <div class="dark right b-a">Players</div>
+                    <div class="dark right b-a">Confirmed Players</div>
                 </td>
                 <td>
                     <div class="neutral b-a left">{{=it.t.players}} / {{=it.t.maxplayers}}</div>
@@ -282,7 +304,13 @@
                 {{ for(var id in it.t.users.approved) { }}
                     <div class="left players" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                         <img src="{{=it.u[id].avatar}}"/>
-                  		<div class="note dark">{{=it.u[id].name}}</div>
+                  		<div class="note dark">{{=it.u[id].name}}
+                  		    {{? it.user.status == 'good'}}
+                  		    <a href="/dismiss/{{=it.t.id}}/{{=id}}">
+                                <div class="delete click">return</div>
+                            </a>
+                            {{?}}
+                  		</div>
                     </div>
                 {{ } }}
                 </div>
@@ -294,7 +322,7 @@
         </tr>
         {{? it.user.loged}}
             {{? !it.t.users.joined[it.user.steamid] && !it.t.users.approved[it.user.steamid]}}
-            {{? it.t.state != 'ended'}}
+            {{? it.t.state != 'ended' && it.t.state == 'join'}}
             <tr>
                 <td>
                     <a href="/join/{{=it.t.id}}">

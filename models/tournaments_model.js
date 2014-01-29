@@ -145,7 +145,7 @@ exports.join = function join(req, id, user, callback){
     var msg = 'error';
     tournaments(req, function(tournament){
         if(tournament){
-            if(tournament.users.joined[user.steamid] == undefined && tournament.users.approved[user.steamid] == undefined){
+            if(tournament.users.joined[user.steamid] == undefined && tournament.users.approved[user.steamid] == undefined && tournament.state == 'join'){
                 tournament.users.joined[user.steamid] = {key : Math.floor((Math.random()*100000)+1)};
                 //rewrite users data in database
                 var where = {id : parseInt(id)};
@@ -161,16 +161,27 @@ exports.join = function join(req, id, user, callback){
     }, id)
 }
 
-exports.dismiss = function dismiss(req, t, id, callback){
+exports.dismiss = function dismiss(req, t, id, callback, approved){
     tournaments(req, function(tournament){
-        if(tournament && tournament.joined>0){
-            delete tournament.users.joined[id];
-            //rewrite users data in database
-            var where = {id : parseInt(t)};
-            var query = {$set: {users : tournament.users}}
-            db.update(req.app, 'tournaments', where, query, function(data){
-                console.log(data);
-            });
+        if(tournament){
+            var changed = false;
+            if(tournament.users.joined[id]){
+                delete tournament.users.joined[id];
+                changed = true;
+            } else if(tournament.users.approved[id]){
+                tournament.users.joined[id] = tournament.users.approved[id];
+                delete tournament.users.approved[id];
+                changed = true;
+            }
+            
+            if(changed){
+                //rewrite users data in database
+                var where = {id : parseInt(t)};
+                var query = {$set: {users : tournament.users}}
+                db.update(req.app, 'tournaments', where, query, function(data){
+                    console.log(data);
+                });
+            }   
             
             callback();
         }
