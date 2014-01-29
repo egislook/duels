@@ -76,7 +76,7 @@ table td > div{padding:2px 5px 2px 5px;}
 .dark{background:var(colorDark);}
 
 .click{text-align:right;padding:2px 5px 2px 5px;overflow:hidden;}
-.neutral{padding:2px 5px 2px 5px;color:var(colorDark);}
+.neutral{padding:2px 5px 2px 5px;color:var(colorDark);background:var(colorLight);}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:var(colorDark);color:var(colorLight);}

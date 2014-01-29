@@ -2,6 +2,7 @@
     var tutorial = [
         {
             name : 'Duel Rules',
+            tag : 'rules',
             desc: '',
             steps : [
                 {
@@ -18,7 +19,8 @@
         },
         {
             name : 'How to login?',
-            desc: 'In order to "Login", please take the following steps:',
+            tag : 'login',
+            desc : 'In order to "Login", please take the following steps:',
             steps : [
                 {
                     desc : 'Press "Login" button.'
@@ -28,20 +30,21 @@
                     img : 'http://s26.postimg.org/3wt1hwzu1/login.jpg'
                 },
                 {
-                    desc : 'If you are signing in first time enter steam code from email and any name for your computer ex:"ILoveMyComputer"',
+                    desc : 'If you are signing in first time enter steam code from email and any name for your computer e.g. "ILoveMyComputer"',
                     img : 'http://s26.postimg.org/oi7t9thex/newpc.jpg'
                 },
                 {
-                    desc : 'Now you will be redirected back to the wdpwp.com main page'
+                    desc : 'You will be redirected back to the wdpwp.com main page'
                 }
             ]
         },
         {
             name : 'How to join tournament?',
+            tag : 'join',
             desc: 'In order to "Join" tournament, please take the following steps:',
             steps : [
                 {
-                    desc : 'You have to be loged in wdpwp.com .'
+                    desc : 'You have to be loged in wdpwp.com <a class="neutral click tip" href="#login">How to login?</a>'
                 },
                 {
                     desc : 'Press "Join" button.',
@@ -67,6 +70,7 @@
         },
         {
             name : 'How to play in tournament?',
+            tag : 'play',
             desc: 'In order to play with oponent, please take the following steps:',
             steps : [
                 {
@@ -74,14 +78,14 @@
                     img : 'http://s26.postimg.org/o0cntyru1/duel.jpg'
                 },
                 {
-                    desc : 'The Radiant side have to create lobby in dota2 game'
+                    desc : 'The Radiant side have to create lobby in dota2 game <a class="neutral click tip" href="#create">How to create game?</a>'
                 },
                 {
                     desc : 'The Dire side have to join lobby in dota2 game find a lobby on "Guild lobbies" section and join opponent lobby',
                     img : 'http://s26.postimg.org/lkaug49rd/find_lobby.jpg'
                 },
                 {
-                    desc : 'After game ends you have to upload screenshot of your game stats'
+                    desc : 'After game ends you have to upload screenshot of your game stats <a class="neutral click tip" href="#upload">How to uplpad screenshot?</a>'
                 },
                 {
                     desc : 'Tournament owner will check your and your opponent screenshots and confirm game statistics'
@@ -94,6 +98,7 @@
         },
         {
             name : 'How to create lobby game?',
+            tag : 'create',
             desc: 'Only the Radiant side player will create the lobby:',
             steps : [
                 {
@@ -116,6 +121,7 @@
         },
         {
             name : 'How to upload game result screenshot?',
+            tag : 'upload',
             desc: 'In order to upload correct screenshot, please take the following steps:',
             steps : [
                 {
@@ -131,44 +137,34 @@
                 }
                 
             ]
-        },
-        {
-            name : 'Please enable "Share Match History"',
-            desc: 'In order to enable the "Share Match History" setting, please take the following steps:',
-            steps : [
-                {
-                    desc : 'Open the Dota 2 game client'
-                },
-                {
-                    desc : 'Click the Settings icon'
-                },
-                {
-                    desc : 'Navigate to "Game", then to "General"'
-                },
-                {
-                    img : 'http://dotabuff.com/assets/pages/enabling-statistics/share-match-history-497c3ea65b6cbb2ecc03b1df3c7b24b6.png',
-                    desc : 'Set the "Share Match History" setting to "On"'
-                }
-            ]
         }
     ];
 }}
 
-<div class="page">
-
+<div class="page" style="width:600px">
     {{~tutorial :tut}}
-        <h1 style="padding-top:10px">{{=tut.name}}</h1>
-        <h4 style="padding-top:10px">{{=tut.desc}}</h2>
-        <ol>
-        {{~tut.steps :step}}
-            <li style="padding:5px;">{{=step.desc}}</li>
+        <a id="{{=tut.tag}}">{{=tut.tag}}</a>
+        <h1 style="padding-top:20px">{{=tut.name}}</h1>
+        <h4 style="padding-top:10px; padding-bottom:10px">{{=tut.desc}}</h4>
+        <ol class="b-t">
+        {{~tut.steps :step:i}}
+            <li style="padding:10px;text-align:left;"><b>{{=i+1}}. </b>{{=step.desc}}</li>
             {{? step.img}}
             <img style="max-width:400px" src="{{=step.img}}">
             {{?}}
         {{~}}
         </ol>
     {{~}}
-    
+</div>
+
+<div id="faq-menu" style="position:fixed;left:0px;top:3px;">
+{{~tutorial :tut}}
+    <a href="#{{=tut.tag}}">
+        <div class="b-a neutral click left" style="clear:both;">
+        {{=tut.name}}
+        </div>
+    </a>
+{{~}}
 </div>
   
   {{#def.test}}

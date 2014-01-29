@@ -52,7 +52,7 @@ table td > div{padding:2px 5px 2px 5px;}
 .dark{background:#383838;}
 
 .click{text-align:right;padding:2px 5px 2px 5px;overflow:hidden;}
-.neutral{padding:2px 5px 2px 5px;color:#383838;}
+.neutral{padding:2px 5px 2px 5px;color:#383838;background:#FFFFFF;}
 .tip{width:70px;text-align:left;font-size:11px;}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:#383838;color:#FFFFFF;}
