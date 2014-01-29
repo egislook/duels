@@ -305,7 +305,7 @@
                     <div class="left players" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                         <img src="{{=it.u[id].avatar}}"/>
                   		<div class="note dark">{{=it.u[id].name}}
-                  		    {{? it.user.status == 'good'}}
+                  		    {{? it.user.status == 'good' && it.t.state == 'join'}}
                   		    <a href="/dismiss/{{=it.t.id}}/{{=id}}">
                                 <div class="delete click">return</div>
                             </a>

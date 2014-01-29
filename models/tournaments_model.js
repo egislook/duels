@@ -163,7 +163,7 @@ exports.join = function join(req, id, user, callback){
 
 exports.dismiss = function dismiss(req, t, id, callback, approved){
     tournaments(req, function(tournament){
-        if(tournament){
+        if(tournament && tournament.state == 'join'){
             var changed = false;
             if(tournament.users.joined[id]){
                 delete tournament.users.joined[id];
