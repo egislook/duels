@@ -31,12 +31,20 @@
                     <td colspan="2">
                         {{? t.state == 'join' && t.maxplayers != t.players}}
                             {{? t.users.joined[it.user.steamid]}}
-                                <div class="neutral space">{{= t.users.joined[it.user.steamid].key}}</div>
+                                <div class="neutral space">{{= t.users.joined[it.user.steamid].key}} <div class="right textSmall">{{=t.players}}/{{=t.maxplayers}}</div></div>
                             {{?? t.users.approved[it.user.steamid]}}
                                 <div class="neutral space">Confirmed <div class="right textSmall">{{=t.players}}/{{=t.maxplayers}}</div></div>
                             {{??}}
                                 <a href="./join/{{=t.id}}">
-                                    <div class="click-dark accept space">Join <div class="right textSmall">{{=t.players}}/{{=t.maxplayers}}</div></div>
+                                    <div class="click-dark accept space">Join 
+                                        <div class="right textSmall">
+                                            {{? t.players == 0}}
+                                                {{=t.joined}}
+                                            {{??}}
+                                                {{=t.players}}/{{=t.maxplayers}}
+                                            {{?}}
+                                        </div>    
+                                    </div>
                                 </a>
                             {{?}}
                         {{?? t.state == 'join' && t.maxplayers == t.players}}

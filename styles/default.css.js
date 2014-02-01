@@ -37,7 +37,7 @@ a{var(ruleColorTextLight);}
 
 #toolbar{border-bottom:solid 5px var(colorDark);position:fixed;bottom:0px;width:100%;z-index:0;}
 #toolbar img{height:30px;display:block;margin:auto;}
-#clock{right:0px;padding:10px;width:100px;margin-top:7px;}
+#clock{right:0px;padding:10px;width:200px;}
 p{font-size:14px;clear:both;padding-top:5px;}
 .list{padding:25px 25px 15px 25px;background:var(colorMain);border-right:solid 2px var(colorLight);}
 .list_small{padding:10px 5px 5px 40px; margin-top:30px;}

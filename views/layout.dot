@@ -8,6 +8,11 @@
 	<body>
 		{{=it.body}}
 		<div id="toolbar">
+		    <div class="left dark textLight textSmall list" id="clock">
+    	        {{ var date = Date();}}
+    	        {{= date}}
+    	        <div class="accept tip textLight" style="padding:3px;">wdpwp alpha</div>
+	        </div>
 		    <a href="/">
 		        <div class="left list">
                   <img src="http://s26.postimg.org/73aobj1id/home_icon.png">
@@ -51,11 +56,6 @@
         		    </a>
     		    {{?}}
 		    {{?}}
-		    <div class="left dark textLight textSmall" id="clock">
-    	        {{ var date = Date();}}
-    	        {{= date}}
-    	        <div class="accept tip textLight" style="padding:3px;">wdpwp alpha</div>
-	        </div>
 		    
 		</div>
 	</body>
