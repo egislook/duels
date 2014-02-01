@@ -7,7 +7,7 @@ module.exports = {
     '/': function(req, res){
         user_model.user(req, res, function(user){
             tournaments_model.list(req, function(tournaments){
-                res.render('index', {user : user, tournaments : tournaments});
+                res.render('index', {user : user, tournaments : tournaments, u : req.app.cache.users});
             });
         });
     },

@@ -6,12 +6,6 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>-->
 	</head>
 	<body>
-	    <div class="dark textLight textSmall" id="clock">
-	        {{ var date = Date();}}
-	        {{= date}}
-	        <div class="accept tip textLight" style="padding:1px;">wdpwp alpha</div>
-	    </div>
-	    
 		{{=it.body}}
 		<div id="toolbar">
 		    <a href="/">
@@ -47,7 +41,6 @@
                   	<img src="http://s26.postimg.org/yo3i2sj1h/profile_icon.png">
                   	<p>{{=it.user.name}}</p>
 		        </div>
-		        
 		    </a>
     		    {{? it.user.status==='good'}}
     		        <a href="/create">
@@ -58,6 +51,11 @@
         		    </a>
     		    {{?}}
 		    {{?}}
+		    <div class="left dark textLight textSmall" id="clock">
+    	        {{ var date = Date();}}
+    	        {{= date}}
+    	        <div class="accept tip textLight" style="padding:3px;">wdpwp alpha</div>
+	        </div>
 		    
 		</div>
 	</body>

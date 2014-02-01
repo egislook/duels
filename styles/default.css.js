@@ -4,6 +4,7 @@
     "textSmall": "11px",
     "textNormal": "16px",
     "textBig": "18px",
+    "paddingNormal": "7px",
     "colorAccept": "#92C24C",
     "colorEdit": "#E4AE33",
     "colorDelete": "#EB4B4B",
@@ -32,10 +33,11 @@ a{var(ruleColorTextLight);}
 .right{float:right;}
 .hero{width:48px;}
 .avatar{height:27px;}
+.clear{clear:both;overflow:hidden;}
 
 #toolbar{border-bottom:solid 5px var(colorDark);position:fixed;bottom:0px;width:100%;z-index:0;}
 #toolbar img{height:30px;display:block;margin:auto;}
-#clock{position:absolute;right:0px;padding:10px;width:100px}
+#clock{right:0px;padding:10px;width:100px;margin-top:7px;}
 p{font-size:14px;clear:both;padding-top:5px;}
 .list{padding:25px 25px 15px 25px;background:var(colorMain);border-right:solid 2px var(colorLight);}
 .list_small{padding:10px 5px 5px 40px; margin-top:30px;}
@@ -46,13 +48,26 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .up_case{text-transform:uppercase;}
 .center{text-align:center;}
 
+.space{padding:15px 5px 15px 5px}
+.data-list{text-align:center;width:100%;border-bottom:solid 10px var(colorDark);border-top:solid 2px var(colorDark);}
+.data-list tr{background:var(colorDark);}
+.data-list tr:hover{background:#1A1A1A;cursor:pointer;}
+.data-list tr.finished:hover{background:#1A1A1A;cursor:pointer;}
+.data-list tr.finished{background:#4A4A4A;}
+.data-list td{
+    border-top:solid 1px #4A4A4A;border-bottom:solid 1px #1A1A1A;border-left:solid 1px #4A4A4A;border-right:solid 1px #1A1A1A;
+}
+.data-text{padding-left:var(paddingNormal);padding-right:var(paddingNormal);}
+.click-dark:hover{background:var(colorLight);color:var(colorDark);}
+
+
 .item{padding:0px;}
 .items div:hover{border:solid 2px var(colorDelete);}
 
 .icon img{height:21px;}
 .page{overflow:hidden;margin:auto;width:100%;text-align:center;border-top:solid 5px var(colorDark);padding-bottom:20px;}
-table{font-size:var(textNormal);position:relative;z-index:3;}
-table td > div{padding:2px 5px 2px 5px;}
+.page table{font-size:var(textNormal);position:relative;z-index:3;}
+.page table td > div{padding:2px 5px 2px 5px;}
 .tournament{float:left;padding-left:30px;/*border:solid 1px var(colorGrey);*/}
 .spaced{min-width:200px;display:inline-block;}
 .spaced .b-l{padding-top:5px;padding-bottom:5px;}
@@ -76,7 +91,7 @@ table td > div{padding:2px 5px 2px 5px;}
 .dark{background:var(colorDark);}
 
 .click{text-align:right;padding:2px 5px 2px 5px;overflow:hidden;}
-.neutral{padding:2px 5px 2px 5px;color:var(colorDark);background:var(colorLight);}
+.neutral{color:var(colorDark);background:var(colorLight);}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:var(colorDark);color:var(colorLight);}

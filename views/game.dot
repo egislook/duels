@@ -5,6 +5,13 @@
                 {{~ it.g.t1[0].imgs :img:i}}
                     <div style="padding-bottom:10px">
                         <img class="b-a nb-l" width="200px" src="{{=img}}">
+                        {{? it.user.status == 'good'}}
+                            <a href="/deleteScreenshot/t1/{{=i}}">
+                                <div class="delete">
+                                    delete screenshot
+                                </div>
+                            </a>
+                        {{?}}
                     </div>
                 {{~}}
             </div>
@@ -14,6 +21,13 @@
                 {{~ it.g.t2[0].imgs :img:i}}
                     <div style="padding-bottom:10px">
                         <img class="b-a nb-r" width="200px" src="{{=img}}">
+                        {{? it.user.status == 'good'}}
+                            <a href="/deleteScreenshot/t2/{{=i}}">
+                                <div class="delete">
+                                    delete screenshot
+                                </div>
+                            </a>
+                        {{?}}
                     </div>
                 {{~}}
             </div>
