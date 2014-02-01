@@ -38,7 +38,7 @@ steam.getLightFromSteam('items', function(data){
     //http://media.steampowered.com/apps/dota2/images/items/ring_of_protection_lg.png
 });
 
-db.con('test', function(dbs){
+db.con('league', function(dbs){
     
     app.cache.db = dbs;
     
