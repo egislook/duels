@@ -19,7 +19,7 @@ module.exports = {
                     res.render('enabling', {user : user});
             }
             else
-                res.send('please login to the system then try to join tournament <a href="./login">login</a> or come back to main page <a href="./">home</a>');
+                res.send('please login to the system then try to join tournament <a href="/../login">login</a> or come back to main page <a href="./">home</a>');
         });
     },
     '/t/:id': function(req, res){
