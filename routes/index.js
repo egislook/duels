@@ -7,7 +7,19 @@ module.exports = {
     '/': function(req, res){
         user_model.user(req, res, function(user){
             tournaments_model.list(req, function(tournaments){
-                res.render('index', {user : user, tournaments : tournaments, u : req.app.cache.users});
+                var active = [];
+                for(i in tournaments){
+                    if(tournaments[i].state == 'final'){
+                        active.push(tournaments[i].id);
+                        break;
+                    }
+                };
+                
+                tournaments_model.games(req, function(games){
+                    res.render('index', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games});
+                },active[0]);
+                
+                
             });
         });
     },

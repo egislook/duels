@@ -6,7 +6,8 @@ var express = require('express'),
     path = require('path'),
     varYk = require('./lib/varYK.js'),
     app = express();
-    
+
+var dbname = 'league';
 
 app.enable('strict routing');
 app.set('port',  process.env.PORT || 3001);
@@ -39,7 +40,7 @@ steam.getLightFromSteam('items', function(data){
     //http://media.steampowered.com/apps/dota2/images/items/ring_of_protection_lg.png
 });
 
-db.con('league', function(dbs){
+db.con(dbname, function(dbs){
     
     app.cache.db = dbs;
     
