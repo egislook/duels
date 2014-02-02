@@ -4,18 +4,16 @@
         <tr>
             <td class="dark">
                 <img height="30" src="http://s26.postimg.org/6pi47krqd/gold_pot.png">
-                <div>Buy-in</div>
+                <div class="textSmall">Buy-in</div>
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colspan="3"></td>
             <td class="dark">
                 <img height="30" src="http://s26.postimg.org/wmgdxxkrp/clock.png">
-                <div>Date</div>
+                <div class="textSmall">Date</div>
             </td>
             <td class="dark">
                 <img height="30" src="http://s26.postimg.org/xq0i9w5et/prize_pot.png">
-                <div>Prize</div>
+                <div class="textSmall">Prize</div>
             </td>
         </tr>
     {{? it.tournaments.length>0}}
@@ -132,15 +130,18 @@
                 {{?}}
             </tr>
             {{? t.class=="rcf"}}
-                {{? t.state == 'join' && (t.players > 0 || t.joined > 0)}}
+                {{? t.state == 'join'}}
                     {{? t.joined>0}}
                         <tr>
-                            <td align="right">
-                                <div class="space">joined</div>
+                            <td colspan="6" class="textSmall">
+                                <div></div>
+                                joined players
                             </td>
-                            <td colspan="5">
-                                {{ for(var i in t.users.joined) {}}
-                                    <img class="left" width="48" src="{{=it.u[i].avatar}}">
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                {{ for(var id in t.users.joined) {}}
+                                    <img class="" width="48" src="{{=it.u[id].avatar}}">
                                 {{ } }}
                             </td>
                         </tr>
@@ -151,8 +152,8 @@
                                 <div class="space">confirmed</div>
                             </td>
                             <td colspan="5">
-                                {{ for(var i in t.users.approved) {}}
-                                    <img class="left" width="48" src="{{=it.u[i].avatar}}">
+                                {{ for(var id in t.users.approved) {}}
+                                    <img class="left" width="48" src="{{=it.u[id].avatar}}">
                                 {{ } }}
                             </td>
                         </tr>
