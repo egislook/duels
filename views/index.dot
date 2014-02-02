@@ -105,6 +105,8 @@
                             {{??}}
                                 <div class="accept b-t textSmall">now</div>
                             {{?}}
+                        {{?? t.state == 'join'}}
+                            <div class="accept textSmall">tomorrow</div>
                         {{??}}
                             <div class="accept b-t textSmall">{{=t.time}}</div>
                             <div class="textSmall">{{=t.date}}</div>
