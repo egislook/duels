@@ -9,7 +9,8 @@ var express = require('express'),
     
 
 app.enable('strict routing');
-app.set('port',  process.env.PORT || 3000);
+app.set('port',  process.env.PORT || 3001);
+app.set('ip',  process.env.IP || "0.0.0.0");
 app.set('view engine', 'dot');
 app.engine('dot', require('express-dot').__express);
 //app.use(express.methodOverride());
@@ -77,6 +78,6 @@ routescan(app);
 
 
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'),app.get('ip'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });

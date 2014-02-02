@@ -47,6 +47,22 @@ exports.create = function create(req, tournament, user, callback){
     var approved = {};
     var max = tournament.maxplayers;
     
+    approved = {
+                '76561198065626987':{
+                    key:'123'
+                },
+                '76561198065634959':{
+                    key:'321'
+                },
+                '76561198116713607':{
+                    key:'123'
+                },
+                '76561198013303116':{
+                    key:'321'
+                }
+            
+        }
+    
     /*if(max == 2){
         approved = {
                 '76561198065626987':{
@@ -208,8 +224,9 @@ exports.approve = function approve(req, t, id, callback){
     },t);
 }
 
-function pvp(approved, players, heroes, id, mode, state){
-    
+function pvp(approved, players, heroes, id, mode, state, tclass){
+
+    tclass = tclass || false;
     var hero1, hero2;
     var duels = [], testgames=[];
     var n1, n2, p1, p2;
@@ -241,7 +258,7 @@ function pvp(approved, players, heroes, id, mode, state){
         var temp = {
                 t1 : [{id : p1[0], hero : hero1}],
                 t2 : [{id : p2[0], hero : hero2}],
-                info : {tournamentid : id, mode : mode, date : date, tournamentstate : state}
+                info : {tournamentid : id, mode : mode, date : date, tournamentstate : state, tournamentclass : tclass}
         }
         testgames.push(temp);
         
@@ -255,8 +272,8 @@ exports.start = function start(req, t, callback){
     var msg = false;
     tournaments(req, function(tournament){
         if(tournament && tournament.state != 'ended'){
-            
             state = false;
+            tclass = tournament['class'];
             var players, approved=[];
             var heroes = req.app.cache.heroes;
             
@@ -271,7 +288,7 @@ exports.start = function start(req, t, callback){
             }
             
             if(tournament.state != 'final'){
-                if(players == 2)
+                if(players == 2 || tclass == 'rcf')
                     state = 'final';
                 else if(players == 4){
                     state = 'semifinal';
@@ -285,7 +302,7 @@ exports.start = function start(req, t, callback){
                     msg = 'bad tournament players count';
                 
                 tournament.states[state] = {};
-                var data = pvp(approved, players, heroes, tournament.id, tournament.mode, state);
+                var data = pvp(approved, players, heroes, tournament.id, tournament.mode, state, tclass);
                 //games = data.games;
                 //tournament.states[state].duels = data.duels;
                 tournament.state = state;
@@ -314,15 +331,23 @@ exports.start = function start(req, t, callback){
                 
                 
             }
-            else if(tournament.state == 'final' && tournament.states['final'].endedgames == 1) {
-                tournament['winner'] = tournament.states['final'].duels[0].winner;
+            else if(tournament.state == 'final' && (tournament.states['final'].endedgames == tournament.states['final'].games)) {
                 tournament.state = 'ended';
                 var date = new Date();
                 date = date.getHours()+':'+date.getMinutes();
                 tournament.time = date;
                 
+                if(tournament.states['final'].games > 1){
+                    tournament['winners'] = approved;
+                    var query = {$set: {state : tournament.state, winners : tournament.winners}};
+                }
+                else{
+                    tournament['winner'] = tournament.states['final'].duels[0].winner;
+                    var query = {$set: {state : tournament.state, winner : tournament.winner}};
+                }
+                
                 var where = {id : parseInt(tournament.id)};
-                var query = {$set: {state : tournament.state, winner : tournament.winner}}
+                
                 db.update(req.app, 'tournaments', where, query, function(data){
                     console.log(data);
                 });
@@ -341,6 +366,7 @@ exports.restart = function restart(req, t, callback){
     tournaments(req, function(tournament){
         if(tournament && tournament.state != 'ended' && tournament.states[tournament.state].endedgames<1){
             
+            var tclass = tournament['class'];
             var state = tournament.state;
             var approved = []; 
             var heroes = req.app.cache.heroes;
@@ -356,7 +382,7 @@ exports.restart = function restart(req, t, callback){
                 players = tournament.players;
             }
             
-            var data = pvp(approved, players, heroes, tournament.id, tournament.mode, state);
+            var data = pvp(approved, players, heroes, tournament.id, tournament.mode, state, tclass);
             console.log(data);
             //games = data.games;
             

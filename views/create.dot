@@ -11,7 +11,15 @@
                     <div class="dark right">date</div>
                 </td>
                 <td class="b-l">
-                    {{var date = new Date(); var time = date.getHours()+':'+date.getMinutes(); date = date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate();}}
+                    {{
+                        var date = new Date();
+                        var time = date.getHours()+':'+date.getMinutes();
+                        var dd = date.getDate();
+                        var mm = date.getMonth()+1;
+                        var yyyy = date.getFullYear();
+                        if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
+                        date = yyyy+'-'+mm+'-'+dd;
+                    }}
                     <input class="inputs" size="8" type="text" value="{{=date}}" name="date"/>
                     <input class="inputs b-l" size="5" type="text" value="{{=time}}" name="time"/>
                 </td>
@@ -22,6 +30,17 @@
                 </td>
                 <td class="b-l">
                     <input class="inputs textBig" size="25" type="text" value="daily" name="name"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dark right">class</div>
+                </td>
+                <td class="b-l">
+                    <select class="inputs" name="class">
+                      <option value="rcf">random cockfights</option>
+                      <option value="full">full</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -65,6 +84,7 @@
                 </td>
                 <td class="b-l">
                     <select class="inputs" name="maxplayers">
+                      <option value="0">unlimited</option>
                       <option value="2">2</option>
                       <option value="4">4</option>
                       <option value="8" selected>8</option>

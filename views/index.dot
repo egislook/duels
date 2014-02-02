@@ -21,19 +21,27 @@
                     <div class="textBig"><div class="textSmall">tournament</div> {{=t.name}}</div>
                 </td>
                 {{? t.state == 'ended'}}
-                <td width="45">
-                    <img width="48" src="{{=it.u[t.winner].avatar}}">
-                </td>
-                <td>
-                    <div class="dark space">{{=it.u[t.winner].name}}</div>
-                </td>
+                    {{? t.winners}}
+                        <td colspan="2">
+                        {{~ t.winners :win}}
+                            <img width="48" src="{{=it.u[win].avatar}}">
+                        {{~}}
+                        </td>
+                    {{??}}
+                        <td width="45">
+                            <img width="48" src="{{=it.u[t.winner].avatar}}">
+                        </td>
+                        <td>
+                            <div class="dark space">{{=it.u[t.winner].name}}</div>
+                        </td>
+                    {{?}}
                 {{??}}
                     <td colspan="2">
-                        {{? t.state == 'join' && t.maxplayers != t.players}}
+                        {{? t.state == 'join' && (t.maxplayers != t.players || t.class == 'rcf')}}
                             {{? t.users.joined[it.user.steamid]}}
-                                <div class="neutral space">{{= t.users.joined[it.user.steamid].key}} <div class="right textSmall">{{=t.players}}/{{=t.maxplayers}}</div></div>
+                                <div class="neutral space">{{= t.users.joined[it.user.steamid].key}} <div class="right textSmall">{{=t.players}}</div></div>
                             {{?? t.users.approved[it.user.steamid]}}
-                                <div class="neutral space">Confirmed <div class="right textSmall">{{=t.players}}/{{=t.maxplayers}}</div></div>
+                                <div class="neutral space">Confirmed <div class="right textSmall">{{=t.players}}</div></div>
                             {{??}}
                                 <a href="./join/{{=t.id}}">
                                     <div class="click-dark accept space">Join 
@@ -56,8 +64,30 @@
                 {{?}}
                 <td class="textSmall data-text">
                     {{? t.state == 'join'}}
-                        <div class="accept b-t textSmall">{{=t.time}}</div>
-                        <div class="textSmall">{{=t.date}}</div>
+                        {{
+                            var date = new Date();
+                            var dd = date.getDate();
+                            var mm = date.getMonth()+1;
+                            var yyyy = date.getFullYear();
+                            var h = date.getHours();
+                            var m = date.getMinutes();
+                            var s = date.getSeconds();
+                            var time = s+(m*60)+(h*3600);
+                            var end = t.time.split(":");
+                            var deadline = (end[0]*3600)+(end[1]*60);
+                            if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
+                        }}
+                        {{? date == t.date }}
+                            {{? deadline-time > 0 }}
+                                <div class="accept b-t textSmall time-left">{{=deadline-time}}</div>
+                                <script> timer(); </script>
+                            {{??}}
+                                <div class="accept b-t textSmall">now</div>
+                            {{?}}
+                        {{??}}
+                            <div class="accept b-t textSmall">{{=t.time}}</div>
+                            <div class="textSmall">{{=t.date}}</div>
+                        {{?}}
                     {{??}}
                     <div class="textSmall">{{=t.date}}</div>
                     {{?}}
