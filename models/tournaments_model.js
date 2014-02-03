@@ -1,22 +1,31 @@
 var db = require('../lib/db.js');
 var upload = require('../lib/upload.js');
 
-function tournaments(req, callback, id){
+function tournaments(req, callback, id, state){
+    
+    state = state || false;
+    
     var tournaments = req.app.cache.tournaments;
     var tournament = false;
+    var temp = [];
     var data;
     
     if(tournaments.length>0){
         for(var i in tournaments){
             tournaments[i].players = Object.keys(tournaments[i].users.approved).length;
             tournaments[i].joined = Object.keys(tournaments[i].users.joined).length;
-            if(id){
+            if(state){
+                if(tournaments[i].class == 'rcf'){
+                    temp.push(tournaments[i]);
+                    tournament = temp;
+                }
+            } else if(id){
                 if(id==tournaments[i].id){
                     tournament = tournaments[i];
                     break;
                 }
             }
-            else if(i==tournaments.length-1 && !id)
+            else if(i==tournaments.length-1 && (!id || !state))
                 tournament = tournaments;
 	    }
 	    callback(tournament);

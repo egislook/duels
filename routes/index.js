@@ -20,7 +20,7 @@ module.exports = {
                 },active[0]);
                 
                 
-            });
+            }, false, 'ended');
         });
     },
     '/error': function(req, res){
