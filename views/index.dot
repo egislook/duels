@@ -99,7 +99,6 @@
                         {{? date == t.date }}
                             {{? deadline-time > 0 }}
                                 <div class="accept b-t textSmall time-left">{{=deadline-time}}</div>
-                                <script> timer(); </script>
                             {{??}}
                                 <div class="accept b-t textSmall">now</div>
                             {{?}}
@@ -221,7 +220,7 @@
     {{?}}
     </table>
 </div>
-  
+  <script> timer(); </script>
   {{#def.test}}
   
  

@@ -38,11 +38,11 @@ function itemselect(x){
 
 function timer(){
     var length = document.getElementsByClassName("time-left").length;
-    
+    var timeLeft=0;
     for(var i=0; i<length; i++){
-        var timeLeft = document.getElementsByClassName("time-left")[i];
-        timeLeft = parseInt(timeLeft.textContent);
+        timeLeft = parseInt(document.getElementsByClassName("time-left")[i].textContent);
         timeChanger(timeLeft, i);
+        timeLeft = 0;
     }
 }
 
