@@ -37,12 +37,16 @@ function itemselect(x){
 }
 
 function timer(){
-    var timeLeft = document.getElementsByClassName("time-left")[0];
-    timeLeft = parseInt(timeLeft.textContent);
-    timeChanger(timeLeft);
+    var length = document.getElementsByClassName("time-left").length;
+    
+    for(var i=0; i<length; i++){
+        var timeLeft = document.getElementsByClassName("time-left")[i];
+        timeLeft = parseInt(timeLeft.textContent);
+        timeChanger(timeLeft, i);
+    }
 }
 
-function timeChanger(t){
+function timeChanger(t, i){
     t = t-1;
     var h = Math.floor(t / 3600);
     var m = Math.floor((t - (h * 3600)) / 60);
@@ -50,9 +54,9 @@ function timeChanger(t){
     if (h   < 10) {h   = "0"+h;}
     if (m < 10) {m = "0"+m;}
     if (s < 10) {s = "0"+s;}
-    document.getElementsByClassName("time-left")[0].innerHTML = h+":"+m+":"+s;
+    document.getElementsByClassName("time-left")[i].innerHTML = h+":"+m+":"+s;
     if(t>0)
-        setTimeout(function(){timeChanger(t)},1000);
+        setTimeout(function(){timeChanger(t, i)},1000);
 }
 /*function menuon(x){
   	x.classList.add("list_hover");
