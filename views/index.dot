@@ -1,17 +1,17 @@
 
 <div>
     <table cellspacing="0" class="textLight data-list">
-        <tr>
-            <td class="dark">
+        <tr class="finished">
+            <td>
                 <img height="30" src="http://s26.postimg.org/6pi47krqd/gold_pot.png">
                 <div class="textSmall">Buy-in</div>
             </td>
             <td colspan="3"></td>
-            <td class="dark">
+            <td>
                 <img height="30" src="http://s26.postimg.org/wmgdxxkrp/clock.png">
                 <div class="textSmall">Date</div>
             </td>
-            <td class="dark">
+            <td>
                 <img height="30" src="http://s26.postimg.org/xq0i9w5et/prize_pot.png">
                 <div class="textSmall">Prize</div>
             </td>
@@ -35,7 +35,7 @@
                         </div>
                     {{?}}
                 </td>
-                <td class="data-text">
+                <td class="data-text space">
                     {{? t.class == 'rcf'}}
                         <div class="textBig"><div class="textSmall">random</div> {{=t.name}}</div>
                         <div class="textSmall">1 duel with 1 random opponent. Fast way find out if u are lucky today...</dv>
@@ -45,7 +45,7 @@
                 </td>
                 {{? t.state == 'ended'}}
                     {{? t.winners}}
-                        <td colspan="2">
+                        <td colspan="2" width="45">
                         {{~ t.winners :win}}
                             <img width="48" src="{{=it.u[win].avatar}}">
                         {{~}}
@@ -59,7 +59,7 @@
                         </td>
                     {{?}}
                 {{??}}
-                    <td colspan="2">
+                    <td colspan="2" class="accept">
                         {{? t.state == 'join' && (t.maxplayers != t.players || t.class == 'rcf')}}
                             {{? t.users.joined[it.user.steamid]}}
                                 <div class="neutral space">{{= t.users.joined[it.user.steamid].key}} <div class="right textSmall">{{=t.players}}</div></div>
@@ -113,7 +113,7 @@
                             <div class="textSmall">{{=t.date}}</div>
                         {{?}}
                     {{??}}
-                    <div class="textSmall">{{=t.date}}</div>
+                    <div class="textSmall">finished</div>
                     {{?}}
                 </td>
                 <td width="90" class="{{=t.prize_type}}">
@@ -140,12 +140,12 @@
             {{? t.class=="rcf"}}
                 {{? t.state == 'join'}}
                     {{? t.joined>0}}
-                        <tr>
+                        <tr class="finished">
                             <td colspan="6" class="textSmall">
                                 joined players
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="selected">
                             <td colspan="6">
                                 {{ for(var id in t.users.joined) {}}
                                     <img class="" width="48" src="{{=it.u[id].avatar}}">

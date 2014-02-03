@@ -48,7 +48,7 @@ db.con(dbname, function(dbs){
         app.cache.tournaments = tournaments;
         app.cache.loaded--;
         console.log("LOADED -> "+app.cache.loaded+" tournaments");
-    }, { $query: {}, $orderby: { date : 1 , time : 1}});
+    }, { $query: {}, $orderby: { date : -1 , time : 1}});
     
     db.get(app, 'users', function(users){
         
