@@ -98,7 +98,7 @@
                         }}
                         {{? date == t.date }}
                             {{? deadline-time > 0 }}
-                                <div class="accept b-t textSmall time-left">{{=deadline-time}}</div>
+                                <div class="accept b-t textBig time-left">{{=deadline-time}}</div>
                             {{??}}
                                 <div class="accept b-t textSmall">now</div>
                             {{?}}
