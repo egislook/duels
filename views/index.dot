@@ -1,6 +1,6 @@
 
-<div>
-    <table cellspacing="0" class="textLight data-list">
+<div class="dark" style="overflow:hidden">
+    <table cellspacing="0" class="textLight data-list" style="width:70%; float:left;">
         <tr class="finished">
             <td>
                 <img height="30" src="http://s26.postimg.org/6pi47krqd/gold_pot.png">
@@ -228,6 +228,26 @@
             {{?}}
         {{~}}
     {{?}}
+    </table>
+    <table class="data-list dark textLight" style="width:30%">
+        <tr class="finished">
+            <td>
+                <div class="textSmall space">Ranking</div>
+            </td>
+            <td>
+                <div class="textSmall">Level</div>
+            </td>
+            <td>
+                <div class="textSmall">Points</div>
+            </td>
+        </tr>
+        {{~ it.r :r}}
+            <tr>
+                <td>{{=it.u[r.steamid].name}}</td>
+                <td>{{=r.lvl}}</td>
+                <td>{{=r.points}}</td>
+            </tr>
+        {{~}}
     </table>
 </div>
   <script> timer(); </script>

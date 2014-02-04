@@ -16,11 +16,11 @@ module.exports = {
                 };
                 
                 tournaments_model.games(req, function(games){
-                    res.render('index', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games});
+                    res.render('index', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games, r : req.app.cache.stats});
                 },active[0]);
                 
                 
-            }, false, 'ended');
+            }, false, 'rcf');
         });
     },
     '/error': function(req, res){

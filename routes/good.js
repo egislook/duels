@@ -3,6 +3,16 @@ var tournaments_model = require('../models/tournaments_model.js');
 
 'use strict';
 module.exports = {
+    /*'/rate' : function(req, res){
+        tournaments_model.list(req, function(tournaments){
+            tournaments_model.games(req, function(games){
+                user_model.rate(req, tournaments, games, function(data){
+                   res.send(data);
+                });
+            }, false, {'info.tournamentclass' : 'rcf'});
+        }, false, 'ended');
+        
+    },*/
     '/create': function(req, res){
         /*req.session.user = {
             'loged' : true,

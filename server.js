@@ -24,7 +24,7 @@ app.use('/css' , express.static(path.join(process.cwd(), '/public/css')));
 app.use('/img' , express.static(path.join(process.cwd(), '/public/img')));
 app.use(app.router);
 
-app.cache.loaded = 4;
+app.cache.loaded = 5;
 
 steam.getLightFromSteam('heroes', function(data){
     app.cache.heroes = data;
@@ -61,6 +61,12 @@ db.con(dbname, function(dbs){
         app.cache.loaded--;
         console.log("LOADED -> "+app.cache.loaded+" users");
     });
+    
+    db.get(app, 'stats', function(stats){
+        app.cache.stats = stats;
+        app.cache.loaded--;
+        console.log("LOADED -> "+app.cache.loaded+" stats");
+    }, { $query: {}, $orderby: { points : -1}});
     
 });
 

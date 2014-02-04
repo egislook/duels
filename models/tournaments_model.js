@@ -15,9 +15,16 @@ function tournaments(req, callback, id, state){
             tournaments[i].players = Object.keys(tournaments[i].users.approved).length;
             tournaments[i].joined = Object.keys(tournaments[i].users.joined).length;
             if(state){
-                if(tournaments[i].class == 'rcf'){
-                    temp.push(tournaments[i]);
-                    tournament = temp;
+                if(state == 'rcf'){
+                    if(tournaments[i].class == 'rcf'){
+                        temp.push(tournaments[i]);
+                        tournament = temp;
+                    }
+                } else if(state == 'ended'){
+                    if(tournaments[i].state == 'ended'){
+                        temp.push(tournaments[i]);
+                        tournament = temp;
+                    }
                 }
             } else if(id){
                 if(id==tournaments[i].id){
@@ -491,14 +498,19 @@ exports.game = function game(req, g, callback){
        callback(game[0]);
     }, {'_id' : db.id(g)});
 }
-exports.games = function games(req, callback, t){
+exports.games = function games(req, callback, t, query){
+    if(t)
+        var query = {'info.tournamentid' : parseInt(t)};
+    else if(!query)
+        query = {};
+    
     db.get(req.app, 'games', function(data){
         var games = {};
         for(i in data){
             games[data[i]['_id']] = data[i];
         }
        callback(games); 
-    }, {'info.tournamentid' : parseInt(t)});
+    }, query);
 }
 
 exports.gameImgAdd = function gameImgAdd(req, g, steamid, callback){
