@@ -63,7 +63,12 @@ db.con(dbname, function(dbs){
     });
     
     db.get(app, 'stats', function(stats){
-        app.cache.stats = stats;
+        var temp = {};
+        for(var i in stats){
+            temp[stats[i].steamid] = stats[i];
+        }
+        
+        app.cache.stats = temp;
         app.cache.loaded--;
         console.log("LOADED -> "+app.cache.loaded+" stats");
     }, { $query: {}, $orderby: { points : -1}});

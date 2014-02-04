@@ -241,13 +241,13 @@
                 <div class="textSmall">Points</div>
             </td>
         </tr>
-        {{~ it.r :r}}
+        {{ for(var r in it.r){}}
             <tr>
-                <td>{{=it.u[r.steamid].name}}</td>
-                <td>{{=r.lvl}}</td>
-                <td>{{=r.points}}</td>
+                <td>{{=it.u[it.r[r].steamid].name}}</td>
+                <td>{{=it.r[r].lvl}}</td>
+                <td>{{=it.r[r].points}}</td>
             </tr>
-        {{~}}
+        {{ } }}
     </table>
 </div>
   <script> timer(); </script>

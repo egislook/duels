@@ -437,8 +437,12 @@ exports.restart = function restart(req, t, callback){
 exports.decide = function decide(req, game, callback){
     var data = req.body;
     var msg = false;
+    var stats = req.app.cache.stats;
     
-    
+    if(data['win'] == 't1')
+        data['lose'] = 't2';
+    else
+        data['lose'] = 't1';
     
     var id = data['id'];
     var where = {'_id' : db.id(id)};
@@ -474,18 +478,69 @@ exports.decide = function decide(req, game, callback){
        if(tournament.state != 'ended'){
            for(i in tournament.states[game.info['tournamentstate']].duels){
                if(tournament.states[game.info['tournamentstate']].duels[i].id == id){
-                    if(!tournament.states[game.info['tournamentstate']].duels[i].winner)
+                    if(!tournament.states[game.info['tournamentstate']].duels[i].winner){
                         tournament.states[game.info['tournamentstate']].endedgames++;
+                        //if they was not played this game then add 1 point and 1 lvl
+                        if(tournament.class == 'rcf'){
+                            
+                            if(!stats[game[data['win']][0].id]){
+                                stats[game[data['win']][0].id]={points:100, lvl:1, steamid: game[data['win']][0].id}
+                                db.add(req.app, 'stats', stats[game[data['win']][0].id], function(data){});
+                            }
+                            if(!stats[game[data['lose']][0].id]){
+                                stats[game[data['lose']][0].id]={points:100, lvl:1, steamid: game[data['lose']][0].id}
+                                db.add(req.app, 'stats', stats[game[data['lose']][0].id], function(data){});
+                            }
+                            
+                            stats[game[data['win']][0].id].points++;
+                            stats[game[data['win']][0].id].lvl++;
+                            if(stats[game[data['lose']][0].id].points>99)
+                                stats[game[data['lose']][0].id].points--;
+                            if(stats[game[data['lose']][0].id].lvl>1)
+                                stats[game[data['lose']][0].id].lvl--;
+                        }
+                    } else {
+                        //if they was not played this game then add 2 point and 2 lvl
+                        if(tournament.class == 'rcf'){
+                            if(stats[game[data['win']][0].id].points>101){
+                                stats[game[data['win']][0].id].points = stats[game[data['win']][0].id].points+2;
+                            } else {
+                                if(stats[game[data['win']][0].id].points>=99)
+                                    stats[game[data['win']][0].id].points = stats[game[data['win']][0].id].points+2;
+                            }
+                            
+                            if(stats[game[data['lose']][0].id].points>100)
+                                stats[game[data['lose']][0].id].points = stats[game[data['lose']][0].id].points-2;
+                            else
+                                stats[game[data['lose']][0].id].points = stats[game[data['lose']][0].id].points-1;
+                            
+                            //set loser lvl by points
+                            if(stats[game[data['lose']][0].id].points > 100)
+                                stats[game[data['lose']][0].id].lvl = stats[game[data['lose']][0].id].points-99;
+                            else
+                                stats[game[data['lose']][0].id].lvl = 1;
+                            
+                            if(stats[game[data['win']][0].id].points > 100)
+                                stats[game[data['win']][0].id].lvl = stats[game[data['win']][0].id].points-99;
+                            else
+                                stats[game[data['win']][0].id].lvl = 1;
+                        }
+                    }
                     tournament.states[game.info['tournamentstate']].duels[i]['winner'] = game[data['win']][0].id;
                     break;
                }
            }
+           
             var str = "states."+tournament.state;
             where = {id : parseInt(tournament.id)};
             var obj = {};
             obj[str] = tournament.states[tournament.state];
             query = {$set: obj};
             db.update(req.app, 'tournaments', where, query, function(data){});
+            
+            db.update(req.app, 'stats', {steamid : game[data['win']][0].id}, {"lvl" : stats[game[data['win']][0].id].lvl, "points" : stats[game[data['win']][0].id].points, "steamid" : game[data['win']][0].id}, function(data){});
+            db.update(req.app, 'stats', {steamid : game[data['lose']][0].id}, {"lvl" : stats[game[data['lose']][0].id].lvl, "points" : stats[game[data['lose']][0].id].points, "steamid" : game[data['lose']][0].id}, function(data){});
+           
            
        }
     }, game.info.tournamentid);
