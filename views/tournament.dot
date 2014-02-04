@@ -139,7 +139,7 @@
                             <a href="/approve/{{=it.t.id}}/{{=id}}">
                                 <div class="accept click right dest">aprove</div>
                             </a>
-                            <a href="steam://friends/add/{{=it.user.steamid}}">
+                            <a href="steam://friends/add/{{=id}}">
                                 <div class="edit click right dest">add to steam</div>
                             </a>
                         </td>
