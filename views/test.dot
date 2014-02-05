@@ -36,12 +36,12 @@
                 <td width="95" class="{{=def}}"></td>
                 <td width="80" align="center" class="{{=def}} data-text">prize</td>
             </tr>
-            <tr class="t" onclick="window.open('/t/{{=t.id}}', '_self');">
-                <td class="textExtra textLightGrey">#{{=i+1}}</td>
-                <td>
+            <tr class="t">
+                <td class="textExtra textLightGrey" onclick="window.open('/t/{{=t.id}}', '_self');return false;">#{{=i+1}}</td>
+                <td onclick="window.open('/t/{{=t.id}}', '_self');return false;">
                     <img src="http://s26.postimg.org/b7kvj1opx/cocks.png">
                 </td>
-                <td class="data-text">
+                <td class="data-text" onclick="window.open('/t/{{=t.id}}', '_self');return false;">
                     <div class="textDark"><b>random</b></div>
                     <div class="textLarge up_case textLightGrey">{{=t.name}}</div>
                     <div class="textSmall textDark">1 duel with 1 random opponent. Fast way find out if u are lucky today...</div>
@@ -69,7 +69,7 @@
                             <div>Confirmed <div class="right textSmall">{{=t.players}}</div></div>
                         </td>
                     {{??}}
-                        <td align="center" class="accept click textLight" onclick="window.open('/join/{{=t.id}}', '_self');">
+                        <td align="center" class="accept click textLight" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
                             <div class="textBig">Join</div> 
                             <div class="textSmall">Now</div>
                         </td>
@@ -192,15 +192,14 @@
         </td>
     </tr>
     <tr>
-        <td colspan="4" class="h-line"></td>
+        <td colspan="4" class="b-t"></td>
     </tr>
     {{ for(var r in it.r){}}
         <tr>
-            <td>{{=it.r[r].lvl}}</td>
+            <td align="center">{{=it.r[r].lvl}}</td>
             <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
             <td class="textDark">{{=it.u[it.r[r].steamid].name}}</td>
-            
-            <td>{{=it.r[r].points}}</td>
+            <td align="center">{{=it.r[r].points}}</td>
         </tr>
         <tr>
             <td colspan="4" class="h-line"></td>
