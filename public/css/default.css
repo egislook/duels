@@ -1,7 +1,7 @@
 
 ol{list-style-type:circle;}
 *{padding:0;margin:0;border:none;text-decoration:none;box-sizing:border-box;}
-body{padding:1px;font-family:"Arial";font-size:16px;padding-bottom:90px;/*background:#ffcf01;*/}
+body{padding:1px;font-family:"Arial";font-size:16px;padding-bottom:90px;background:#F2F2F2;}
 a{color:#FFFFFF;}
 .inputs{padding:5px 10px 5px 10px;color:#383838;border:solid 2px #383838;border-left:none;background:#FFFFFF;}
 .left{float:left;}
@@ -17,9 +17,13 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .list{padding:25px 25px 15px 25px;background:#4B69FF;border-right:solid 2px #4A4A4A;}
 .list_small{padding:10px 5px 5px 40px; margin-top:30px;}
 .list:hover{background:#383838;padding:25px 25px 15px 25px;border-right:solid 2px #4A4A4A;}
-.textLight{color:#FFFFFF}
+.textLight{color:#FFFFFF;}
+.textLightGrey{color:#BCBCBC;}
+.textDark{color:#383838;}
 .textSmall{font-size:11px;}
 .textBig{font-size:18px;text-transform:uppercase;}
+.textLarge{font-size:26px;letter-spacing:-2px;}
+.textExtra{font-size:38;}
 .up_case{text-transform:uppercase;}
 .center{text-align:center;}
 
@@ -35,8 +39,6 @@ p{font-size:14px;clear:both;padding-top:5px;}
 }
 .data-text{padding-left:7px;padding-right:7px;}
 .click-dark:hover{background:#FFFFFF;color:#383838;}
-
-
 .item{padding:0px;}
 .items div:hover{border:solid 2px #EB4B4B;}
 
@@ -66,7 +68,7 @@ p{font-size:14px;clear:both;padding-top:5px;}
 
 .dark{background:#383838;}
 
-.click{text-align:right;padding:2px 5px 2px 5px;overflow:hidden;}
+.click{padding:2px 5px 2px 5px;overflow:hidden;cursor:pointer;}
 .neutral{color:#383838;background:#FFFFFF;}
 .tip{width:70px;text-align:left;font-size:11px;}
 .dest{padding:8px 5px 0px 10px;}
@@ -88,3 +90,11 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .accept{background:#92C24C;}
 .edit{background:#E4AE33;}
 .delete{background:#EB4B4B;}
+
+.t:hover{background:#FFFFFF;cursor:pointer;}
+.hbr{border-right:1px solid #FFFFFF;}
+.hbl{border-left:1px solid #BCBCBC;}
+.h-line{background:#BCBCBC;height:2px;border-bottom:1px solid #FFFFFF;}
+.v-line{background:#BCBCBC;width:2px;border-right:1px solid #FFFFFF;}
+.count{width:14px;padding:2px;}
+.ticket{vertical-align:top;padding-right:5px;background-image:url('http://s26.postimg.org/davaqpoit/dota_icon_curve.png');background-repeat:no-repeat;background-position:bottom left;}

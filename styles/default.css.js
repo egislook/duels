@@ -4,11 +4,15 @@
     "textSmall": "11px",
     "textNormal": "16px",
     "textBig": "18px",
+    "textLarge": "26px",
+    "textExtra": "38",
     "paddingNormal": "7px",
     "colorAccept": "#92C24C",
     "colorEdit": "#E4AE33",
     "colorDelete": "#EB4B4B",
     "colorLight" : "#FFFFFF",
+    "colorLightGrey" : "#F2F2F2",
+    "colorDarkGrey" : "#BCBCBC",
     "colorMain" : "#4B69FF",
     "colorOrange" : "#ED6639",
     "colorDark" : "#383838",
@@ -26,7 +30,7 @@
 
 ol{list-style-type:circle;}
 *{padding:0;margin:0;border:none;text-decoration:none;box-sizing:border-box;}
-body{padding:1px;font-family:"Arial";font-size:var(textNormal);padding-bottom:90px;/*background:#ffcf01;*/}
+body{padding:1px;font-family:"Arial";font-size:var(textNormal);padding-bottom:90px;background:var(colorLightGrey);}
 a{var(ruleColorTextLight);}
 .inputs{padding:5px 10px 5px 10px;color:var(colorDark);border:solid 2px var(colorDark);border-left:none;background:var(colorLight);}
 .left{float:left;}
@@ -42,9 +46,13 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .list{padding:25px 25px 15px 25px;background:var(colorMain);border-right:solid 2px #4A4A4A;}
 .list_small{padding:10px 5px 5px 40px; margin-top:30px;}
 .list:hover{background:var(colorDark);padding:25px 25px 15px 25px;border-right:solid 2px #4A4A4A;}
-.textLight{var(ruleColorTextLight)}
+.textLight{var(ruleColorTextLight);}
+.textLightGrey{color:var(colorDarkGrey);}
+.textDark{color:var(colorDark);}
 .textSmall{font-size:var(textSmall);}
 .textBig{font-size:var(textBig);text-transform:uppercase;}
+.textLarge{font-size:var(textLarge);letter-spacing:-2px;}
+.textExtra{font-size:var(textExtra);}
 .up_case{text-transform:uppercase;}
 .center{text-align:center;}
 
@@ -60,8 +68,6 @@ p{font-size:14px;clear:both;padding-top:5px;}
 }
 .data-text{padding-left:var(paddingNormal);padding-right:var(paddingNormal);}
 .click-dark:hover{background:var(colorLight);color:var(colorDark);}
-
-
 .item{padding:0px;}
 .items div:hover{border:solid 2px var(colorDelete);}
 
@@ -91,7 +97,7 @@ p{font-size:14px;clear:both;padding-top:5px;}
 
 .dark{background:var(colorDark);}
 
-.click{text-align:right;padding:2px 5px 2px 5px;overflow:hidden;}
+.click{padding:2px 5px 2px 5px;overflow:hidden;cursor:pointer;}
 .neutral{color:var(colorDark);background:var(colorLight);}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
@@ -113,3 +119,11 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .accept{background:var(colorAccept);}
 .edit{background:var(colorEdit);}
 .delete{background:var(colorDelete);}
+
+.t:hover{background:#FFFFFF;cursor:pointer;}
+.hbr{border-right:1px solid var(colorLight);}
+.hbl{border-left:1px solid var(colorDarkGrey);}
+.h-line{background:var(colorDarkGrey);height:2px;border-bottom:1px solid var(colorLight);}
+.v-line{background:var(colorDarkGrey);width:2px;border-right:1px solid var(colorLight);}
+.count{width:14px;padding:2px;}
+.ticket{vertical-align:top;padding-right:5px;background-image:url('http://s26.postimg.org/davaqpoit/dota_icon_curve.png');background-repeat:no-repeat;background-position:bottom left;}

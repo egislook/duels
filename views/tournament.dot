@@ -376,6 +376,11 @@
             </td>
         </tr>
         {{?}}
+        {{? it.user.status == 'good'}}
+            <a href="./remove/{{= it.t.id}}">
+                <div class="right space b-l b-r b-b delete">delete</div>
+            </a>
+        {{?}}
         
     </table>
 </div>

@@ -72,7 +72,7 @@
                                             {{? t.players == 0}}
                                                 {{=t.joined}}
                                             {{??}}
-                                                {{=t.players}}/{{=t.maxplayers}}
+                                                {{=t.players}}
                                             {{?}}
                                         </div>    
                                     </div>
@@ -112,8 +112,10 @@
                             <div class="accept b-t textSmall">{{=t.time}}</div>
                             <div class="textSmall">{{=t.date}}</div>
                         {{?}}
+                    {{?? t.state != 'joined' && t.state != 'ended'}}
+                        <div class="textSmall edit">started</div>
                     {{??}}
-                    <div class="textSmall">finished</div>
+                        <div class="textSmall">finished</div>
                     {{?}}
                 </td>
                 <td width="90" class="{{=t.prize_type}}">

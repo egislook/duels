@@ -501,7 +501,7 @@ exports.decide = function decide(req, game, callback){
                         }
                     } else {
                         //if they was not played this game then add 2 point and 2 lvl
-                        if(tournament.class == 'rcf'){
+                        if(tournament.class == 'rcf' && game[data['win']][0].id != tournament.states[game.info['tournamentstate']].duels[i].winner){
                             if(stats[game[data['win']][0].id].points>101){
                                 stats[game[data['win']][0].id].points = stats[game[data['win']][0].id].points+2;
                             } else {
