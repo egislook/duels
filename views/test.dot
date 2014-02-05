@@ -24,8 +24,9 @@
                     var end = t.time.split(":");
                     var deadline = (end[0]*3600)+(end[1]*60);
                     if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
-                    var start = 'finished';
-                    if(date == t.date && t.state=='join'){start=deadline-time;spec='textLarge time-left'};
+                    var start = 'tomorrow';
+                    if(date == t.date && t.state=='join'){start=deadline-time;spec='textLarge time-left'}
+                    else if(t.state=='ended'){start='finished'};
                     if(t.state=='final'){start='in progress'};
                 }}
                 <td class="{{=def}}"></td>
