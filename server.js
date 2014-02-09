@@ -7,7 +7,7 @@ var express = require('express'),
     varYk = require('./lib/varYK.js'),
     app = express();
 
-var dbname = 'league';
+var dbname = 'test';
 
 app.enable('strict routing');
 app.set('port',  process.env.PORT || 3001);

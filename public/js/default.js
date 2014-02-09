@@ -38,6 +38,7 @@ function itemselect(x){
 
 function timer(){
     var length = document.getElementsByClassName("time-left").length;
+    
     var timeLeft=0;
     for(var i=0; i<length; i++){
         time = document.getElementsByClassName("time-left")[i].textContent;
@@ -46,6 +47,9 @@ function timer(){
         timeLeft = 0;
     }
 }
+
+var audio = new Audio('http://soundjax.com/reddo/43540%5Enmab_door06_jarviscocker.mp3');
+audio.volume=0.3;
 
 function timeChanger(t, i){
     t = t-1;
@@ -58,8 +62,12 @@ function timeChanger(t, i){
     document.getElementsByClassName("time-left")[i].innerHTML = h+":"+m+":"+s;
     if(t>0)
         setTimeout(function(){timeChanger(t, i)},1000);
-    else
+    else{
+        
+        audio.play();
+        setTimeout(function(){location.reload();},2000);
         document.getElementsByClassName("time-left")[i].innerHTML = 'delayed';
+    }
         
 }
 /*function menuon(x){
