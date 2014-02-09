@@ -1,19 +1,85 @@
 {{
     var tutorial = [
         {
+            name : 'Requirements',
+            tag : 'requirements',
+            desc: '',
+            steps : [
+                {
+                    desc : 'you have to join steam group "wdpwp" <a class="neutral click tip" href="#group">How to join group?</a>'
+                },
+                {
+                    desc : 'you have to join dota2 guild "wdpwp" <a class="neutral click tip" href="#guild">How join guild?</a>'
+                },
+                {
+                    desc : '<b class="delete space">you must read all this tutorial</b>'
+                },
+                {
+                    desc : 'if u need more help ask in "wdpwp" steam group chat <a class="neutral click tip" href="#group">How use group?</a>'
+                }
+                
+            ]
+        },
+        {
             name : 'Duel Rules',
             tag : 'rules',
             desc: '',
             steps : [
                 {
-                    desc : 'first 2 kills wins'
+                    desc : 'If u did not join game in 15 mins after event starts u will be pronounced as loser. <a class="neutral click tip" href="#play">How to join?</a>'
                 },
                 {
-                    desc : 'first 2 towers wins'
+                    desc : 'If u died 2 times u must type in all chat (shift+enter) GG and w8 10 seconds.'
                 },
                 {
-                    desc : 'If you lose you have to type in all chat "GG" and wait 10 seconds till game ends'
+                    desc : 'If u losed 2 towers u must type in all chat (shift+enter) GG and w8 10 seconds.'
                 },
+                {
+                    desc : 'Winner must take a screenshot of the game and upload to your duel statistic page. <a class="neutral click tip" href="#upload">How to upload screenshot?</a>'
+                }
+            ]
+        },
+        {
+            name : 'How to join and use group?',
+            tag : 'group',
+            desc : 'In order to join and use our steam group, please take the following steps:',
+            steps : [
+                {
+                    desc : 'If you did not get invitation in the "wdpwp" steam group from other players visit </br> <a class="accept click" href="http://steamcommunity.com/groups/wdpwp">wdpwp group</a> and join the group',
+                    img : 'http://s26.postimg.org/qlafc4h9l/browser_group.jpg'
+                },
+                {
+                    desc : 'If you want to join "wdpwp" steam group chat press "Enter chat room" and please invite your friends to the group',
+                    img : 'http://s26.postimg.org/vb0d0q8a1/steam_group_chat.png'
+                },
+                {
+                    desc : 'If u can not find how to enter to the group "wdpwp" after you are joined press "Groups" on your nickname section',
+                    img : 'http://s26.postimg.org/gy2bonyw9/steam_group.jpg'
+                }
+            ]
+        },
+        {
+            name : 'How to join and use guild?',
+            tag : 'guild',
+            desc : 'In order to join and use our dota2 guild, please take the following steps:',
+            steps : [
+                {
+                    desc : 'You must get invite from one of the moderators. Ask for invitation in the group chat </br> <a class="neutral click tip" href="#group">how to use group?</a>'
+                },
+                {
+                    desc : 'Turn on dota 2 game and "accept" guild invitation',
+                    img : 'http://s26.postimg.org/9eln5pv1l/guild.jpg'
+                },
+                {
+                    desc : 'After u enter the guild u can chat with other guild members in "wdpwp" guild chat',
+                    img : 'http://s26.postimg.org/olttkpmy1/clan_chat.jpg'
+                },
+                {
+                    desc : 'After u enter the guild u can spectate other member game (just remember nick or avatar)</br> <b class="delete">If there is no "watch game" button just press "view dota profile" and then back to members list and then u can use "watch game"</b>',
+                    img : 'http://s26.postimg.org/a3wmcpvmx/watch_game.jpg'
+                }
+                
+                
                 
             ]
         },
@@ -47,24 +113,23 @@
                     desc : 'You have to be loged in wdpwp.com <a class="neutral click tip" href="#login">How to login?</a>'
                 },
                 {
-                    desc : 'Press "Join" button.',
-                    img : 'http://s26.postimg.org/5eehth4kp/join.jpg'
+                    desc : 'Check how much time left till start. Check what buyin is in this tournament. Press "Join" button.',
+                    img : 'http://s26.postimg.org/5w1u3yu7d/join_duel.jpg'
                 },
                 {
                     desc : 'Then you will get participation code. Press on the tournament owner nick e.g. "Majasqzi" (on the top of the tournament screen) and add to your friendlist',
                     img : 'http://s26.postimg.org/engo3ldgp/code.jpg'
                 },
                 {
-                    desc : 'You will receive message from owner with your participation code. You need to confirm if it is correct code (you can see code on wdpwp.com tournament page)',
+                    desc : 'You will receive message from owner with your participation code. You need to confirm if it is correct code (you can see code on <a class="accept click" href="../">wdpwp</a> tournament page) </br> <b class="delete">Never enter code to the chat only check if code correct. This will ensure that you are trading with system moderator.</b>',
                     img : 'http://s26.postimg.org/mu8nv63jd/confirm.jpg'
                 },
                 {
-                    desc : 'After confirmation you must turn on Dota2 and accept "WDPWP" guild invitation',
-                    img : 'http://s26.postimg.org/9eln5pv1l/guild.jpg'
+                    desc : 'When u will finish trade with owner for buyin item he will confirm you as tournament player. Then you need to wait till tournament will starts',
+                    img : 'http://s26.postimg.org/ks86gx5k9/participated.jpg'
                 },
                 {
-                    desc : 'When you become "WDPWP" guild member you will be confirmed tournament player. Then you need to wait till all tournament slots will be filled',
-                    img : 'http://s26.postimg.org/ks86gx5k9/participated.jpg'
+                    desc : 'You must be at guild. If u are not in a guild then ask for invitation <a class="neutral click tip" href="#guild">How to join guild?</a>'
                 }
             ]
         },

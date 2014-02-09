@@ -19,14 +19,22 @@
                   <p>Home</p>
 		        </div> 
 		    </a>
-          {{? true}}
 		    <a href="/faq">
 		        <div class="left list">
 		            <img src="http://s26.postimg.org/lfbok6rtx/alien_icon.png">
                   	<p>Tutorials</p>
 		        </div> 
 		    </a>
-          {{?}}
+		    <a href="http://steamcommunity.com/groups/wdpwp" target="_blank">
+		        <div class="left list accept">
+                  	<p>Steam <div class="right textSmall">group</div></p>
+		        </div> 
+		    </a>
+		    <a href="https://www.facebook.com/groups/733591169986623/" target="_blank">
+		        <div class="left list">
+                  	<p>Facebook <div class="right textSmall">group</div></p>
+		        </div> 
+		    </a>
 		    {{? !it.user.loged }}
 		    <a href="/login">
 		        <div class="right list">
