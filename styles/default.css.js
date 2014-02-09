@@ -98,7 +98,6 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .dark{background:var(colorDark);}
 
 .click{padding:2px 5px 2px 5px;overflow:hidden;cursor:pointer;}
-.neutral{color:var(colorDark);background:var(colorLight);}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:var(colorDark);color:var(colorLight);}
@@ -120,8 +119,11 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .free{background:var(colorAccept);}
 .edit{background:var(colorEdit);}
 .delete{background:var(colorDelete);}
+.neutral{color:var(colorDark);background:var(colorLight);}
+.grey{background:var(colorDarkGrey);}
 
-.t:hover{background:#E0E0E0;cursor:pointer;}
+.t:hover{background:#E0E0E0;cursor:pointer;opacity:1;}
+.t-finished{opacity:0.7;}
 .hbr{border-right:1px solid var(colorLight);}
 .hbl{border-left:1px solid var(colorDarkGrey);}
 .h-line{background:var(colorDarkGrey);height:2px;border-bottom:1px solid var(colorLight);}

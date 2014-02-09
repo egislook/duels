@@ -6,13 +6,14 @@
                 {{
                     var prize = 'rare';
                     var buyin = 'free';
+                    var bg = 't';
                     if(t.prize_type=='unc'){prize='uncommon';buyin=prize}
                     else if(t.prize_type=='com'){prize='common';buyin=prize};
                     
                     var def='dark textLight textSmall';
                     var spec='textBig';
                     if(t.state!='ended' && t.state!='join'){def='edit textLight textSmall'} 
-                    else if(t.state=='ended'){def='delete textLight textSmall'};
+                    else if(t.state=='ended'){def='grey textLight textSmall'};
                     
                     var date = new Date();
                     var dd = date.getDate();
@@ -28,7 +29,7 @@
                     var start = 'tomorrow';
                     if(date == t.date && t.state=='join' && deadline-time>0){start=deadline-time;spec='textLarge time-left'}
                     else if(t.state=='join' && deadline-time<=0 && date == t.date){start='delayed';spec='textLarge time-left'}
-                    else if(t.state=='ended'){start='finished'};
+                    else if(t.state=='ended'){start='finished',bg='t-finished t'};
                     if(t.state=='final'){start='in progress'};
                 }}
                 <td class="{{=def}}"></td>
@@ -39,7 +40,7 @@
                 <td width="95" class="{{=def}}"></td>
                 <td width="80" align="center" class="{{=def}} data-text">prize</td>
             </tr>
-            <tr class="t">
+            <tr class="{{=bg}}">
                 <td class="textExtra textLightGrey" onclick="window.open('/t/{{=t.id}}', '_self');return false;">#{{=i+1}}</td>
                 <td onclick="window.open('/t/{{=t.id}}', '_self');return false;">
                     {{? t.class=='rcf'}}

@@ -69,7 +69,6 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .dark{background:#383838;}
 
 .click{padding:2px 5px 2px 5px;overflow:hidden;cursor:pointer;}
-.neutral{color:#383838;background:#FFFFFF;}
 .tip{width:70px;text-align:left;font-size:11px;}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:#383838;color:#FFFFFF;}
@@ -91,8 +90,11 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .free{background:#92C24C;}
 .edit{background:#E4AE33;}
 .delete{background:#EB4B4B;}
+.neutral{color:#383838;background:#FFFFFF;}
+.grey{background:#BCBCBC;}
 
-.t:hover{background:#E0E0E0;cursor:pointer;}
+.t:hover{background:#E0E0E0;cursor:pointer;opacity:1;}
+.t-finished{opacity:0.7;}
 .hbr{border-right:1px solid #FFFFFF;}
 .hbl{border-left:1px solid #BCBCBC;}
 .h-line{background:#BCBCBC;height:2px;border-bottom:1px solid #FFFFFF;}
