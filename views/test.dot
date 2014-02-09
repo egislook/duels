@@ -5,12 +5,13 @@
             <tr>
                 {{
                     var prize = 'rare';
-                    if(t.prize_type=='unc'){prize='uncommon'}
-                    else if(t.prize_type=='com'){prize='common'};
+                    var buyin = 'free';
+                    if(t.prize_type=='unc'){prize='uncommon';buyin=prize}
+                    else if(t.prize_type=='com'){prize='common';buyin=prize};
                     
                     var def='dark textLight textSmall';
                     var spec='textBig';
-                    if(t.state!='ended' && t.state!='join'){def='accept textLight textSmall'} 
+                    if(t.state!='ended' && t.state!='join'){def='edit textLight textSmall'} 
                     else if(t.state=='ended'){def='delete textLight textSmall'};
                     
                     var date = new Date();
@@ -25,7 +26,8 @@
                     var deadline = (end[0]*3600)+(end[1]*60);
                     if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
                     var start = 'tomorrow';
-                    if(date == t.date && t.state=='join'){start=deadline-time;spec='textLarge time-left'}
+                    if(date == t.date && t.state=='join' && deadline-time>0){start=deadline-time;spec='textLarge time-left'}
+                    else if(t.state=='join' && deadline-time<=0 && date == t.date){start='delayed';spec='textLarge time-left'}
                     else if(t.state=='ended'){start='finished'};
                     if(t.state=='final'){start='in progress'};
                 }}
@@ -40,7 +42,9 @@
             <tr class="t">
                 <td class="textExtra textLightGrey" onclick="window.open('/t/{{=t.id}}', '_self');return false;">#{{=i+1}}</td>
                 <td onclick="window.open('/t/{{=t.id}}', '_self');return false;">
-                    <img src="http://s26.postimg.org/b7kvj1opx/cocks.png">
+                    {{? t.class=='rcf'}}
+                        <img src="http://s26.postimg.org/b7kvj1opx/cocks.png">
+                    {{?}}
                 </td>
                 <td class="data-text" onclick="window.open('/t/{{=t.id}}', '_self');return false;">
                     <div class="textDark"><b>random</b></div>
@@ -48,12 +52,16 @@
                     <div class="textSmall textDark">1 duel with 1 random opponent. Fast way find out if u are lucky today...</div>
                 </td>
                 <td class="{{=t.buyin_type}} ticket textLight" align="right">
+                    {{? t.buyin_type != 'free'}}
                     <div class="left dark textSmall textLight count">{{=t.buyin_count}}</div>
                     <div class="clear"><b>Any</b></div>
-                    <div class="textSmall">{{=prize}}</div>
+                    <div class="textSmall">{{=buyin}}</div>
                     <div>item</div>
+                    {{??}}
+                        <div class="textBig">{{=buyin}}</div>
+                    {{?}}
                 </td>
-                <td align="center">
+                <td align="center" class="hbr">
                     <div class="textDark"><b>arshom</b></div>
                     <div class="textSmall textLightGrey">all random</div>
                     <div class="textSmall textLightGrey">same hero</div>
@@ -66,7 +74,7 @@
                             <div>{{= t.users.joined[it.user.steamid].key}} <div class="right textSmall">{{=t.players}}</div></div>
                         </td>
                     {{?? t.users.approved[it.user.steamid]}}
-                        <td>
+                        <td class="hbl">
                             <div>Confirmed <div class="right textSmall">{{=t.players}}</div></div>
                         </td>
                     {{??}}
@@ -76,9 +84,9 @@
                         </td>
                     {{?}}
                 {{??}}
-                    <td align="center" class="textDark">
+                    <td align="center" class="textDark hbl">
                         <div class="textSmall">Registration</div> 
-                        <div class="textSmall">Finished</div>
+                        <div class="textSmall "><b>Finished</b></div>
                     </td>
                 {{?}}
                 <td class="{{=t.prize_type}} ticket textLight" align="right">
@@ -95,16 +103,28 @@
                     <tr>
                         <td colspan="7">
                             {{? t.joined>0}}
-                            <div class="left textLightGrey textSmall data-text hbr"><b class="textDark">joined</b><div>players</div></div>
                                 {{ for(var id in t.users.joined) {}}
-                                    <img class="hbr hbl left" width="30" src="{{=it.u[id].avatar}}"/>
+                                    <div class="hbr left" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                        <img width="30" src="{{=it.u[id].avatar}}"/>
+                                        <div class="note accept">{{=it.u[id].name}}</div>
+                                    </div>
                                 {{ } }}
+                                <div class="left data-text hbl">
+                                    <div class="textLightGrey textSmall"> players</div>
+                                    <b class="textDark">joined</b><div class="textSmall textLight left accept data-text">{{=t.joined}}</div>
+                                </div>
                             {{?}}
                             {{? t.players>0}}
-                            <div class="right textLightGrey textSmall data-text hbl"><b class="textDark">confirmed</b><div>players</div></div>
                                 {{ for(var id in t.users.approved) {}}
-                                    <img class="hbr hbl right" width="30" src="{{=it.u[id].avatar}}"/>
+                                    <div class="hbr right" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                        <img width="30" src="{{=it.u[id].avatar}}"/>
+                                        <div class="note edit">{{=it.u[id].name}}</div>
+                                    </div>
                                 {{ } }}
+                                <div class="right data-text hbr">
+                                    <div class="textLightGrey right textSmall"> players</div>
+                                    <b class="textDark left clear">confirmed</b><div class="textSmall textLight right edit data-text">{{=t.players}}</div>
+                                </div>
                             {{?}}
                         </td>
                     </tr>
@@ -173,9 +193,11 @@
             <tr>
                 <td colspan="7" class="h-line"></td>
             </tr>
-            <tr>
-                <td height="10"></td>
-            </tr>
+            {{? t.state != 'ended'}}
+                <tr><td height="30"></td></tr>
+            {{??}}
+                <tr><td height="10"></td></tr>
+            {{?}}
         {{~}}
     {{?}}
 </table>

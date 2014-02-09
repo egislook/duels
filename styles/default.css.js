@@ -102,7 +102,7 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:var(colorDark);color:var(colorLight);}
-.note{display:none;position:absolute;border-radius:2px;padding:3px;font-size:11px;max-width:145px;}
+.note{display:none;position:absolute;border-radius:2px;padding:5px;font-size:11px;max-width:145px;color:var(colorLight);}
 
 .players{padding:0px; padding-right:2px}
 .players img{width:35px; border:solid 2px var(colorDark);padding:0px;margin:0px;}
@@ -117,10 +117,11 @@ p{font-size:14px;clear:both;padding-top:5px;}
 
 
 .accept{background:var(colorAccept);}
+.free{background:var(colorAccept);}
 .edit{background:var(colorEdit);}
 .delete{background:var(colorDelete);}
 
-.t:hover{background:#FFFFFF;cursor:pointer;}
+.t:hover{background:#E0E0E0;cursor:pointer;}
 .hbr{border-right:1px solid var(colorLight);}
 .hbl{border-left:1px solid var(colorDarkGrey);}
 .h-line{background:var(colorDarkGrey);height:2px;border-bottom:1px solid var(colorLight);}

@@ -23,7 +23,7 @@
 		    <a href="/faq">
 		        <div class="left list">
 		            <img src="http://s26.postimg.org/lfbok6rtx/alien_icon.png">
-                  	<p>Faq</p>
+                  	<p>Tutorials</p>
 		        </div> 
 		    </a>
           {{?}}

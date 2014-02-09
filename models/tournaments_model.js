@@ -140,7 +140,7 @@ exports.create = function create(req, tournament, user, callback){
     tournament.users = {'joined' : {}, 'approved' : approved};
     tournament.owner = [{'steamid' : user.steamid, name : user.name}];
     tournament.states = {};
-    req.app.cache.tournaments.push(tournament);
+    req.app.cache.tournaments.unshift(tournament);
     //add tournament data to db
     db.add(req.app, 'tournaments', tournament, function(data){
         console.log(data);

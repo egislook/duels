@@ -40,8 +40,9 @@ function timer(){
     var length = document.getElementsByClassName("time-left").length;
     var timeLeft=0;
     for(var i=0; i<length; i++){
-        timeLeft = parseInt(document.getElementsByClassName("time-left")[i].textContent);
-        timeChanger(timeLeft, i);
+        time = document.getElementsByClassName("time-left")[i].textContent;
+        if(time != 'delayed')
+            timeChanger(parseInt(time), i);
         timeLeft = 0;
     }
 }
@@ -57,6 +58,9 @@ function timeChanger(t, i){
     document.getElementsByClassName("time-left")[i].innerHTML = h+":"+m+":"+s;
     if(t>0)
         setTimeout(function(){timeChanger(t, i)},1000);
+    else
+        document.getElementsByClassName("time-left")[i].innerHTML = 'delayed';
+        
 }
 /*function menuon(x){
   	x.classList.add("list_hover");
