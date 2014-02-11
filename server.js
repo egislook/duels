@@ -77,7 +77,7 @@ db.con(dbname, function(dbs){
         app.cache.stats = temp;
         app.cache.loaded--;
         console.log("LOADED -> "+app.cache.loaded+" stats");
-    }, { $query: {steamid: {$ne: app.cache.steamid.bad[0]},games: {$ne : 1}}, $orderby: {win : -1, games : -1, lose : 1}});
+    }, { $query: {steamid: {$ne: app.cache.steamid.bad[0]}}, $orderby: {win : -1, games : -1, lose : 1}});
     
 });
 

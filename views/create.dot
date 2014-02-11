@@ -45,6 +45,17 @@
             </tr>
             <tr>
                 <td>
+                    <div class="dark right">allow</div>
+                </td>
+                <td class="b-l">
+                    <select class="inputs" name="allow">
+                      <option value="all">all</option>
+                      <option value="beginners">beginners</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <div class="dark right">type</div>
                 </td>
                 <td class="b-l">

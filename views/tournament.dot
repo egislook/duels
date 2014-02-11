@@ -140,7 +140,10 @@
                                 <div class="accept click right dest">aprove</div>
                             </a>
                             <a href="steam://friends/add/{{=id}}">
-                                <div class="edit click right dest">add to steam</div>
+                                <div class="edit click right dest">add friend</div>
+                            </a>
+                            <a href="steam://friends/message/{{=id}}">
+                                <div class="neutral click right dest">send message</div>
                             </a>
                         </td>
                         {{?}}

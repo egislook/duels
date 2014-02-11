@@ -1,14 +1,25 @@
 <div style="overflow:hidden;">
-<table class="left hbr clear" cellspacing="0" style="width:80%;">
+<table class="left hbr clear" cellspacing="0" style="width:80%;box-shadow: 0px 0px 5px #000000;">
      {{? it.tournaments.length>0}}
         {{~it.tournaments :t:i}}
+            {{? t.allow == 'beginners' && t.state == 'join'}}
+            <tr>
+                <td colspan="7">
+                    <div class="delete textSmall space textLight"><b>This cockfight can join only players with less then 2 wins in the system.</b></div>
+                </td>
+            </tr>
+            {{?}}
             <tr>
                 {{
                     var prize = 'rare';
                     var buyin = 'free';
                     var bg = 't';
-                    if(t.prize_type=='unc'){prize='uncommon';buyin=prize}
-                    else if(t.prize_type=='com'){prize='common';buyin=prize};
+                    
+                    if(t.buyin_type=='unc'){buyin='uncommon'}
+                    else if(t.buyin_type=='com'){buyin='common';};
+                    
+                    if(t.prize_type=='unc'){prize='uncommon';}
+                    else if(t.prize_type=='com'){prize='common';};
                     
                     var def='dark textLight textSmall';
                     var spec='textBig';
@@ -50,7 +61,11 @@
                 <td class="data-text" onclick="window.open('/t/{{=t.id}}', '_self');return false;">
                     <div class="textDark"><b>random</b></div>
                     <div class="textLarge up_case textLightGrey">{{=t.name}}</div>
-                    <div class="textSmall textDark">1 duel with 1 random opponent. Fast way find out if u are lucky today...</div>
+                    {{? t.allow == 'beginners'}}
+                        <div class="textSmall textDark">1 Free random duel for <b>beginners</b>. Join, take win and free common item</div>
+                    {{??}}
+                        <div class="textSmall textDark">1 duel with 1 random opponent. Fast way find out if u are lucky today...</div>
+                    {{?}}
                 </td>
                 <td class="{{=t.buyin_type}} ticket textLight" align="right">
                     {{? t.buyin_type != 'free'}}
@@ -59,7 +74,7 @@
                     <div class="textSmall">{{=buyin}}</div>
                     <div>item</div>
                     {{??}}
-                        <div class="textBig">{{=buyin}}</div>
+                        <div class="textBig space">{{=buyin}}</div>
                     {{?}}
                 </td>
                 <td align="center" class="hbr">
@@ -71,18 +86,27 @@
                 </td>
                 {{? t.state == 'join' && (t.maxplayers != t.players || t.class == 'rcf')}}
                     {{? t.users.joined[it.user.steamid]}}
-                        <td>
-                            <div>{{= t.users.joined[it.user.steamid].key}} <div class="right textSmall">{{=t.players}}</div></div>
+                        <td align="center" class="hbl">
+                            <div class="textSmall">Your Code</div> 
+                            <div class="textBig"><b>{{= t.users.joined[it.user.steamid].key}}</b></div>
                         </td>
                     {{?? t.users.approved[it.user.steamid]}}
-                        <td class="hbl">
-                            <div>Confirmed <div class="right textSmall">{{=t.players}}</div></div>
+                        <td align="center" class="edit">
+                            <div class="textSmall">You Are</div> 
+                            <div class="textSmall "><b>Confirmed</b></div>
                         </td>
                     {{??}}
-                        <td align="center" class="accept click textLight" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
-                            <div class="textBig">Join</div> 
-                            <div class="textSmall">Now</div>
-                        </td>
+                        {{? t.allow != 'beginners' || !it.r[it.user.steamid] || it.r[it.user.steamid].win<3}}
+                            <td align="center" class="accept click textLight" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
+                                <div class="textBig">Join</div> 
+                                <div class="textSmall">Now</div>
+                            </td>
+                        {{??}}
+                            <td align="center" class="delete textLight">
+                                <div class="textSmall">Beginners</div> 
+                                <div class="textSmall "><b>Only</b></div>
+                            </td>
+                        {{?}}
                     {{?}}
                 {{??}}
                     <td align="center" class="textDark hbl">
@@ -219,7 +243,7 @@
             <div class="textSmall data-text"></div>
         </td>
         <td colspan="2">
-            <div class="textSmall">Player</div>
+            <div class="textSmall space">Player</div>
         </td>
         <td>
             <div class="textSmall">Games</div>
@@ -232,25 +256,32 @@
         <td colspan="5" class="b-t"></td>
     </tr>
     {{var n=0; for(var r in it.r){ n++;}}
+        {{? it.r[r].games>1}}
         <tr>
             <td align="center">{{=n}}</td>
             <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
             <td class="textDark">{{=it.u[it.r[r].steamid].name}}
                 {{? it.user.status == 'good'}}
                     <div>
-                        <a href="steam://friends/add/{{=it.r[r].steamid}}"><div class="right delete click">add</div></a>
+                        <a href="steam://friends/add/{{=it.r[r].steamid}}"><div class="right edit click">add</div></a>
                         <a href="steam://friends/message/{{=it.r[r].steamid}}"><div class="right neutral click">message</div></a>
                     </div>
                 {{?}}
             </td>
             <td align="center">{{=it.r[r].games}}</td>
             <td align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
-            
         </tr>
         <tr>
             <td colspan="5" class="h-line"></td>
         </tr>
+        {{?}}
     {{ } }}
+    <tr>
+        <td></td>
+        <td colspan="4">
+            <div class="space">players who have been played less then 2 games are not ranked</div>
+        </td>
+    </tr>
 </table>
 </div>
 <script> timer(); </script>
