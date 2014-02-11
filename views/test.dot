@@ -238,8 +238,8 @@
             <td class="textDark">{{=it.u[it.r[r].steamid].name}}
                 {{? it.user.status == 'good'}}
                     <div>
-                        <a href="steam://friends/add/{{=id}}"><div class="right delete click">add</div></a>
-                        <a href="steam://friends/message/{{=id}}"><div class="right neutral click">message</div></a>
+                        <a href="steam://friends/add/{{=it.r[r].steamid}}"><div class="right delete click">add</div></a>
+                        <a href="steam://friends/message/{{=it.r[r].steamid}}"><div class="right neutral click">message</div></a>
                     </div>
                 {{?}}
             </td>
