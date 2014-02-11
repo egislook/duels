@@ -16,6 +16,7 @@ app.set('view engine', 'dot');
 app.engine('dot', require('express-dot').__express);
 //app.use(express.methodOverride());
 app.use(express.bodyParser());
+
 app.use(express.cookieParser());
 app.use(express.session({ secret: 'whatever'}));
 
@@ -25,6 +26,11 @@ app.use('/img' , express.static(path.join(process.cwd(), '/public/img')));
 app.use(app.router);
 
 app.cache.loaded = 5;
+
+app.cache.steamid = {
+    'good' : ['76561198065626987', '76561198065634959'],
+    'bad' : ['76561198047101614']
+};
 
 steam.getLightFromSteam('heroes', function(data){
     app.cache.heroes = data;
@@ -71,14 +77,11 @@ db.con(dbname, function(dbs){
         app.cache.stats = temp;
         app.cache.loaded--;
         console.log("LOADED -> "+app.cache.loaded+" stats");
-    }, { $query: {}, $orderby: { points : -1}});
+    }, { $query: {steamid: {$ne: app.cache.steamid.bad[0]},games: {$ne : 1}}, $orderby: {win : -1, games : -1, lose : 1}});
     
 });
 
-app.cache.steamid = {
-    'good' : ['76561198065626987', '76561198065634959'],
-    'bad' : ['23849234892349829']
-};
+
 
 
 

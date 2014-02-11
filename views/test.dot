@@ -107,7 +107,13 @@
                                 {{ for(var id in t.users.joined) {}}
                                     <div class="hbr left" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                                         <img width="30" src="{{=it.u[id].avatar}}"/>
-                                        <div class="note accept">{{=it.u[id].name}}</div>
+                                        <div class="note accept">{{=it.u[id].name}}
+                                            {{? it.user.status == 'good'}}
+                                                <a href="steam://friends/message/{{=id}}"><div class="neutral click">steam message</div></a>
+                                                <a href="steam://friends/add/{{=id}}"><div class="delete click">steam add</div></a>
+                                            {{?}}
+                                        </div>
+                                        
                                     </div>
                                 {{ } }}
                                 <div class="left data-text hbl">
@@ -119,7 +125,12 @@
                                 {{ for(var id in t.users.approved) {}}
                                     <div class="hbr right" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                                         <img width="30" src="{{=it.u[id].avatar}}"/>
-                                        <div class="note edit">{{=it.u[id].name}}</div>
+                                        <div class="note edit">{{=it.u[id].name}}
+                                            {{? it.user.status == 'good'}}
+                                                <a href="steam://friends/message/{{=id}}"><div class="neutral click">steam message</div></a>
+                                                <a href="steam://friends/add/{{=id}}"><div class="delete click">steam add</div></a>
+                                            {{?}}
+                                        </div>
                                     </div>
                                 {{ } }}
                                 <div class="right data-text hbr">
@@ -205,28 +216,39 @@
 <table class="textLightGrey textSmall hbl" style="width:20%">
     <tr>
         <td>
-            <div class="textSmall">Level</div>
+            <div class="textSmall data-text"></div>
         </td>
-        <td align="center" colspan="2">
+        <td colspan="2">
             <div class="textSmall">Player</div>
         </td>
-        
+        <td>
+            <div class="textSmall">Games</div>
+        </td>
         <td>
             <div class="textSmall">Points</div>
         </td>
     </tr>
     <tr>
-        <td colspan="4" class="b-t"></td>
+        <td colspan="5" class="b-t"></td>
     </tr>
-    {{ for(var r in it.r){}}
+    {{var n=0; for(var r in it.r){ n++;}}
         <tr>
-            <td align="center">{{=it.r[r].lvl}}</td>
+            <td align="center">{{=n}}</td>
             <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
-            <td class="textDark">{{=it.u[it.r[r].steamid].name}}</td>
-            <td align="center">{{=it.r[r].points}}</td>
+            <td class="textDark">{{=it.u[it.r[r].steamid].name}}
+                {{? it.user.status == 'good'}}
+                    <div>
+                        <a href="steam://friends/add/{{=id}}"><div class="right delete click">add</div></a>
+                        <a href="steam://friends/message/{{=id}}"><div class="right neutral click">message</div></a>
+                    </div>
+                {{?}}
+            </td>
+            <td align="center">{{=it.r[r].games}}</td>
+            <td align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
+            
         </tr>
         <tr>
-            <td colspan="4" class="h-line"></td>
+            <td colspan="5" class="h-line"></td>
         </tr>
     {{ } }}
 </table>

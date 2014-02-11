@@ -484,46 +484,22 @@ exports.decide = function decide(req, game, callback){
                         if(tournament.class == 'rcf'){
                             
                             if(!stats[game[data['win']][0].id]){
-                                stats[game[data['win']][0].id]={points:100, lvl:1, steamid: game[data['win']][0].id}
+                                stats[game[data['win']][0].id]={win:0, lose:0, games:0, steamid: game[data['win']][0].id}
                                 db.add(req.app, 'stats', stats[game[data['win']][0].id], function(data){});
                             }
                             if(!stats[game[data['lose']][0].id]){
-                                stats[game[data['lose']][0].id]={points:100, lvl:1, steamid: game[data['lose']][0].id}
+                                stats[game[data['lose']][0].id]={win:0, lose:0, games:0, steamid: game[data['lose']][0].id}
                                 db.add(req.app, 'stats', stats[game[data['lose']][0].id], function(data){});
                             }
                             
-                            stats[game[data['win']][0].id].points++;
-                            stats[game[data['win']][0].id].lvl++;
-                            if(stats[game[data['lose']][0].id].points>99)
-                                stats[game[data['lose']][0].id].points--;
-                            if(stats[game[data['lose']][0].id].lvl>1)
-                                stats[game[data['lose']][0].id].lvl--;
+                            stats[game[data['win']][0].id].win++;stats[game[data['win']][0].id].games++;
+                            stats[game[data['lose']][0].id].lose++;stats[game[data['lose']][0].id].games++;
                         }
                     } else {
                         //if they was not played this game then add 2 point and 2 lvl
                         if(tournament.class == 'rcf' && game[data['win']][0].id != tournament.states[game.info['tournamentstate']].duels[i].winner){
-                            if(stats[game[data['win']][0].id].points>101){
-                                stats[game[data['win']][0].id].points = stats[game[data['win']][0].id].points+2;
-                            } else {
-                                if(stats[game[data['win']][0].id].points>=99)
-                                    stats[game[data['win']][0].id].points = stats[game[data['win']][0].id].points+2;
-                            }
-                            
-                            if(stats[game[data['lose']][0].id].points>100)
-                                stats[game[data['lose']][0].id].points = stats[game[data['lose']][0].id].points-2;
-                            else
-                                stats[game[data['lose']][0].id].points = stats[game[data['lose']][0].id].points-1;
-                            
-                            //set loser lvl by points
-                            if(stats[game[data['lose']][0].id].points > 100)
-                                stats[game[data['lose']][0].id].lvl = stats[game[data['lose']][0].id].points-99;
-                            else
-                                stats[game[data['lose']][0].id].lvl = 1;
-                            
-                            if(stats[game[data['win']][0].id].points > 100)
-                                stats[game[data['win']][0].id].lvl = stats[game[data['win']][0].id].points-99;
-                            else
-                                stats[game[data['win']][0].id].lvl = 1;
+                            stats[game[data['win']][0].id].win++;stats[game[data['win']][0].id].lose--;
+                            stats[game[data['lose']][0].id].win--;stats[game[data['lose']][0].id].lose++;
                         }
                     }
                     tournament.states[game.info['tournamentstate']].duels[i]['winner'] = game[data['win']][0].id;
@@ -538,8 +514,18 @@ exports.decide = function decide(req, game, callback){
             query = {$set: obj};
             db.update(req.app, 'tournaments', where, query, function(data){});
             
-            db.update(req.app, 'stats', {steamid : game[data['win']][0].id}, {"lvl" : stats[game[data['win']][0].id].lvl, "points" : stats[game[data['win']][0].id].points, "steamid" : game[data['win']][0].id}, function(data){});
-            db.update(req.app, 'stats', {steamid : game[data['lose']][0].id}, {"lvl" : stats[game[data['lose']][0].id].lvl, "points" : stats[game[data['lose']][0].id].points, "steamid" : game[data['lose']][0].id}, function(data){});
+            db.update(req.app, 'stats', {steamid : game[data['win']][0].id}, {
+                "games" : stats[game[data['win']][0].id].games,
+                "win" : stats[game[data['win']][0].id].win,
+                "lose" : stats[game[data['win']][0].id].lose,
+                "steamid" : game[data['win']][0].id
+            }, function(data){});
+            db.update(req.app, 'stats', {steamid : game[data['lose']][0].id}, {
+                "games" : stats[game[data['lose']][0].id].games,
+                "win" : stats[game[data['lose']][0].id].win,
+                "lose" : stats[game[data['lose']][0].id].lose,
+                "steamid" : game[data['lose']][0].id
+            }, function(data){});
            
            
        }
