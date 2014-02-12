@@ -165,7 +165,84 @@
                         </td>
                     </tr>
                 {{?}}
-                
+                {{? t.state == 'final'}}
+                    <tr>
+                        <td colspan="7" class="h-line"></td>
+                    </tr>
+                    <tr>
+                        <td class="textSmall textLightGrey" align="center" colspan="7">
+                            duels
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="7">
+                            <table cellspacing="0" class="textLight data-list">
+                                <tr>
+                                    <td width="50%">
+                                        <div class="accept space textSmall">The Radiant</div>
+                                    </td>
+                                    <td width="40">
+                                        <img height="42" src="http://s26.postimg.org/pcpri3zvp/radiant.jpg">
+                                    </td>
+                                    <td width="40">
+                                        <img height="42" src="http://s26.postimg.org/66ckexjdx/dire.jpg">
+                                    </td>
+                                    <td width="50%">
+                                        <div class="delete space textSmall">The Dire</div>
+                                    </td>
+                                </tr>
+                                {{? t.states.final.duels}}
+                                {{~t.states.final.duels :duel}}
+                                <tr onclick="window.open('/g/{{=duel.id}}', '_self');">
+                                
+                                        {{? duel.winner && duel.winner == it.g[duel.id].t1[0].id}}
+                                            <td class="edit">
+                                                {{=it.u[it.g[duel.id].t1[0].id].name}}
+                                            </td>
+                                        {{??}}
+                                            <td>
+                                            {{=it.u[it.g[duel.id].t1[0].id].name}}
+                                            </td>
+                                        {{?}}
+                                        
+                                    
+                                    <td>
+                                        {{? it.user.status=='good' && it.g[duel.id].t1[0].imgs}}
+                                            <div class="neutral space">{{=it.g[duel.id].t1[0].imgs.length}}</div>
+                                        {{??}}
+                                            <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                                <img width="67" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[duel.id].t1[0].hero.url}}_sb.png"/>
+                                                <div class="note neutral">{{=it.g[duel.id].t1[0].hero.name}}</div>
+                                            </div>
+                                        {{?}}
+                                    </td>
+                                    <td>
+                                        {{? it.user.status=='good' && it.g[duel.id].t2[0].imgs}}
+                                            <div class="space neutral">{{=it.g[duel.id].t2[0].imgs.length}}</div>
+                                        {{??}}
+                                            <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                                <img width="67" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[duel.id].t2[0].hero.url}}_sb.png"/>
+                                                <div class="note neutral">{{=it.g[duel.id].t2[0].hero.name}}</div>
+                                            </div>
+                                        {{?}}
+                                        
+                                    </td>
+                                        {{? duel.winner && duel.winner == it.g[duel.id].t2[0].id}}
+                                            <td class="edit">
+                                                {{=it.u[it.g[duel.id].t2[0].id].name}}
+                                            </td>
+                                        {{??}}
+                                            <td>
+                                            {{=it.u[it.g[duel.id].t2[0].id].name}}
+                                            </td>
+                                        {{?}}
+                                </tr>
+                                {{~}}
+                                {{?}}
+                            </table>
+                        </td>
+                    </tr>
+                {{?}}
             <tr>
                 <td colspan="7" class="h-line"></td>
             </tr>
@@ -195,8 +272,9 @@
     <tr>
         <td colspan="5" class="b-t"></td>
     </tr>
-    {{var n=0; for(var r in it.r){ n++;}}
+    {{var n=0; for(var r in it.r){}}
         {{? it.r[r].games>1}}
+        {{n++;}}
         <tr>
             <td align="center">{{=n}}</td>
             <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>

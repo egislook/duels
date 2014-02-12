@@ -11,13 +11,12 @@ module.exports = {
                 for(i in tournaments){
                     if(tournaments[i].state == 'final'){
                         active.push(tournaments[i].id);
-                        break;
                     }
                 };
                 
                 tournaments_model.games(req, function(games){
                     res.render('test', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games, r : req.app.cache.stats});
-                },active[0]);
+                },active);
             });
         });
     },

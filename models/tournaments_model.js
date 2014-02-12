@@ -1,5 +1,6 @@
 var db = require('../lib/db.js');
 var upload = require('../lib/upload.js');
+var util = require('util');
 
 function tournaments(req, callback, id, state){
     
@@ -177,7 +178,20 @@ exports.join = function join(req, id, user, callback){
     var msg = 'error';
     tournaments(req, function(tournament){
         if(tournament){
-            if(true){
+            var allow = false;
+            
+            if(tournament.allow=='beginners'){
+                if(req.app.cache.stats[user.steamid]){
+                    if(req.app.cache.stats[user.steamid].wins<2)
+                        allow=true;
+                } else {
+                    allow=true;
+                }
+            } else {
+                allow=true;
+            }
+            
+            if(allow){
                 if(tournament.users.joined[user.steamid] == undefined && tournament.users.approved[user.steamid] == undefined && tournament.state == 'join'){
                     tournament.users.joined[user.steamid] = {key : Math.floor((Math.random()*100000)+1)};
                     //rewrite users data in database
@@ -542,8 +556,16 @@ exports.game = function game(req, g, callback){
     }, {'_id' : db.id(g)});
 }
 exports.games = function games(req, callback, t, query){
-    if(t)
-        var query = {'info.tournamentid' : parseInt(t)};
+    if(t){
+        if(util.isArray(t)){
+            var temp=[];
+            for(i in t){temp.push({'info.tournamentid':  parseInt(t[i])});};
+            var query = { $or: temp };
+        } else {
+            var query = {'info.tournamentid' : parseInt(t)};
+        }
+    }
+        
     else if(!query)
         query = {};
     
