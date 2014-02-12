@@ -182,7 +182,7 @@ exports.join = function join(req, id, user, callback){
             
             if(tournament.allow=='beginners'){
                 if(req.app.cache.stats[user.steamid]){
-                    if(req.app.cache.stats[user.steamid].wins<2)
+                    if(req.app.cache.stats[user.steamid].win<2)
                         allow=true;
                 } else {
                     allow=true;
