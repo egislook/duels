@@ -177,7 +177,7 @@ exports.join = function join(req, id, user, callback){
     var msg = 'error';
     tournaments(req, function(tournament){
         if(tournament){
-            if(tournament.allow != 'beginners' || !req.app.cache.stats[user.steamid] || req.app.cache.stats[it.user.steamid].win<3){
+            if(true){
                 if(tournament.users.joined[user.steamid] == undefined && tournament.users.approved[user.steamid] == undefined && tournament.state == 'join'){
                     tournament.users.joined[user.steamid] = {key : Math.floor((Math.random()*100000)+1)};
                     //rewrite users data in database
