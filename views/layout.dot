@@ -63,6 +63,14 @@
         		        </div> 
         		    </a>
     		    {{?}}
+    		    {{? it.user.status==='good' || it.user.status==='support'}}
+    		        <a href="/players">
+        		        <div class="right list">
+                          	<img src="http://s26.postimg.org/95g9afiat/group_icon.png">
+                          	<p>Players</p>
+        		        </div> 
+        		    </a>
+    		    {{?}}
 		    {{?}}
 		    
 		</div>

@@ -4,14 +4,28 @@ var tournaments_model = require('../models/tournaments_model.js');
 'use strict';
 module.exports = {
     '/rate' : function(req, res){
-        tournaments_model.list(req, function(tournaments){
-            tournaments_model.games(req, function(games){
-                user_model.stats(req, tournaments, games, function(data){
-                   res.send(data);
-                });
-            }, false, {'info.tournamentclass' : 'rcf'});
-        }, false, 'ended');
-        
+        user_model.user(req, res, function(user){
+            if(user.status === 'good' && user.loged === true){
+                tournaments_model.list(req, function(tournaments){
+                    tournaments_model.games(req, function(games){
+                        user_model.stats(req, tournaments, games, function(data){
+                           res.send(data);
+                        });
+                    }, false, {'info.tournamentclass' : 'rcf'});
+                }, false, 'ended');
+            } else {
+                res.redirect('/error');
+            }
+        });
+    },
+    '/players': function(req, res){
+        user_model.user(req, res, function(user){
+            if(user.loged === true && (user.status === 'good' || user.status==='support')){
+                res.render('players', {user : user, u : req.app.cache.users, r : req.app.cache.stats});
+            } else {
+                res.redirect('/error');
+            }
+        });
     },
     '/create': function(req, res){
         /*req.session.user = {

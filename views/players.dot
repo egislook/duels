@@ -1,0 +1,35 @@
+{{? it.user.status == 'good' || it.user.status == 'support'}}
+<table class="textLightGrey textSmall hbl" cellspacing="0">
+    <tr class="b-r">
+    {{var n=0; for(var i in it.u){ }}
+        {{? n%3===0}}
+            </tr>
+            <tr>
+                <td colspan="15" class="h-line"></td>
+            </tr>
+            <tr class="b-r">
+        {{?}}
+        <td class="data-text hbl" align="center">{{=n}}</td>
+        <td><img height="30" src="{{=it.u[i].avatar}}"></td>
+        <td class="textDark data-text">{{=it.u[i].name}}</td>
+        
+            {{? it.r[i]}}
+                <td>
+                <div class="data-text accept textLight">{{=it.r[i].games}}</div>
+            {{??}}
+                <td>
+            {{?}}
+        </td>
+        <td class="hbr">
+            <div>
+                <a href="steam://friends/add/{{=i}}"><div class="right edit click">add</div></a>
+                <a href="steam://friends/message/{{=i}}"><div class="right neutral click">message</div></a>
+            </div>
+        </td>
+    {{n++; } }}
+    </tr>
+    <tr>
+        <td colspan="15" class="h-line"></td>
+    </tr>
+</table>
+{{?}}
