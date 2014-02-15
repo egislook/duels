@@ -29,7 +29,8 @@ app.cache.loaded = 5;
 
 app.cache.steamid = {
     'good' : ['76561198065626987', '76561198065634959'],
-    'bad' : ['76561198047101614']
+    'bad' : ['76561198047101614'],
+    'support' : ['76561198013303116', '76561198074301154']
 };
 
 steam.getLightFromSteam('heroes', function(data){
