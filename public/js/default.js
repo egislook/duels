@@ -65,7 +65,7 @@ function timeChanger(t, i){
     else{
         
         audio.play();
-        //setTimeout(function(){location.reload();},2000);
+        setTimeout(function(){location.reload();},2000);
         document.getElementsByClassName("time-left")[i].innerHTML = 'delayed';
     }
         
