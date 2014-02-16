@@ -57,8 +57,8 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .center{text-align:center;}
 
 .space{padding:15px 5px 15px 5px}
-.data-list{text-align:center;width:100%;border-bottom:solid 10px var(colorDark);border-top:solid 2px var(colorDark);}
-.data-list tr{background:var(colorDark);}
+.data-list{text-align:center;border-bottom:solid 10px var(colorDark);border-top:solid 2px var(colorDark);}
+.data-list tr{background:#5C5C5C;}
 .data-list tr:hover{background:#1A1A1A;cursor:pointer;}
 .data-list tr.selected{background:#1A1A1A}
 .data-list tr.finished:hover{background:#1A1A1A;cursor:pointer;}

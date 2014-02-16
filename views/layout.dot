@@ -13,6 +13,11 @@
     	        {{= date}}
     	        <div class="accept tip textLight" style="padding:3px;">wdpwp alpha</div>
 	        </div>-->
+	        <a href="/all">
+		        <div class="left list edit">
+                  	<p>All <div class="right textSmall">tournaments</div></p>
+		        </div>
+		    </a>
 		    <a href="/">
 		        <div class="left list">
                   <img src="http://s26.postimg.org/73aobj1id/home_icon.png">

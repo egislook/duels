@@ -26,6 +26,18 @@ function tournaments(req, callback, id, state){
                         temp.push(tournaments[i]);
                         tournament = temp;
                     }
+                } else if(state == 'date'){
+                    if(i<9){
+                        temp.push(tournaments[i]);
+                        tournament = temp;
+                    } else {
+                        if(tournaments[i].date == tournaments[i-1].date){
+                            temp.push(tournaments[i]);
+                            tournament = temp;
+                        } else {
+                            break;
+                        }
+                    }
                 }
             } else if(id){
                 if(id==tournaments[i].id){
@@ -560,7 +572,7 @@ exports.games = function games(req, callback, t, query){
         if(util.isArray(t)){
             var temp=[];
             for(i in t){temp.push({'info.tournamentid':  parseInt(t[i])});};
-            var query = { $or: temp };
+            var query = { $query: { $or: temp }, $orderby: { "info.date" : -1}};
         } else {
             var query = {'info.tournamentid' : parseInt(t)};
         }

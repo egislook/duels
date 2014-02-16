@@ -7,17 +7,17 @@ module.exports = {
     '/': function(req, res){
         user_model.user(req, res, function(user){
             tournaments_model.list(req, function(tournaments){
+                
                 var active = [];
                 for(i in tournaments){
-                    if(tournaments[i].state == 'final'){
-                        active.push(tournaments[i].id);
-                    }
+                    active.push(tournaments[i].id);
                 };
                 
                 tournaments_model.games(req, function(games){
-                    res.render('test', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games, r : req.app.cache.stats});
+                    res.render('test', {user : user, tournaments : tournaments, u : req.app.cache.users, r : req.app.cache.stats, g : games});
                 },active);
-            });
+                
+            }, false, 'date');
         });
     },
     '/error': function(req, res){
@@ -27,5 +27,21 @@ module.exports = {
         user_model.user(req, res, function(user){
             res.render('faq', {user : user});
         });
-    }   
+    },
+    '/all': function(req, res){
+        user_model.user(req, res, function(user){
+            tournaments_model.list(req, function(tournaments){
+                var active = [];
+                for(i in tournaments){
+                    if(tournaments[i].state == 'final'){
+                        active.push(tournaments[i].id);
+                    }
+                };
+                
+                tournaments_model.games(req, function(games){
+                    res.render('all', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games, r : req.app.cache.stats});
+                },active);
+            });
+        });
+    }
 };

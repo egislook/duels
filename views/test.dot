@@ -1,18 +1,67 @@
-<div style="overflow:hidden;">
-<table class="left hbr clear" cellspacing="0" style="width:70%;box-shadow: 0px 0px 5px #000000;">
-     {{? it.tournaments.length>0}}
-        {{~it.tournaments :t:i}}
-            {{? t.allow == 'beginners' && t.state == 'join'}}
+
+{{
+    var date = new Date();
+    var dd = date.getDate();
+    var mm = date.getMonth()+1;
+    var yyyy = date.getFullYear();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    var time = s+(m*60)+(h*3600);
+    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
+}}
+
+<div style="overflow:hidden;" class="textLight">
+    <div class="left">
+        <table width="200" cellspacing="0" class="textLight data-list">
             <tr>
-                <td colspan="7">
-                    <div class="delete textSmall space textLight"><b>This cockfight can join only players with less then 2 wins in the system.</b></div>
+                <td>
+                    <div class="accept space textSmall">The Radiant</div>
+                </td>
+                <td></td>
+                <td>
+                    <div class="delete space textSmall">The Dire</div>
                 </td>
             </tr>
+            {{ var n=0; for(g in it.g){ n++;}}
+                <tr onclick="window.open('/g/{{=g}}', '_self');">
+                    {{? it.g[g].info.win == 't1'}}
+                        <td class="edit textSmall">
+                    {{??}}
+                        <td class="textSmall"> 
+                    {{?}}
+                        {{=it.u[it.g[g].t1[0].id].name}}
+                    </td>
+                    <td>
+                        {{? it.user.status=='good' && (it.g[g].t1[0].imgs || it.g[g].t2[0].imgs)}}
+                            <img class="b-r-r" width="35" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[g].t1[0].hero.url}}_sb.png"/>
+                        {{??}}
+                            <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                <img width="35" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[g].t1[0].hero.url}}_sb.png"/>
+                                <div class="note neutral">{{=it.g[g].t1[0].hero.name}}</div>
+                            </div>
+                        {{?}}
+                    </td>
+                    {{? it.g[g].info.win == 't2'}}
+                        <td class="edit textSmall">
+                    {{??}}
+                        <td class="textSmall">
+                    {{?}}
+                        {{=it.u[it.g[g].t2[0].id].name}}
+                </tr>
+            {{ } }}
+            
+        </table>
+    </div>
+    <div style="width:auto;box-shadow: 0px 0px 5px #000000;" class="left">
+    {{? it.tournaments.length>0}}
+        {{~it.tournaments :t:i}}
+            {{? i==0 || it.tournaments[i].date != it.tournaments[i-1].date}}
+            <div class="dark textLarge data-text textLight clear" style="text-align:right">{{=t.date}}</div>
             {{?}}
-            <tr>
                 {{
                     var prize = 'rare';
-                    var buyin = 'free';
+                    var buyin = 'Free';
                     var bg = 't';
                     
                     if(t.buyin_type=='unc'){buyin='uncommon'}
@@ -21,286 +70,202 @@
                     if(t.prize_type=='unc'){prize='uncommon';}
                     else if(t.prize_type=='com'){prize='common';};
                     
-                    var def='dark textLight textSmall';
-                    var spec='textBig';
-                    if(t.state!='ended' && t.state!='join'){def='edit textLight textSmall'} 
-                    else if(t.state=='ended'){def='grey textLight textSmall'};
-                    
-                    var date = new Date();
-                    var dd = date.getDate();
-                    var mm = date.getMonth()+1;
-                    var yyyy = date.getFullYear();
-                    var h = date.getHours();
-                    var m = date.getMinutes();
-                    var s = date.getSeconds();
-                    var time = s+(m*60)+(h*3600);
+                    var spec='';
                     var end = t.time.split(":");
                     var deadline = (end[0]*3600)+(end[1]*60);
-                    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
                     var start = 'tomorrow';
-                    if(date == t.date && t.state=='join' && deadline-time>0){start=deadline-time;spec='textLarge time-left'}
-                    else if(t.state=='join' && deadline-time<=0 && date == t.date){start='delayed';spec='textLarge time-left'}
-                    else if(t.state=='ended'){start='finished',bg='t-finished t'};
+                    if(date == t.date && t.state=='join' && deadline-time>0){start=deadline-time;spec='time-left'}
+                    else if(t.state=='join' && deadline-time<=0 && date == t.date){start='delayed';spec='time-left'}
+                    else if(t.state=='ended'){start='finished';bg='t-finished t';spec='grey'};
                     if(t.state=='final'){start='in progress'};
                 }}
-                <td class="{{=def}}"></td>
-                <td class="{{=def}}"></td>
-                <td class="{{=def}} {{=spec}}" align="center">{{=start}}</td>
-                <td width="80" align="center" class="{{=def}} data-text">buy-in</td>
-                <td width="80" align="center" class="{{=def}} data-text">mode</td>
-                <td width="95" class="{{=def}}"></td>
-                <td width="80" align="center" class="{{=def}} data-text">prize</td>
-            </tr>
-            <tr class="{{=bg}}">
-                <td class="textExtra textLightGrey" onclick="window.open('/t/{{=t.id}}', '_self');return false;">#{{=i+1}}</td>
-                <td onclick="window.open('/t/{{=t.id}}', '_self');return false;">
-                    {{? t.class=='rcf'}}
-                        <img src="http://s26.postimg.org/b7kvj1opx/cocks.png">
-                    {{?}}
-                </td>
-                <td class="data-text" onclick="window.open('/t/{{=t.id}}', '_self');return false;">
-                    <div class="textDark"><b>random</b></div>
-                    <div class="textLarge up_case textLightGrey">{{=t.name}}</div>
-                    {{? t.allow == 'beginners'}}
-                        <div class="textSmall textDark">1 Free random duel for <b>beginners</b>. Join, take win and free common item</div>
-                    {{??}}
-                        <div class="textSmall textDark">1 duel with 1 random opponent. Fast way find out if u are lucky today...</div>
-                    {{?}}
-                </td>
-                <td class="{{=t.buyin_type}} ticket textLight" align="right">
-                    {{? t.buyin_type != 'free'}}
-                    <div class="left dark textSmall textLight count">{{=t.buyin_count}}</div>
-                    <div class="clear"><b>Any</b></div>
-                    <div class="textSmall">{{=buyin}}</div>
-                    <div>item</div>
-                    {{??}}
-                        <div class="textBig space">{{=buyin}}</div>
-                    {{?}}
-                </td>
-                <td align="center" class="hbr">
-                    <div class="textDark"><b>arshom</b></div>
-                    <div class="textSmall textLightGrey">all random</div>
-                    <div class="textSmall textLightGrey">same hero</div>
-                    <div class="textSmall textLightGrey">only mid</div>
-                    <div class="textDark textLarge">1x1</div>
-                </td>
+            <div class="left" style="text-align:center;padding:0 12 20 12">
+                <div onclick="window.open('/t/{{=t.id}}', '_self');" style="max-width:200px;border:1px solid #BCBCBC;border-top:none;box-shadow:inset 0px 0px 10px #FFFFFF;" class="clear space {{=bg}}">
+                    <div>
+                        <div>
+                            {{? t.buyin_type == 'free'}}
+                                <img src="http://s26.postimg.org/3utdjjlgl/beginners_cock.png">
+                            {{?? t.buyin_type == 'com'}}
+                                <img src="http://s26.postimg.org/uvbrluz51/common_cock.png">
+                            {{?? t.buyin_type == 'unc'}}
+                                <img src="http://s26.postimg.org/8s6y4nnfp/uncommon_cock.png">
+                            {{??}}
+                                <img src="http://s26.postimg.org/b7kvj1opx/cocks.png">
+                            {{?}}
+                        </div>
+                        <div>
+                            <div class="textDark textSmall"><b>random</b></div>
+                            <div class="textBig up_case textLightGrey">{{=t.name}}</div>
+                            <div class="h-line"></div>
+                            {{? t.allow == 'beginners'}}
+                                <div class="textSmall space textDark">1 Free random duel for <b>beginners</b>. Join, take win and free common item</div>
+                            {{??}}
+                                <div class="textSmall space textDark">1 duel with 1 random opponent. Fast way find out if u are lucky today...</div>
+                            {{?}}
+                        </div>
+                        
+                        {{? t.allow == 'beginners' && t.state == 'join'}}
+                            <div class="space delete textSmall textLight"><b>This cockfight can join only players with less then 2 wins in the system.</b></div>
+                        {{?}}
+                        <div class="{{=spec}} dark textLarge textLight">{{=start}}</div>
+                        <div class="up_case textLight textSmall delete">
+                            Time Left
+                        </div>
+                        <div class="clear">
+                            <div style="width:33%" class="left">
+                                <div class="dark up_case textSmall space">Buy-in</div>
+                                <div class="{{=t.buyin_type}} textLight" style="height:80px">
+                                {{? t.buyin_type != 'free'}}
+                                    <div class="left dark textSmall textLight count">{{=t.buyin_count}}</div>
+                                    <div class="clear"><b>Any</b></div>
+                                    <div class="textSmall">{{=buyin}}</div>
+                                    <div>item</div>
+                                {{??}}
+                                    <div class="space">
+                                        <b>{{=buyin}}</b>
+                                        <div class="textSmall">confirmation</div>
+                                    </div>
+                                {{?}}
+                                </div>
+                            </div>
+                            <div style="width:34%" class="left">
+                                <div class="dark up_case textSmall space">mode</div>
+                                <div>
+                                    <div class="textDark"><b>arshom</b></div>
+                                    <div class="textSmall textLightGrey">all random</div>
+                                    <div class="textSmall textLightGrey">same hero</div>
+                                    <div class="textSmall textLightGrey">only mid</div>
+                                    <div class="textDark textLarge">1x1</div>
+                                </div>
+                            </div>
+                            <div style="width:33%" class="left">
+                                <div class="dark up_case textSmall space">prize</div>
+                                <div class="{{=t.prize_type}} textLight"  style="height:80px">
+                                    <div class="left dark textSmall textLight count">{{=t.prize_count}}</div>
+                                    <div class="clear"><b>Any</b></div>
+                                    <div class="textSmall">{{=prize}}</div>
+                                    <div>item</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-line"></div>
+                    <div>
+                        <div class="clear">
+                            <div class="textLightGrey textSmall data-text"> players</div>
+                            <b class="textDark">joined</b><div class="textSmall textLight accept data-text">{{=t.joined}}</div>
+                        </div>
+                        <div class="clear">
+                            {{ for(var id in t.users.joined) {}}
+                                <div class="hbr left" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                    <img width="30" src="{{=it.u[id].avatar}}"/>
+                                    <div class="note accept">{{=it.u[id].name}}
+                                        {{? it.user.status == 'good'}}
+                                            <a href="steam://friends/message/{{=id}}"><div class="neutral click">steam message</div></a>
+                                            <a href="steam://friends/add/{{=id}}"><div class="delete click">steam add</div></a>
+                                        {{?}}
+                                    </div>
+                                </div>
+                            {{ } }}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="textLightGrey textSmall data-text"> players</div>
+                            <b class="textDark">confirmed</b><div class="textSmall textLight edit data-text">{{=t.players}}</div>
+                        </div>
+                    </div>
+                    <div class="clear">
+                        {{ for(var id in t.users.approved) {}}
+                            <div class="hbr left" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                <img width="30" src="{{=it.u[id].avatar}}"/>
+                                <div class="note edit">{{=it.u[id].name}}
+                                    {{? it.user.status == 'good'}}
+                                        <a href="steam://friends/message/{{=id}}"><div class="neutral click">steam message</div></a>
+                                        <a href="steam://friends/add/{{=id}}"><div class="delete click">steam add</div></a>
+                                    {{?}}
+                                </div>
+                            </div>
+                        {{ } }}
+                    </div>
+                </div>
                 {{? t.state == 'join' && (t.maxplayers != t.players || t.class == 'rcf')}}
                     {{? t.users.joined[it.user.steamid]}}
-                        <td align="center" class="hbl">
+                        <div class="grey space">
                             <div class="textSmall">Your Code</div> 
                             <div class="textBig"><b>{{= t.users.joined[it.user.steamid].key}}</b></div>
-                        </td>
+                        </div>
                     {{?? t.users.approved[it.user.steamid]}}
-                        <td align="center" class="edit">
+                        <div class="edit space">
                             <div class="textSmall">You Are</div> 
                             <div class="textSmall "><b>Confirmed</b></div>
-                        </td>
+                        </div>
                     {{??}}
                         {{? t.allow != 'beginners' || !it.r[it.user.steamid] || it.r[it.user.steamid].win<3}}
-                            <td align="center" class="accept click textLight" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
+                            <div class="accept click" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
                                 <div class="textBig">Join</div> 
                                 <div class="textSmall">Now</div>
-                            </td>
+                            </div>
                         {{??}}
-                            <td align="center" class="delete textLight">
+                            <div class="delete textLight">
                                 <div class="textSmall">Beginners</div> 
                                 <div class="textSmall "><b>Only</b></div>
-                            </td>
+                            </div>
                         {{?}}
                     {{?}}
-                {{??}}
-                    <td align="center" class="textDark hbl">
-                        <div class="textSmall">Registration</div> 
-                        <div class="textSmall "><b>Finished</b></div>
-                    </td>
                 {{?}}
-                <td class="{{=t.prize_type}} ticket textLight" align="right">
-                    <div class="left dark textSmall textLight count">{{=t.prize_count}}</div>
-                    <div class="clear"><b>Any</b></div>
-                    <div class="textSmall">{{=prize}}</div>
-                    <div>item</div>
-                </td>
-            </tr>
-                {{? t.joined>0 || t.players>0}}
-                    <tr>
-                        <td colspan="7" class="h-line"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="7">
-                            {{? t.joined>0}}
-                                {{ for(var id in t.users.joined) {}}
-                                    <div class="hbr left" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-                                        <img width="30" src="{{=it.u[id].avatar}}"/>
-                                        <div class="note accept">{{=it.u[id].name}}
-                                            {{? it.user.status == 'good'}}
-                                                <a href="steam://friends/message/{{=id}}"><div class="neutral click">steam message</div></a>
-                                                <a href="steam://friends/add/{{=id}}"><div class="delete click">steam add</div></a>
-                                            {{?}}
-                                        </div>
-                                        
-                                    </div>
-                                {{ } }}
-                                <div class="left data-text hbl">
-                                    <div class="textLightGrey textSmall"> players</div>
-                                    <b class="textDark">joined</b><div class="textSmall textLight left accept data-text">{{=t.joined}}</div>
-                                </div>
-                            {{?}}
-                            {{? t.players>0}}
-                                {{ for(var id in t.users.approved) {}}
-                                    <div class="hbr right" onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-                                        <img width="30" src="{{=it.u[id].avatar}}"/>
-                                        <div class="note edit">{{=it.u[id].name}}
-                                            {{? it.user.status == 'good'}}
-                                                <a href="steam://friends/message/{{=id}}"><div class="neutral click">steam message</div></a>
-                                                <a href="steam://friends/add/{{=id}}"><div class="delete click">steam add</div></a>
-                                            {{?}}
-                                        </div>
-                                    </div>
-                                {{ } }}
-                                <div class="right data-text hbr">
-                                    <div class="textLightGrey right textSmall"> players</div>
-                                    <b class="textDark left clear">confirmed</b><div class="textSmall textLight right edit data-text">{{=t.players}}</div>
-                                </div>
-                            {{?}}
-                        </td>
-                    </tr>
-                {{?}}
-                {{? t.state == 'final'}}
-                    <tr>
-                        <td colspan="7" class="h-line"></td>
-                    </tr>
-                    <tr>
-                        <td class="textSmall textLightGrey" align="center" colspan="7">
-                            duels
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center" colspan="7">
-                            <table cellspacing="0" class="textLight data-list">
-                                <tr>
-                                    <td width="50%">
-                                        <div class="accept space textSmall">The Radiant</div>
-                                    </td>
-                                    <td width="40">
-                                        <img height="42" src="http://s26.postimg.org/pcpri3zvp/radiant.jpg">
-                                    </td>
-                                    <td width="40">
-                                        <img height="42" src="http://s26.postimg.org/66ckexjdx/dire.jpg">
-                                    </td>
-                                    <td width="50%">
-                                        <div class="delete space textSmall">The Dire</div>
-                                    </td>
-                                </tr>
-                                {{? t.states.final.duels}}
-                                {{~t.states.final.duels :duel}}
-                                <tr onclick="window.open('/g/{{=duel.id}}', '_self');">
-                                
-                                        {{? duel.winner && duel.winner == it.g[duel.id].t1[0].id}}
-                                            <td class="edit">
-                                                {{=it.u[it.g[duel.id].t1[0].id].name}}
-                                            </td>
-                                        {{??}}
-                                            <td>
-                                            {{=it.u[it.g[duel.id].t1[0].id].name}}
-                                            </td>
-                                        {{?}}
-                                        
-                                    
-                                    <td>
-                                        {{? it.user.status=='good' && it.g[duel.id].t1[0].imgs}}
-                                            <div class="neutral space">{{=it.g[duel.id].t1[0].imgs.length}}</div>
-                                        {{??}}
-                                            <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-                                                <img width="67" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[duel.id].t1[0].hero.url}}_sb.png"/>
-                                                <div class="note neutral">{{=it.g[duel.id].t1[0].hero.name}}</div>
-                                            </div>
-                                        {{?}}
-                                    </td>
-                                    <td>
-                                        {{? it.user.status=='good' && it.g[duel.id].t2[0].imgs}}
-                                            <div class="space neutral">{{=it.g[duel.id].t2[0].imgs.length}}</div>
-                                        {{??}}
-                                            <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
-                                                <img width="67" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[duel.id].t2[0].hero.url}}_sb.png"/>
-                                                <div class="note neutral">{{=it.g[duel.id].t2[0].hero.name}}</div>
-                                            </div>
-                                        {{?}}
-                                        
-                                    </td>
-                                        {{? duel.winner && duel.winner == it.g[duel.id].t2[0].id}}
-                                            <td class="edit">
-                                                {{=it.u[it.g[duel.id].t2[0].id].name}}
-                                            </td>
-                                        {{??}}
-                                            <td>
-                                            {{=it.u[it.g[duel.id].t2[0].id].name}}
-                                            </td>
-                                        {{?}}
-                                </tr>
-                                {{~}}
-                                {{?}}
-                            </table>
-                        </td>
-                    </tr>
-                {{?}}
-            <tr>
-                <td colspan="7" class="h-line"></td>
-            </tr>
-            {{? t.state != 'ended'}}
-                <tr><td height="30"></td></tr>
-            {{??}}
-                <tr><td height="10"></td></tr>
-            {{?}}
+            </div>
         {{~}}
     {{?}}
-</table>
-<table width="30%" class="textLightGrey textSmall hbl">
-    <tr>
-        <td>
-            <div class="textSmall data-text"></div>
-        </td>
-        <td colspan="2">
-            <div class="textSmall space">Player</div>
-        </td>
-        <td>
-            <div class="textSmall">Games</div>
-        </td>
-        <td>
-            <div class="textSmall">Points</div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="5" class="b-t"></td>
-    </tr>
-    {{var n=0; for(var r in it.r){}}
-        {{? it.r[r].games>1}}
-        {{n++;}}
+    </div>
+    <table width="200" class="left textLightGrey textSmall">
         <tr>
-            <td align="center">{{=n}}</td>
-            <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
-            <td class="textDark">{{=it.u[it.r[r].steamid].name}}
-                {{? it.user.status == 'good'}}
-                    <div>
-                        <a href="steam://friends/add/{{=it.r[r].steamid}}"><div class="right edit click">add</div></a>
-                        <a href="steam://friends/message/{{=it.r[r].steamid}}"><div class="right neutral click">message</div></a>
-                    </div>
-                {{?}}
+            <td>
+                <div class="textSmall data-text"></div>
             </td>
-            <td align="center">{{=it.r[r].games}}</td>
-            <td align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
+            <td colspan="2">
+                <div class="textSmall space">Player</div>
+            </td>
+            <td>
+                <div class="textSmall">Games</div>
+            </td>
+            <td>
+                <div class="textSmall">Points</div>
+            </td>
         </tr>
         <tr>
-            <td colspan="5" class="h-line"></td>
+            <td colspan="5" class="b-t"></td>
         </tr>
-        {{?}}
-    {{ } }}
-    <tr>
-        <td></td>
-        <td colspan="4">
-            <div class="space">players who have been played less then 2 games are not ranked</div>
-        </td>
-    </tr>
-</table>
+        {{var n=0; for(var r in it.r){}}
+            {{? it.r[r].games>1}}
+            {{n++;}}
+            <tr>
+                <td align="center">{{=n}}</td>
+                <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
+                <td class="textDark">{{=it.u[it.r[r].steamid].name}}
+                    {{? it.user.status == 'good'}}
+                        <div>
+                            <a href="steam://friends/add/{{=it.r[r].steamid}}"><div class="right edit click">add</div></a>
+                            <a href="steam://friends/message/{{=it.r[r].steamid}}"><div class="right neutral click">message</div></a>
+                        </div>
+                    {{?}}
+                </td>
+                <td align="center">{{=it.r[r].games}}</td>
+                <td align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="h-line"></td>
+            </tr>
+            {{?}}
+        {{ } }}
+        <tr>
+            <td></td>
+            <td colspan="4">
+                <div class="space">players who have been played less then 2 games are not ranked</div>
+            </td>
+        </tr>
+    </table>
 </div>
+
 <script> timer(); </script>
  {{#def.test}}

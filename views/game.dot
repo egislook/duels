@@ -340,6 +340,7 @@
                     {{?}}
                 </td>
             </tr>
+            {{? it.g.info.tournamentclass!='rcf'}}
             <tr>
                 <td class="b-r" height="10px"></td>
             </tr>
@@ -525,6 +526,7 @@
                 <tr>
                     <td class="b-r" height="10px"></td>
                 </tr>
+                {{?}}
       	{{?}}
         <tr>
             <td class="b-r" height="20px"></td>

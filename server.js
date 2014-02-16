@@ -80,6 +80,17 @@ db.con(dbname, function(dbs){
         console.log("LOADED -> "+app.cache.loaded+" stats");
     }, { $query: {steamid: {$ne: app.cache.steamid.bad[0]}}, $orderby: {win : -1, games : -1, lose : 1}});
     
+    /*db.get(app, 'games', function(data){
+        var games = {};
+        for(i in data){
+            games[data[i]['_id']] = data[i];
+        }
+       app.cache.games = games;
+       app.cache.loaded--;
+        console.log("LOADED -> "+app.cache.loaded+" games");
+        
+    }, { $query: {}, $orderby: { "info.date" : 1}});*/
+    
 });
 
 
