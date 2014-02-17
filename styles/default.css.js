@@ -122,6 +122,9 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .neutral{color:var(colorDark);background:var(colorLight);}
 .grey{background:var(colorDarkGrey);}
 
+.d{cursor:pointer;}
+.d-finished{opacity:0.6;}
+.d-finished:hover{opacity:1;cursor:pointer;}
 .t:hover{background:#E0E0E0;cursor:pointer;opacity:1;}
 .t-finished{opacity:0.7;}
 .hbr{border-right:1px solid var(colorLight);}

@@ -11,24 +11,36 @@
     if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
 }}
 
-<div style="overflow:hidden;" class="textLight">
+<div style="overflow:hidden;margin:auto;position:relative;max-width:1150px;" class="textLight clear">
     <div class="left">
-        <table width="200" cellspacing="0" class="textLight data-list">
+        <table width="250" cellspacing="0" class="textLightGrey">
             <tr>
-                <td>
-                    <div class="accept space textSmall">The Radiant</div>
+                <td width="45%" align="center">
+                    <div class="space textSmall">The Radiant</div>
                 </td>
                 <td></td>
-                <td>
-                    <div class="delete space textSmall">The Dire</div>
+                <td width="45%" align="center">
+                    <div class="space textSmall">The Dire</div>
                 </td>
             </tr>
+            <tr>
+                <td align="center" colspan="3" class="dark textSmall textLight" style="padding:2px;">recent games</td>
+            </tr>
+            <tr><td height="10"></td></tr>
+            <tr>
+                <td colspan="3" class="h-line"></td>
+            </tr>
             {{ var n=0; for(g in it.g){ n++;}}
-                <tr onclick="window.open('/g/{{=g}}', '_self');">
+                {{? it.g[g].info.win == 't1' || it.g[g].info.win == 't2'}}
+                    {{var pvp = 'd-finished';}}
+                {{??}}
+                    {{var pvp = 'd grey textLight';}}
+                {{?}}
+                <tr onclick="window.open('/g/{{=g}}', '_self');" class="{{=pvp}}">
                     {{? it.g[g].info.win == 't1'}}
-                        <td class="edit textSmall">
+                        <td align="right" class="accept textSmall textDark data-text">
                     {{??}}
-                        <td class="textSmall"> 
+                        <td align="right" class="textSmall textDark data-text"> 
                     {{?}}
                         {{=it.u[it.g[g].t1[0].id].name}}
                     </td>
@@ -38,16 +50,19 @@
                         {{??}}
                             <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
                                 <img width="35" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.g[g].t1[0].hero.url}}_sb.png"/>
-                                <div class="note neutral">{{=it.g[g].t1[0].hero.name}}</div>
+                                <div class="note neutral" style="z-index:5">{{=it.g[g].t1[0].hero.name}}</div>
                             </div>
                         {{?}}
                     </td>
                     {{? it.g[g].info.win == 't2'}}
-                        <td class="edit textSmall">
+                        <td class="accept textSmall textDark data-text">
                     {{??}}
-                        <td class="textSmall">
+                        <td class="textSmall textDark data-text">
                     {{?}}
                         {{=it.u[it.g[g].t2[0].id].name}}
+                </tr>
+                <tr>
+                    <td colspan="3" class="h-line"></td>
                 </tr>
             {{ } }}
             
@@ -188,6 +203,15 @@
                             </div>
                         {{ } }}
                     </div>
+                    {{? it.user.loged === true}}
+                    <div style="padding:5px"></div>
+                    <div class="textLight textSmall dark">add on steam</div>
+                    <a href="steam://friends/add/{{=t.owner[0].steamid}}">
+                        <div class="b-a textDark click">
+                            <div class="left data-text textSmall delete textLight">duel owner</div> {{=t.owner[0].name}} 
+                        </div>
+                    </a>
+                    {{?}}
                 </div>
                 {{? t.state == 'join' && (t.maxplayers != t.players || t.class == 'rcf')}}
                     {{? t.users.joined[it.user.steamid]}}
@@ -234,14 +258,18 @@
             </td>
         </tr>
         <tr>
-            <td colspan="5" class="b-t"></td>
+            <td align="center" colspan="6" class="dark textSmall textLight" style="padding:2px;">ranking</td>
+        </tr>
+        <tr><td height="10"></td></tr>
+        <tr>
+            <td colspan="6" class="h-line"></td>
         </tr>
         {{var n=0; for(var r in it.r){}}
             {{? it.r[r].games>1}}
             {{n++;}}
             <tr>
                 <td align="center">{{=n}}</td>
-                <td><img height="30" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
+                <td><img height="20" src="{{=it.u[it.r[r].steamid].avatar}}"></td>
                 <td class="textDark">{{=it.u[it.r[r].steamid].name}}
                     {{? it.user.status == 'good'}}
                         <div>
@@ -251,7 +279,15 @@
                     {{?}}
                 </td>
                 <td align="center">{{=it.r[r].games}}</td>
-                <td align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
+                {{? n == 1}}
+                    <td class="accept textLight" align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
+                {{?? n == 2}}
+                    <td align="center" class="edit textLight">{{=it.r[r].games-it.r[r].lose+100}}</td>
+                {{?? n == 3}}
+                    <td align="center" class="grey textLight">{{=it.r[r].games-it.r[r].lose+100}}</td>
+                {{??}}
+                    <td align="center">{{=it.r[r].games-it.r[r].lose+100}}</td>
+                {{?}}
             </tr>
             <tr>
                 <td colspan="5" class="h-line"></td>
