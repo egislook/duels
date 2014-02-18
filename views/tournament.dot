@@ -291,7 +291,7 @@
                 </td>
                 <td>
                     <div class="neutral b-a left">{{=it.t.players}} / {{=it.t.maxplayers}}</div>
-                    {{? (it.t.players == it.t.maxplayers || (it.t.class=='rcf' && it.t.players % 2 === 0)) && it.user.status == 'good' && it.t.state == 'join'}}
+                    {{? (it.t.players == it.t.maxplayers || (it.t.class=='rcf' && it.t.players > 1)) && it.user.status == 'good' && it.t.state == 'join'}}
                     <a href="/start/{{=it.t.id}}">
                         <div class="accept click left dest">Start</div>
                     </a>

@@ -11,7 +11,7 @@
     if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} date = yyyy+'-'+mm+'-'+dd;
 }}
 
-<div style="overflow:hidden;margin:auto;position:relative;max-width:1150px;" class="textLight clear">
+<div style="overflow:hidden;margin:auto;position:relative;max-width:1160px;" class="textLight clear">
     <div class="left">
         <table width="250" cellspacing="0" class="textLightGrey">
             <tr>
@@ -215,10 +215,24 @@
                 </div>
                 {{? t.state == 'join' && (t.maxplayers != t.players || t.class == 'rcf')}}
                     {{? t.users.joined[it.user.steamid]}}
-                        <div class="grey space">
-                            <div class="textSmall">Your Code</div> 
-                            <div class="textBig"><b>{{= t.users.joined[it.user.steamid].key}}</b></div>
-                        </div>
+                        {{? t.allow == 'beginners'}}
+                            {{? start < 1800 }}
+                            <div class="edit click" onclick="window.open('/confirm/{{=t.id}}', '_self');return false;">
+                                <div class="textBig">Confirm</div> 
+                                <div class="textSmall">Me</div>
+                            </div>
+                            {{??}}
+                                <div class="grey space">
+                                    <div class="textSmall">till confirmation start left</div> 
+                                    <div class="textBig"><b class="{{=spec}}">{{=start-1800}}</b></div>
+                                </div>
+                            {{?}}
+                        {{??}}
+                            <div class="grey space">
+                                <div class="textSmall">Your Code</div> 
+                                <div class="textBig"><b>{{= t.users.joined[it.user.steamid].key}}</b></div>
+                            </div>
+                        {{?}}
                     {{?? t.users.approved[it.user.steamid]}}
                         <div class="edit space">
                             <div class="textSmall">You Are</div> 

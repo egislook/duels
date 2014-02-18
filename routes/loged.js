@@ -22,6 +22,34 @@ module.exports = {
                 res.send('please login to the system then try to join tournament <a href="/../login">login</a> or come back to main page <a href="./">home</a>');
         });
     },
+    '/confirm/:id': function(req,res){
+          user_model.user(req, res, function(user){
+            if(user.loged === true){
+                if(req.params.id){
+                    tournaments_model.list(req, function(tournament){
+                        if(tournament){
+                            if(tournament.users.joined[user.steamid] && tournament.allow == 'beginners'){
+                                tournaments_model.approve(req, tournament.id, user.steamid, function(e){
+                                    if(e)
+                                        res.redirect('/error');
+                                    else
+                                        res.redirect('/t/'+tournament.id);
+                                });
+                            } else {
+                                res.redirect('/error');
+                            }
+                        } else {
+                            res.redirect('/error');
+                        }
+                    }, req.params.id);
+                }
+                else
+                    res.render('enabling', {user : user});
+            }
+            else
+                res.send('please login to the system then try to join tournament <a href="/../login">login</a> or come back to main page <a href="./">home</a>');
+        });
+    },
     '/t/:id': function(req, res){
         user_model.user(req, res, function(user){
             tournaments_model.list(req, function(tournament){

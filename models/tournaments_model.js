@@ -300,9 +300,9 @@ function pvp(approved, players, heroes, id, mode, state, tclass){
         
         //new way
         var temp = {
-                t1 : [{id : p1[0], hero : hero1}],
-                t2 : [{id : p2[0], hero : hero2}],
-                info : {tournamentid : id, mode : mode, date : date, tournamentstate : state, tournamentclass : tclass}
+            t1 : [{id : p1[0], hero : hero1}],
+            t2 : [{id : p2[0], hero : hero2}],
+            info : {tournamentid : id, mode : mode, date : date, tournamentstate : state, tournamentclass : tclass}
         }
         testgames.push(temp);
         
@@ -327,8 +327,17 @@ exports.start = function start(req, t, callback){
                     approved.push(tournament.states[tournament.state].duels[i].winner);
                 }
             } else {
-                players = tournament.players;
-                approved = Object.keys(tournament.users.approved);
+                if(tournament.class == 'rcf'){
+                    players = tournament.players;
+                    approved = Object.keys(tournament.users.approved);
+                    if(players%2 !== 0){
+                        approved.splice(players-1, 1);
+                        players = approved.length;
+                    }
+                } else {
+                    players = tournament.players;
+                    approved = Object.keys(tournament.users.approved);
+                }
             }
             
             if(tournament.state != 'final'){
@@ -567,6 +576,7 @@ exports.game = function game(req, g, callback){
        callback(game[0]);
     }, {'_id' : db.id(g)});
 }
+
 exports.games = function games(req, callback, t, query){
     if(t){
         if(util.isArray(t)){
