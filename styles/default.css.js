@@ -15,7 +15,7 @@
     "colorDarkGrey" : "#BCBCBC",
     "colorMain" : "#4B69FF",
     "colorOrange" : "#ED6639",
-    "colorDark" : "#383838",
+    "colorDark" : "#25292b",
     "colorGrey" : "#9E9E9E",
     "colorBlue" : "#39C0ED",
     "colorCom" : "#B0C3D9",
@@ -39,13 +39,15 @@ a{var(ruleColorTextLight);}
 .avatar{height:27px;}
 .clear{clear:both;overflow:hidden;}
 
-#toolbar{background:#4A4A4A;position:fixed;bottom:0px;width:100%;z-index:0;box-shadow: 0px -1px 3px #000000;}
-#toolbar img{height:30px;display:block;margin:auto;}
+#toolbar{background:var(colorDark);border-top:solid 1px var(colorMain);position:fixed;bottom:0px;width:100%;z-index:0;box-shadow: 0px -1px 3px #000000;}
+#toolbar img{height:25px;display:block;margin:auto;}
 #clock{right:0px;padding:10px;width:200px;}
 p{font-size:14px;clear:both;padding-top:5px;}
-.list{padding:25px 25px 15px 25px;background:var(colorMain);border-right:solid 2px #4A4A4A;}
+.must{background-image:url('http://s26.postimg.org/wnn5n9oit/exclamation_mark_icon.png');background-size:13px;position:absolute;height:13px;width:13px;margin-left:20px;}
+.list{padding:25px 25px 15px 25px;border-left:solid 1px #191c1d;box-shadow: -1px 0px 0px #2d3133;}
+.list p{font-size:11px;}
 .list_small{padding:10px 5px 5px 40px; margin-top:30px;}
-.list:hover{background:var(colorDark);padding:25px 25px 15px 25px;border-right:solid 2px #4A4A4A;}
+.list:hover{background:var(colorMain);padding:25px 25px 15px 25px;}
 .textLight{var(ruleColorTextLight);}
 .textLightGrey{color:var(colorDarkGrey);}
 .textDark{color:var(colorDark);}
@@ -97,7 +99,7 @@ p{font-size:14px;clear:both;padding-top:5px;}
 
 .dark{background:var(colorDark);}
 
-.click{padding:2px 5px 2px 5px;overflow:hidden;cursor:pointer;}
+.click{overflow:hidden;cursor:pointer;}
 .tip{width:70px;text-align:left;font-size:var(textSmall);}
 .dest{padding:8px 5px 0px 10px;}
 .click:hover{background:var(colorDark);color:var(colorLight);}

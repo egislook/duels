@@ -1,9 +1,21 @@
 <div class="page">
+    {{ for(var state in it.t.states) { }}
+        {{
+            it.t.states[state].games = it.t.states[state].duels.length;
+            it.t.states[state].endedgames = 0;
+        }}
+        {{~it.t.states[state].duels :d :i }}
+            {{? it.g[d.id].info.win}}
+                {{it.t.states[state].endedgames++;}}
+                {{it.t.states[state].duels[i]['winner'] = it.g[d.id][it.g[d.id].info.win][0].id;}}
+            {{?}}
+        {{~}}
+    {{ } }}
     <table cellspacing="0" class="spaced textLight">
         <tr>
             <td class="b-r">
                 <a href="steam://friends/add/{{=it.t.owner[0].steamid}}">
-                    <div class="left b-b b-l b-r neutral tip click">{{=it.t.owner[0].name}}</div>
+                    <div class="left b-b b-l b-r neutral space textSmall click">{{=it.t.owner[0].name}}</div>
                   <div class="left dark b-b" style="width:20px;margin-top:-1px;text-align:center;" onmouseover="mouseon(this)" onmouseout="mouseout(this)">?
                       <div class="note dark right textSmall" style="max-width:150px;margin-left:21px;margin-top:-17px;">Game created by this person. Click on it if you want add him to your steam friendlist for more information.</div>
       				</div>
@@ -169,12 +181,12 @@
                 </td>
             </tr>
       		<tr>
-                <td class="b-r">
-                  <div class="right item"><img height="18" src="http://s26.postimg.org/pcpri3zvp/radiant.jpg"></div>
-                  <div class="accept right textSmall b-r">The Radiant</div>
+                <td class="b-r-r">
+                  <div class="right dark"><img height="30" src="http://s26.postimg.org/pcpri3zvp/radiant.jpg"></div>
+                  <div class="accept right textSmall">The Radiant</div>
                 </td>
               	<td>
-                  <div class="left item b-r"><img height="18" src="http://s26.postimg.org/66ckexjdx/dire.jpg"></div>
+                  <div class="left dark"><img height="30" src="http://s26.postimg.org/66ckexjdx/dire.jpg"></div>
                   <div class="delete left textSmall">The Dire</div>
                 </td>
       		</tr>
@@ -182,7 +194,7 @@
                 <td class="b-r" height="5px"></td>
             </tr>
             {{~it.t.states[it.t.state].duels :duel:i }}
-                {{? !duel.winner}}
+                {{? !it.g[duel.id].info.win}}
                 <tr>
                     <td class="b-r-r">
                         {{? it.t.mode == 'sh' || it.t.mode == 'ar'}}

@@ -14,6 +14,78 @@
 <div style="overflow:hidden;margin:auto;position:relative;max-width:1160px;" class="textLight clear">
     <div class="left">
         <table width="250" cellspacing="0" class="textLightGrey">
+    	    <tr>
+    	        <td align="center" colspan="3">
+    	            <div class="textSmall">
+        	            {{var numb = 0;for(p in it.p) { numb++;}}
+                        {{ } }}
+                        {{=numb}} player(s) is waiting
+                    </div>
+    	        </td>
+    	   </tr>
+    	   <tr>
+    	        <td align="center" colspan="3">
+    	            {{? it.p[it.user.steamid]}}
+    	            <a href="/leave">
+            	        <div class="delete space click textLight data-text">
+                            <div class="textBig">Leave</div>
+                            <div class="textSmall">Practise</div>
+                        </div>
+                    </a>
+    	            {{??}}
+    	            <a href="/practise">
+            	        <div class="edit space click textLight data-text">
+                            <div class="textBig">Search</div>
+                            <div class="textSmall">Practise</div>
+                        </div>
+                    </a>
+                    {{?}}
+    	        </td>
+    	    </tr>
+    	    
+    	    <tr><td height="10"></td></tr>
+    	    <tr>
+    	        <td colspan="3" class="h-line"></td>
+    	    </tr>
+    	    {{ var n=0; for(pg in it.pg){ n++;}}
+                {{? it.pg[pg].info.win == 't1' || it.pg[pg].info.win == 't2'}}
+                    {{var pvp = 'd-finished';}}
+                {{??}}
+                    {{var pvp = 'd grey textLight';}}
+                {{?}}
+                <tr onclick="window.open('/g/{{=pg}}', '_self');" class="{{=pvp}}">
+                    {{? it.pg[pg].info.win == 't1'}}
+                        <td align="right" class="edit textSmall textDark data-text">
+                    {{??}}
+                        <td align="right" class="textSmall textDark data-text"> 
+                    {{?}}
+                        {{=it.u[it.pg[pg].t1[0].id].name}}
+                    </td>
+                    <td>
+                        {{? it.user.status=='good' && (it.pg[pg].t1[0].imgs || it.pg[pg].t2[0].imgs)}}
+                            <img class="b-r-r" width="35" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.pg[pg].t1[0].hero.url}}_sb.png"/>
+                        {{??}}
+                            <div onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                                <img width="35" src="http://media.steampowered.com/apps/dota2/images/heroes/{{=it.pg[pg].t1[0].hero.url}}_sb.png"/>
+                                <div class="note neutral" style="z-index:5">{{=it.pg[pg].t1[0].hero.name}}</div>
+                            </div>
+                        {{?}}
+                    </td>
+                    {{? it.pg[pg].info.win == 't2'}}
+                        <td class="edit textSmall textDark data-text">
+                    {{??}}
+                        <td class="textSmall textDark data-text">
+                    {{?}}
+                        {{=it.u[it.pg[pg].t2[0].id].name}}
+                </tr>
+                <tr>
+                    <td colspan="3" class="h-line"></td>
+                </tr>
+            {{ } }}
+    	    <tr><td height="10"></td></tr>
+            <tr>
+                <td align="center" colspan="3" class="dark textSmall textLight" style="padding:2px;">practise games</td>
+            </tr>
             <tr>
                 <td width="45%" align="center">
                     <div class="space textSmall">The Radiant</div>
@@ -217,7 +289,7 @@
                     {{? t.users.joined[it.user.steamid]}}
                         {{? t.allow == 'beginners'}}
                             {{? start < 1800 }}
-                            <div class="edit click" onclick="window.open('/confirm/{{=t.id}}', '_self');return false;">
+                            <div class="edit click space" onclick="window.open('/confirm/{{=t.id}}', '_self');return false;">
                                 <div class="textBig">Confirm</div> 
                                 <div class="textSmall">Me</div>
                             </div>
@@ -240,7 +312,7 @@
                         </div>
                     {{??}}
                         {{? t.allow != 'beginners' || !it.r[it.user.steamid] || it.r[it.user.steamid].win<3}}
-                            <div class="accept click" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
+                            <div class="accept click space" onclick="window.open('/join/{{=t.id}}', '_self');return false;">
                                 <div class="textBig">Join</div> 
                                 <div class="textSmall">Now</div>
                             </div>

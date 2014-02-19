@@ -13,39 +13,41 @@
     	        {{= date}}
     	        <div class="accept tip textLight" style="padding:3px;">wdpwp alpha</div>
 	        </div>-->
-	        <a href="/all">
-		        <div class="left list edit">
-                  	<p>All <div class="right textSmall">tournaments</div></p>
-		        </div>
-		    </a>
 		    <a href="/">
 		        <div class="left list">
                   <img src="http://s26.postimg.org/73aobj1id/home_icon.png">
                   <p>Home</p>
 		        </div> 
 		    </a>
+	        <a href="/all">
+		        <div class="left list">
+                  	<img src="http://s26.postimg.org/6bdm3w9k9/Crown_icon.png">
+                  	<p>Tournaments</p>
+		        </div>
+		    </a>
 		    <a href="/faq">
-		        <div class="delete left list">
+		        <div class="left list">
+                  <div class="must"></div>
 		            <img src="http://s26.postimg.org/lfbok6rtx/alien_icon.png">
-                  	<p>Must Read</p>
+                  	<p>Tutorial</p>
 		        </div> 
 		    </a>
 		    <a href="http://steamcommunity.com/groups/wdpwp" target="_blank">
-		        <div class="left list accept">
-                  	<p>Steam <div class="right textSmall">group</div></p>
-		        </div> 
+              	<div class="left list">
+                  	<img src="http://s26.postimg.org/x2tu2jl2h/steam_icon_half.png">
+		        </div>
 		    </a>
 		    <a href="https://www.facebook.com/groups/733591169986623/" target="_blank">
 		        <div class="left list">
-                  	<p>Facebook <div class="right textSmall">group</div></p>
-		        </div> 
+                  	<img src="http://s26.postimg.org/c4no4gl7t/fb_icon.png">
+		        </div>
 		    </a>
 		    {{? !it.user.loged }}
 		    <a href="/login">
 		        <div class="right list">
                   <img src="http://s26.postimg.org/dr2810ep1/login_icon.png">
                   <p>Login</p>
-		        </div> 
+		        </div>
 		    </a>
 		    {{?? true}}
 		    <a href="/logout">

@@ -1,5 +1,6 @@
 var user_model = require('../models/user_model.js');
 var tournaments_model = require('../models/tournaments_model.js');
+var games_model = require('../models/games_model.js');
 
 
 'use strict';
@@ -13,8 +14,18 @@ module.exports = {
                     active.push(tournaments[i].id);
                 };
                 
-                tournaments_model.games(req, function(games){
-                    res.render('test', {user : user, tournaments : tournaments, u : req.app.cache.users, r : req.app.cache.stats, g : games});
+                games_model.games(req, function(games){
+                    games_model.games(req, function(practiseGames){
+                        res.render('test', {
+                            user : user,
+                            tournaments : tournaments,
+                            u : req.app.cache.users,
+                            r : req.app.cache.stats,
+                            g : games,
+                            p: req.app.cache.practise,
+                            pg : practiseGames
+                        });
+                    }, false, {"info.type" : "practise"});
                 },active);
                 
             }, false, 'date');
@@ -38,7 +49,7 @@ module.exports = {
                     }
                 };
                 
-                tournaments_model.games(req, function(games){
+                games_model.games(req, function(games){
                     res.render('all', {user : user, tournaments : tournaments, u : req.app.cache.users, g : games, r : req.app.cache.stats});
                 },active);
             });

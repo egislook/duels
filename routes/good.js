@@ -1,5 +1,7 @@
 var user_model = require('../models/user_model.js');
 var tournaments_model = require('../models/tournaments_model.js');
+var games_model = require('../models/games_model.js');
+var stats_model = require('../models/stats_model.js');
 
 'use strict';
 module.exports = {
@@ -7,9 +9,9 @@ module.exports = {
         user_model.user(req, res, function(user){
             if(user.status === 'good' && user.loged === true){
                 tournaments_model.list(req, function(tournaments){
-                    tournaments_model.games(req, function(games){
-                        user_model.stats(req, tournaments, games, function(data){
-                           res.send(data);
+                    games_model.games(req, function(games){
+                        stats_model.stats(req, tournaments, games, function(data){
+                            res.redirect('/');
                         });
                     }, false, {'info.tournamentclass' : 'rcf'});
                 }, false, 'ended');
@@ -105,6 +107,37 @@ module.exports = {
                 res.redirect('/error');
         })
     },
+    '/g/:g/remove' : function(req,res){
+        user_model.user(req, res, function(user){
+            if(user.status === 'good' && user.loged === true){
+                if(req.params.g){
+                    games_model.remove(req, req.params.g, function(e){
+                        res.redirect('/');
+                    });
+                }
+                else
+                    res.redirect('/error');
+            }
+            else
+                res.redirect('/');
+        })
+    },
+    '/g/:g/set/:win' : function(req,res){
+        user_model.user(req, res, function(user){
+            if(user.status === 'good' && user.loged === true){
+                if(req.params.g && req.params.win){
+                    games_model.set(req, req.params.g, req.params.win, function(e){
+                        //res.send(e);
+                        res.redirect('/g/'+req.params.g);
+                    });
+                }
+                else
+                    res.redirect('/error');
+            }
+            else
+                res.redirect('/');
+        })
+    },
     '/start/:t': function(req, res){
         user_model.user(req, res, function(user){
             if(user.status === 'good' && user.loged === true){
@@ -143,7 +176,7 @@ module.exports = {
             user_model.user(req, res, function(user){
                 if(user.status === 'good' && user.loged === true){
                     if(req.body){
-                        tournaments_model.game(req, req.body.id, function(games){
+                        games_model.game(req, req.body.id, function(games){
                             if(games){
                                 tournaments_model.decide(req, games, function(game){
                                     res.redirect('/g/'+game);

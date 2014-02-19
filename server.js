@@ -33,6 +33,8 @@ app.cache.steamid = {
     'support' : ['76561198013303116', '76561198074301154']
 };
 
+app.cache.practise = {}
+
 steam.getLightFromSteam('heroes', function(data){
     app.cache.heroes = data;
     app.cache.loaded--;
