@@ -258,6 +258,7 @@ function pvp(approved, players, heroes, id, mode, state, tclass){
     var hero1, hero2;
     var duels = [], testgames=[];
     var n1, n2, p1, p2;
+    var heroescount = heroes.length-1;
     while(players>0){
         n1 = Math.floor((Math.random()*players-1));
         p1 = approved.splice(n1, 1);
@@ -266,13 +267,13 @@ function pvp(approved, players, heroes, id, mode, state, tclass){
         p2 = approved.splice(n2, 1);
         players--;
         if(mode == 'sh'){
-            h1 = Math.floor((Math.random()*107)-1);
+            h1 = Math.floor((Math.random()*heroescount)-1);
             hero1={name: heroes[h1].localized_name, url: (heroes[h1].name).slice(14)};
             hero2=hero1;
         } else if(mode == 'ar'){
-            h1 = Math.floor((Math.random()*107)-1);
+            h1 = Math.floor((Math.random()*heroescount)-1);
             hero1={name: heroes[h1].localized_name, url: (heroes[h1].name).slice(14)};
-            h2 = Math.floor((Math.random()*107)-1);
+            h2 = Math.floor((Math.random()*heroescount)-1);
             hero2={name: heroes[h2].localized_name, url: (heroes[h2].name).slice(14)};
         } else {
             hero1='false'; hero2='false';

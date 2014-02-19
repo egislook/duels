@@ -35,8 +35,15 @@ app.cache.steamid = {
 
 app.cache.practise = {}
 
-steam.getLightFromSteam('heroes', function(data){
-    app.cache.heroes = data;
+steam.getLightFromSteam('heroes', function(heroes){
+    for(var i=0; i<heroes.length; i++){
+        if(heroes[i].id == 110 || heroes[i].id == 108 || heroes[i].id == 82 || heroes[i].id == 47){
+            console.log(i);
+            heroes.splice(i, 1);
+        }
+    }
+    
+    app.cache.heroes = heroes;
     app.cache.loaded--;
     console.log("LOADED -> "+app.cache.loaded+" heroes");
     //http://media.steampowered.com/apps/dota2/images/heroes/elder_titan_sb.png

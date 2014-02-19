@@ -38,7 +38,7 @@ exports.leave = function leave(req, user, callback){
 function pvp(req, approved, mode, type){
 
     var heroes = req.app.cache.heroes;
-    
+    var count = heroes.length-1;
     players = approved.length;
     type = type || false;
     var hero1, hero2;
@@ -52,13 +52,13 @@ function pvp(req, approved, mode, type){
         p2 = approved.splice(n2, 1);
         players--;
         if(mode == 'sh'){
-            h1 = Math.floor((Math.random()*107)-1);
+            h1 = Math.floor((Math.random()*count)-1);
             hero1={name: heroes[h1].localized_name, url: (heroes[h1].name).slice(14)};
             hero2=hero1;
         } else if(mode == 'ar'){
-            h1 = Math.floor((Math.random()*107)-1);
+            h1 = Math.floor((Math.random()*count)-1);
             hero1={name: heroes[h1].localized_name, url: (heroes[h1].name).slice(14)};
-            h2 = Math.floor((Math.random()*107)-1);
+            h2 = Math.floor((Math.random()*count)-1);
             hero2={name: heroes[h2].localized_name, url: (heroes[h2].name).slice(14)};
         } else {
             hero1='false'; hero2='false';
