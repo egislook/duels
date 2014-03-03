@@ -6,6 +6,17 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>-->
 	</head>
 	<body>
+	    <div>
+	        <div class="textSmall">
+	            <div class="center textLight b-b">
+	                <span style="width:100px; margin:auto;" class="delete data-text">announcement</span>
+	                <span class="dark data-text">at this time we are remaking whole wdpwp system with lots of new features.</span>
+	                <span class="accept data-text">all current data would be saved so play and have fun till we will finish recreation process</span>
+	            </div>
+	        </div>
+	        <div style="width:800px; margin:auto;" class="center textLarge space">wdpwp <b class="textSmall textLightGrey">3.beta</b></div>
+	        
+	    </div>
 		{{=it.body}}
 		<div id="toolbar">
 		    <!--<div class="left dark textLight textSmall list" id="clock">

@@ -4,7 +4,7 @@ var express = require('express'),
     db = require('./lib/db.js'),
     http = require('http'),
     path = require('path'),
-    varYk = require('./lib/varYK.js'),
+    //varYk = require('./lib/varYK.js'),
     app = express();
 
 var dbname = 'league';

@@ -32,7 +32,7 @@ exports.remove = function remove(req, g, callback){
     });
 }
 
-exports.games = function games(req, callback, t, query){
+exports.games = function games(req, callback, t, query, limit){
     if(t){
         if(util.isArray(t)){
             var temp=[];
@@ -52,7 +52,7 @@ exports.games = function games(req, callback, t, query){
             games[data[i]['_id']] = data[i];
         }
        callback(games); 
-    }, query);
+    }, query, limit);
 }
 
 exports.set = function set(req, g, win, callback){

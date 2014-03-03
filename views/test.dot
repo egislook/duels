@@ -24,19 +24,19 @@
     	        </td>
     	   </tr>
     	   <tr>
-    	        <td align="center" colspan="3">
+    	        <td id="practice" align="center" colspan="3">
     	            {{? it.p[it.user.steamid]}}
-    	            <a href="/leave">
+    	            <a href="/leave" id="searching">
             	        <div class="delete space click textLight data-text">
                             <div class="textBig">Leave</div>
-                            <div class="textSmall">Practise</div>
+                            <div class="textSmall">Practice</div>
                         </div>
                     </a>
     	            {{??}}
     	            <a href="/practise">
             	        <div class="edit space click textLight data-text">
                             <div class="textBig">Search</div>
-                            <div class="textSmall">Practise</div>
+                            <div class="textSmall">Practice</div>
                         </div>
                     </a>
                     {{?}}
@@ -148,7 +148,7 @@
             {{?}}
                 {{
                     var prize = 'rare';
-                    var buyin = 'Free';
+                    var buyin = 'rare';
                     var bg = 't';
                     
                     if(t.buyin_type=='unc'){buyin='uncommon'}
@@ -351,7 +351,7 @@
             <td colspan="6" class="h-line"></td>
         </tr>
         {{var n=0; for(var r in it.r){}}
-            {{? it.r[r].games>1}}
+            {{? it.r[r].games>1 && n<40}}
             {{n++;}}
             <tr>
                 <td align="center">{{=n}}</td>

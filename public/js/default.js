@@ -1,3 +1,9 @@
+function checkPractise(){
+    if(document.getElementById("searching"))
+        setTimeout(function(){location.reload();},4000);
+}
+window.onload = checkPractise;
+
 function mouseon(x){
 	x.getElementsByTagName("div")[0].style.display="block";
 }

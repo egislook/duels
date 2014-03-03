@@ -25,7 +25,7 @@ module.exports = {
                             p: req.app.cache.practise,
                             pg : practiseGames
                         });
-                    }, false, {"info.type" : "practise"});
+                    }, false, { $query: {"info.type" : "practise"}, $orderby: {"info.date" : -1, "info.time" : -1}}, 10);
                 },active);
                 
             }, false, 'date');

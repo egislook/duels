@@ -74,7 +74,7 @@ p{font-size:14px;clear:both;padding-top:5px;}
 .items div:hover{border:solid 2px var(colorDelete);}
 
 .icon img{height:21px;}
-.page{overflow:hidden;margin:auto;width:100%;text-align:center;border-top:solid 5px var(colorDark);padding-bottom:20px;}
+.page{overflow:hidden;margin:auto;width:100%;text-align:center;border-top:solid 2px var(colorDark);padding-bottom:20px;}
 .page table{font-size:var(textNormal);position:relative;z-index:3;}
 .page table td > div{padding:2px 5px 2px 5px;}
 .tournament{float:left;padding-left:30px;/*border:solid 1px var(colorGrey);*/}
